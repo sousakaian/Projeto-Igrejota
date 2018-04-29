@@ -1,0 +1,14 @@
+<div *ngIf="noticia">
+	<button class="delete" (click)="onDelete(noticia)">Deletar</button><br>
+	<button class="save" (click)="onSave(noticia)">Salvar</button><br>
+	<label>
+		Título: <input [(ngModel)]="noticia.titulo" placeholder="{{noticia.titulo}}">
+	</label><br>
+	<label>
+		Descrição: <textarea [(ngModel)]="noticia.conteudo" type="textarea" placeholder="Descrição">{{noticia.conteudo}}</textarea>
+	</label><br>
+	<label>
+		Imagem Escolhida: <input [(ngModel)]="noticia.imagemDestaque" type="file">
+		<img src="{{ noticia.imagemDestaque }}" alt="../assets/default-image.png"><br>
+	</label>
+</div>

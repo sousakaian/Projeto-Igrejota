@@ -1,0 +1,27 @@
+<div *ngIf="jogo">
+	<button class="delete" (click)="onDelete(jogo)">Deletar</button><br>
+	<button class="save" (click)="onSave(jogo)">Salvar</button><br>
+	<label>
+		Nome do Jogo: <input [(ngModel)]="jogo.nome" maxlength="180" placeholder="Nome" value="{{jogo.nome}}">
+	</label><br>
+	<label>
+		{{ jogo.minJogadores }} a {{ jogo.maxJogadores }} jogadores<br><input [(ngModel)]="jogo.minJogadores" type="range" min="1" max="100" value="{{jogo.minJogadores}}"><input [(ngModel)]="jogo.maxJogadores" type="range" min="1" max="100" value="{{jogo.maxJogadores}}">
+	</label><br>
+	<label>
+		Tempo de Jogo: {{ jogo.tempoJogo < 5 ? "< 5" : (jogo.tempoJogo > 600) ? "600+" : jogo.tempoJogo }} minutos <br>
+		<input [(ngModel)]="jogo.tempoJogo" type="range" min="0" max="605" step="5" value="{{jogo.tempoJogo}}">
+	</label><br>
+	<label>
+		Descrição: <textarea rows="20" cols="100" maxlength="2000" [(ngModel)]="jogo.descricao" placeholder="Descrição">{{jogo.descricao}}</textarea>
+	</label><br>
+	<label>
+		Imagem Escolhida: <input [(ngModel)]="jogo.imagemJogo" type="file">
+		<img src="{{ jogo.imagemJogo }}" alt="../assets/default-image.png"><br>
+	</label>
+	<label>
+		Link do Manual: <input [(ngModel)]="jogo.linkManual" maxlength="200" placeholder="Link do Manual" value="{{jogo.linkManual}}">
+	</label><br>
+	<label>
+		Link do Desenvolvedor: <input [(ngModel)]="jogo.linkDesenvolvedor" maxlength="200" placeholder="Link do Desenvolvedor" value="{{jogo.linkDesenvolvedor}}">
+	</label>
+</div>

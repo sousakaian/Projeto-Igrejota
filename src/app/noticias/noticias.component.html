@@ -1,0 +1,8 @@
+<h2>Notícias</h2>
+<ul class="noticias">
+	<li *ngFor="let noticia of noticias" [class.selected]="noticia === noticiaSelecionada" (click)="onSelect(noticia)">
+		<a routerLink="{{ bolsista ? '/noticia/edit/'+noticia.id : '/noticia/'+noticia.id }}">
+			<h3>{{ noticia.titulo }}</h3>
+		</a>
+	</li>
+</ul>
