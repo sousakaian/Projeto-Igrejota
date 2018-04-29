@@ -1,7 +1,7 @@
 <div class="jogo" *ngIf="jogo">
 	<h1>{{ jogo.nome }}</h1>
 	<img src="{{ jogo.imagemJogo }}" alt="../assets/default-image.png"><br>
-	<h4><img class="icone" src="" alt="">{{ jogo.minJogadores }} a {{ jogo.maxJogadores }} jogadores</h4>
+	<h4><img class="icone" src="" alt="">{{ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' }}</h4>
 	<h4><img class="icone" src="" alt="">{{ jogo.tempoJogo }} minutos</h4>
 	<p>{{ jogo.descricao }}</p>
 	<div *ngIf="jogo.linkManual">

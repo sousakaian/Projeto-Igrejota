@@ -23,7 +23,8 @@ export class NoticiaService {
   }
 
   remove(id: number): void {
-    NOTICIAS.splice(id,1);
+    let index = NOTICIAS.indexOf(NOTICIAS.find(noticia => noticia.id === id));
+    NOTICIAS.splice(index,1);
   }
 
   update(noticia: Noticia): void {

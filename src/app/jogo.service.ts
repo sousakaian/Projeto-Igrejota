@@ -11,6 +11,7 @@ export class JogoService {
   constructor(private messageService: MessageService) { }
 
   private checarTempo(tempoDisponivel: number, margem: number, jogo: Jogo): Boolean {
+  	console.log(jogo.tempoJogo-margem,jogo.tempoJogo+margem);
 	return tempoDisponivel >= (jogo.tempoJogo - margem) && tempoDisponivel <= (jogo.tempoJogo + margem);
   }
 
@@ -23,7 +24,7 @@ export class JogoService {
   }
 
   getJogo(id: number): Observable<Jogo> {
-  	return of(JOGOS[id]);
+  	return of(JOGOS.find(jogo => jogo.id === id));
   }
 
   editJogo(jogo: Jogo): void {
@@ -46,34 +47,39 @@ export class JogoService {
 
   getJogosSugeridos(nJogadores: number, tempoEscolhido: number, categorias: string[]): Observable<Jogo[]> {
     var jogosSugeridos: Jogo[] = [];
+    if (nJogadores === -1 && tempoEscolhido === -1 && this.categorias.length <= 0) {
+      return this.getJogos();
+    }
     for (let jogo of JOGOS) {
-    	if (this.checarJogadores(nJogadores, jogo)) {
+    	if (this.checarJogadores(nJogadores, jogo) || nJogadores === -1) {
 			jogosSugeridos.push(jogo);
 		}
     }
 
     for (let i in jogosSugeridos) {
 		let jogo = jogosSugeridos[i];
-		if (!this.checarTempo(tempoEscolhido, 10, jogo)) {
+		if (!this.checarTempo(tempoEscolhido, 10, jogo) && tempoEscolhido !== -1) {
 			jogosSugeridos.splice(jogosSugeridos.indexOf(jogo), 1);
 		}
 	}
 
 	var maxEquivalente: number = 0;
 
-	for (let i in jogosSugeridos) {
-		let jogo = jogosSugeridos[i];
-		var nEquivalente = 0;
-		for (let categoria of jogo.categorias) {
-			if (categorias.includes(categoria)) {
-				nEquivalente++;
+	if (categorias.length > 0) {
+		for (let i in jogosSugeridos) {
+			let jogo = jogosSugeridos[i];
+			var nEquivalente = 0;
+			for (let categoria of jogo.categorias) {
+				if (categorias.includes(categoria)) {
+					nEquivalente++;
+				}
 			}
-		}
-		if (nEquivalente <= 0) {
-			jogosSugeridos.splice(jogosSugeridos.indexOf(jogo),1);
-		} else if (nEquivalente > maxEquivalente) {
-			jogosSugeridos.unshift(jogosSugeridos.splice(jogosSugeridos.indexOf(jogo),1)[0]);
-			maxEquivalente = nEquivalente;
+			if (nEquivalente <= 0) {
+				jogosSugeridos.splice(jogosSugeridos.indexOf(jogo),1);
+			} else if (nEquivalente > maxEquivalente) {
+				jogosSugeridos.unshift(jogosSugeridos.splice(jogosSugeridos.indexOf(jogo),1)[0]);
+				maxEquivalente = nEquivalente;
+			}
 		}
 	}
 
@@ -81,18 +87,20 @@ export class JogoService {
 	return of(jogosSugeridos);
   }
 
-  getJogosPossiveis(nJogadores: number, tempoEscolhido: number, categorias: string[]): Observable<Jogo[]> {
+  getJogosPossiveis(nJogadores: number, tempoEscolhido: number): Observable<Jogo[]> {
 	var jogosPossiveis: Jogo[] = [];
-
+	if (nJogadores === -1 && tempoEscolhido === -1) {
+      return this.getJogos();
+    }
 	for (let jogo of JOGOS) {
-		if (this.checarJogadores(nJogadores, jogo)) {
+		if (this.checarJogadores(nJogadores, jogo) || nJogadores === -1) {
 			jogosPossiveis.push(jogo);
 		}
 	}
 
 	for (let i in jogosPossiveis) {
 		let jogo = jogosPossiveis[i];
-		if (!this.checarTempo(tempoEscolhido, 30, jogo)) {
+		if (!this.checarTempo(tempoEscolhido, 30, jogo) && tempoEscolhido !== -1) {
 			jogosPossiveis.splice(jogosPossiveis.indexOf(jogo), 1);
 		}
 	}

@@ -1,10 +1,33 @@
 <h2>Jogos</h2>
 <ul class="jogos">
+	<button (click)="toggleFiltros()">Filtros</button>
+	<div class="filtros" *ngIf="mostrarFiltros">
+		<button (click)="limparFiltros()">Limpar</button>
+		<h3>Número de Jogadores: {{	numeroJogadores > 30 ? '30+' : numeroJogadores }}</h3>
+		<input [(ngModel)]="numeroJogadores" type="range" min="1" max="31" step="1" value="{{numeroJogadores}}"><br>
+		<input type="checkbox" [(ngModel)]="ignorarJogadores"> Ignorar número de jogadores<br>
+
+		<h3>Tempo de Jogo: {{ tempoJogo < 5 ? "< 5" : (tempoJogo > 600) ? "600+" : tempoJogo }} minutos</h3>
+		<input [(ngModel)]="tempoJogo" type="range" min="0" max="605" step="5" value="{{tempoJogo}}"><br>
+		<input type="checkbox" [(ngModel)]="ignorarTempoJogo"> Ignorar tempo de jogo<br>
+
+		<h3>Categorias</h3>
+		<app-categoria-select></app-categoria-select>
+		<button (click)="filtrar()">Aplicar</button>
+	</div>
+	<img src="" alt="Organização: ">
+	<select (change)="organizar()" [(ngModel)]="metodoOrganizacao">
+	  <option selected="selected" value="A-Z">A-Z</option>
+	  <option value="Min. Jogadores">Min. Jogadores</option>
+	  <option value="Max. Jogadores">Max. Jogadores</option>
+	  <option value="Tempo de Jogo">Tempo de Jogo</option>
+	</select>
+	<button (click)="toggleInverter()"><img src="" alt="Inverter"></button>
 	<li *ngFor="let jogo of jogos" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
 		<a routerLink="{{ bolsista ? '/jogo/edit/'+jogo.id : '/jogo/'+jogo.id }}">
 			<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="../assets/default-image.png">
-			<h3>{{ jogo.nome }}</h3>
-			<h4>{{ jogo.tempoJogo }} min - {{jogo.minJogadores}} a {{jogo.maxJogadores}} jogadores</h4>
+			<h3>{{ jogo.nome | uppercase }}</h3>
+			<h4>{{ jogo.tempoJogo+'min - '+ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' | lowercase }}</h4>
 		</a>
 	</li>
 </ul>

@@ -1,9 +1,10 @@
 <footer>
 	<nav class="tab-menu-mobile">
 		<ul>
-			<li><img src="" alt=""><br>Acervo</li>
-			<li><img src="" alt=""><br>Calendário</li>
-			<li><img src="" alt=""><br>Notícias</li>
+			<li><button (click)="goToAcervo()"><img class="tab-icon" src="" alt="../assets/default-image.png"><br>Acervo</button></li>
+			<li><button (click)="goToNoticias()"><img class="tab-icon" src="" alt="../assets/default-image.png"><br>Notícias</button></li>
+			<li><button (click)="goToCalendario()"><img class="tab-icon" src="" alt="../assets/default-image.png"><br>Calendário</button></li>
+			<li *ngIf="bolsista"><button (click)="goToEdit()"><img class="tab-icon" src="" alt="../assets/default-image.png"><br>Notícias</button></li>
 		</ul>
 	</nav>
 </footer>
