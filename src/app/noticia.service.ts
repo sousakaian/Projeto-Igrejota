@@ -35,8 +35,12 @@ export class NoticiaService {
     NOTICIAS[index].imagemDestaque = noticia.imagemDestaque;
   }
 
-  add(): void {
+  add(noticia: Noticia): void {
+    NOTICIAS.push(noticia);
+  }
 
+  generateEmptyNoticia(): Observable<Noticia> {
+    return of({id: -1, titulo: "", conteudo: "", dataCriacao: new Date(Date.now()), dataEdicao: undefined, imagemDestaque: ""});
   }
 
 }

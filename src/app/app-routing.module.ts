@@ -8,6 +8,7 @@ import { JogoDetailComponent } from './jogo-detail/jogo-detail.component';
 import { JogoEditComponent } from './jogo-edit/jogo-edit.component';
 import { CategoriaEditComponent } from './categoria-edit/categoria-edit.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'categorias/edit', component: CategoriaEditComponent},
   { path: 'jogos', component: JogoComponent },
   { path: 'jogo/:id', component: JogoDetailComponent },
-  { path: 'jogo/edit/:id', component: JogoEditComponent }
+  { path: 'jogo/edit/:id', component: JogoEditComponent },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

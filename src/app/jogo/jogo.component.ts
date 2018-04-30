@@ -14,7 +14,7 @@ import { CategoriaSelectComponent } from '../categoria-select/categoria-select.c
 export class JogoComponent implements OnInit {
   jogos: Jogo[];
   jogoSelecionado: Jogo;
-  bolsista: Boolean = false;
+  bolsista: Boolean = true;
   metodoOrganizacao: string = "";
   inverterOrdem: Boolean = false;
   mensagemInverter: string = "Normal";
@@ -129,9 +129,4 @@ export class JogoComponent implements OnInit {
     }
     this.toggleFiltros();
   }
-
-  newJogo(): void {
-
-  }
-
 }

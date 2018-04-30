@@ -34,16 +34,21 @@ export class CategoriaEditComponent implements OnInit {
   	for (let categoria of this.categorias) {
   		this.onSave(categoria);
   	}
-  	this.router.navigate(['/inicio');
+  	this.router.navigate(['/inicio']);
   }
 
   onSave(categoria: Categoria): void {
-  	this.categoriaService.update(categoria);
+  	categoria.id === -1 ? this.categoriaService.add(categoria) : this.categoriaService.update(categoria);
   }
 
   onDelete(categoria: Categoria): void {
   	this.categoriaService.remove(categoria.id);
   	this.getCategorias();
+  }
+
+  addCategoria(): void {
+  	this.categoriaService.generateEmptyCategoria()
+  		.subscribe(categoria => this.categorias.push(categoria));
   }
 
 }

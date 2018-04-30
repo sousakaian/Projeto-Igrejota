@@ -23,6 +23,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { MainPageComponent } from './main-page/main-page.component';
 import { JogoService } from './jogo.service';
 import { CategoriaService } from './categoria.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { CategoriaService } from './categoria.service';
     CategoriaSelectComponent,
     CategoriaEditComponent,
     MessagesComponent,
-    MainPageComponent
+    MainPageComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

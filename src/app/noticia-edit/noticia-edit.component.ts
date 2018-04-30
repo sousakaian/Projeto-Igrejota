@@ -28,8 +28,13 @@ export class NoticiaEditComponent implements OnInit {
 
   getNoticia(): void {
   	const id = +this.route.snapshot.paramMap.get('id');
-  	this.noticiaService.get(id)
-  		.subscribe(noticia => this.noticia = noticia);
+    if (id === -1) {
+  	  this.noticiaService.generateEmptyNoticia()
+        .subscribe(noticia => this.noticia = noticia);
+    } else {
+      this.noticiaService.get(id)
+        .subscribe(noticia => this.noticia = noticia);
+    }
   }
 
   onDelete(noticia: Noticia) {
@@ -38,7 +43,7 @@ export class NoticiaEditComponent implements OnInit {
   }
 
   onSave(noticia: Noticia) {
-  	this.noticiaService.update(noticia);
+  	noticia.id === -1 ? this.noticiaService.add(noticia) : this.noticiaService.update(noticia);
   	this.router.navigate(["/noticias"]);
   }
 }

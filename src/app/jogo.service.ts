@@ -59,8 +59,12 @@ export class JogoService {
   	JOGOS.splice(index, 1);
   }
 
-  add(): void {
+  add(jogo: Jogo): void {
+    JOGOS.push(jogo);
+  }
 
+  generateEmptyJogo(): Observable<Jogo> {
+    return of({id: -1, nome: "", minJogadores: 0, maxJogadores: 0, tempoJogo: 0, categorias: [], descricao: "", imagemJogo: "" ,linkDesenvolvedor: "", linkManual:"", emDestaque: false});
   }
 
   getJogosSugeridos(nJogadores: number, tempoEscolhido: number, categorias: Categoria[]): Observable<Jogo[]> {

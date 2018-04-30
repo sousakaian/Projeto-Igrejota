@@ -34,8 +34,12 @@ export class CategoriaService {
   	this.jogoService.removeCategoriaFromAll(CATEGORIAS.splice(index,1)[0]);
   }
 
-  add(): void {
+  add(categoria: Categoria): void {
+    CATEGORIAS.push(categoria);
+  }
 
+  generateEmptyCategoria(): Observable<Categoria> {
+    return of({id: 0, nome: ""});
   }
 
 }

@@ -33,9 +33,14 @@ export class JogoEditComponent implements OnInit {
   }
 
   getJogo(): void {
-  	const id = +this.route.snapshot.paramMap.get('id');
-  	this.jogoService.get(id)
-  		.subscribe(jogo => this.jogo = jogo);
+    const id = +this.route.snapshot.paramMap.get('id');
+    if (id === -1) {
+      this.jogoService.generateEmptyJogo()
+        .subscribe(jogo => this.jogo = jogo);
+    } else {
+  	  this.jogoService.get(id)
+  		  .subscribe(jogo => this.jogo = jogo);
+    }
   }
 
   adjustNumeroJogadores(minJogadores: number, maxJogadores: number): void {
@@ -44,7 +49,8 @@ export class JogoEditComponent implements OnInit {
   }
 
   onSave(jogo: Jogo): void {
-  	this.jogoService.edit(jogo);
+    const id = +this.route.snapshot.paramMap.get('id');
+    id === -1 ? this.jogoService.add(jogo) : this.jogoService.edit(jogo);
   	this.router.navigate(['/jogo/'+jogo.id]);
   }
 
