@@ -1,8 +1,9 @@
 <div class="jogo" *ngIf="jogo">
-	<h1>{{ jogo.nome }}</h1>
-	<img src="{{ jogo.imagemJogo }}" alt="../assets/default-image.png"><br>
+	<h1>{{ jogo.nome }}</h1><img *ngIf="jogo.emDestaque" src="" alt="Escolha do Editor"><br>
+	<img src="{{ jogo.imagemJogo }}" alt="Capa do Jogo"><br>
 	<h4><img class="icone" src="" alt="">{{ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' }}</h4>
 	<h4><img class="icone" src="" alt="">{{ jogo.tempoJogo }} minutos</h4>
+	<h4 *ngFor="let categoria of jogo.categorias">{{ categoria.nome }}</h4>
 	<p>{{ jogo.descricao }}</p>
 	<div *ngIf="jogo.linkManual">
 		<a href="{{ jogo.linkManual }}"><img src="" alt="">Manual</a>

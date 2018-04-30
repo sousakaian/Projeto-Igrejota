@@ -22,6 +22,7 @@ import { MessageService } from './message.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { MainPageComponent } from './main-page/main-page.component';
 import { JogoService } from './jogo.service';
+import { CategoriaService } from './categoria.service';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { JogoService } from './jogo.service';
   providers: [
     NoticiaService,
     MessageService,
-    JogoService
+    JogoService,
+    CategoriaService
   ],
   bootstrap: [AppComponent]
 })

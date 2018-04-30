@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Jogo } from '../jogo';
+import { CategoriaSelectComponent } from '../categoria-select/categoria-select.component'
 import { JogoService } from '../jogo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -10,6 +11,7 @@ import { IonRangeSliderComponent } from "ng2-ion-range-slider";
   templateUrl: './jogo-edit.component.html',
   styleUrls: ['./jogo-edit.component.css']
 })
+
 export class JogoEditComponent implements OnInit {
   @Input() jogo: Jogo;
   @ViewChild('sliderJogadores') sliderJogadores: IonRangeSliderComponent;
@@ -27,27 +29,27 @@ export class JogoEditComponent implements OnInit {
   ngOnInit() {
   	this.getJogo();
     this.maisDe30 = this.jogo.maxJogadores > 30;
+    CategoriaSelectComponent.categoriasEscolhidas = this.jogo.categorias;
   }
 
   getJogo(): void {
   	const id = +this.route.snapshot.paramMap.get('id');
-  	this.jogoService.getJogo(id)
+  	this.jogoService.get(id)
   		.subscribe(jogo => this.jogo = jogo);
   }
 
   adjustNumeroJogadores(minJogadores: number, maxJogadores: number): void {
-    console.log(minJogadores,maxJogadores);
     this.jogo.minJogadores = minJogadores;
     this.jogo.maxJogadores = this.maisDe30 ? 31 : maxJogadores;
   }
 
   onSave(jogo: Jogo): void {
-  	this.jogoService.editJogo(jogo);
+  	this.jogoService.edit(jogo);
   	this.router.navigate(['/jogo/'+jogo.id]);
   }
 
   onDelete(jogo: Jogo): void {
-  	this.jogoService.removeJogo(jogo.id);
+  	this.jogoService.remove(jogo.id);
   	this.router.navigate(['/jogos'])
   }
 

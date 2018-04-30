@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { JOGOS } from './mock-jogos';
 import { Jogo } from './jogo';
+import { Categoria } from './categoria';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { MessageService } from './message.service';
@@ -19,15 +20,28 @@ export class JogoService {
 	return nJogadores >= jogo.minJogadores || nJogadores <= jogo.maxJogadores;
   }
 
+  removeCategoriaFromAll(categoria: Categoria) {
+    for (let jogo of JOGOS) {
+      if (jogo.categorias.includes(categoria)) {
+        let indexCategoria = jogo.categorias.indexOf(categoria);
+        jogo.categorias.splice(indexCategoria,1);
+      }
+    }
+  }
+
   getJogos(): Observable<Jogo[]> {
   	return of(JOGOS);
   }
 
-  getJogo(id: number): Observable<Jogo> {
+  getJogosEmDestaque(): Observable<Jogo[]> {
+  	return of(JOGOS.filter(jogo => jogo.emDestaque));
+  }
+
+  get(id: number): Observable<Jogo> {
   	return of(JOGOS.find(jogo => jogo.id === id));
   }
 
-  editJogo(jogo: Jogo): void {
+  edit(jogo: Jogo): void {
   	let index = JOGOS.indexOf(JOGOS.find(item => item.id === jogo.id));
   	JOGOS[index].nome = jogo.nome;
   	JOGOS[index].tempoJogo = jogo.tempoJogo;
@@ -40,14 +54,18 @@ export class JogoService {
   	JOGOS[index].linkDesenvolvedor = jogo.linkDesenvolvedor;
   }
 
-  removeJogo(id: number): void {
+  remove(id: number): void {
   	let index = JOGOS.indexOf(JOGOS.find(jogo => jogo.id === id));
   	JOGOS.splice(index, 1);
   }
 
-  getJogosSugeridos(nJogadores: number, tempoEscolhido: number, categorias: string[]): Observable<Jogo[]> {
+  add(): void {
+
+  }
+
+  getJogosSugeridos(nJogadores: number, tempoEscolhido: number, categorias: Categoria[]): Observable<Jogo[]> {
     var jogosSugeridos: Jogo[] = [];
-    if (nJogadores === -1 && tempoEscolhido === -1 && this.categorias.length <= 0) {
+    if (nJogadores === -1 && tempoEscolhido === -1 && categorias.length <= 0) {
       return this.getJogos();
     }
     for (let jogo of JOGOS) {

@@ -1,3 +1,5 @@
-<p>
-  categoria-select works!
-</p>
+<ul class="categorias">
+	<li *ngFor="let categoria of categorias">
+		<input type="checkbox" [checked]="categoriaChecada(categoria)" (click)="toggleCategoria(categoria)"> {{ categoria.nome }}
+	</li>
+</ul>

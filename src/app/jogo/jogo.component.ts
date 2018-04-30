@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Jogo } from '../jogo';
 import { JogoService } from '../jogo.service';
+import { Categoria } from '../categoria';
+import { CATEGORIAS } from '../mock-categorias';
+import { CategoriaSelectComponent } from '../categoria-select/categoria-select.component'
 
 @Component({
   selector: 'app-jogo',
@@ -14,12 +17,12 @@ export class JogoComponent implements OnInit {
   bolsista: Boolean = false;
   metodoOrganizacao: string = "";
   inverterOrdem: Boolean = false;
+  mensagemInverter: string = "Normal";
   mostrarFiltros: Boolean = false;
   numeroJogadores: number = 4;
   ignorarJogadores: Boolean = false;
   tempoJogo: number = 40;
   ignorarTempoJogo: Boolean = false;
-  categorias: string[] = [];
 
   constructor(private jogoService: JogoService) { }
 
@@ -95,7 +98,11 @@ export class JogoComponent implements OnInit {
 
   toggleInverter(): void {
     this.inverterOrdem = !this.inverterOrdem;
+    this.mensagemInverter = this.inverterOrdem ? "Inversa" : "Normal"
     this.organizar();
+    if (!this.inverterOrdem) {
+      this.jogos.reverse();
+    }
   }
 
   toggleFiltros(): void {
@@ -114,13 +121,17 @@ export class JogoComponent implements OnInit {
   filtrar(): void {
     let nJogadores = this.ignorarJogadores ? -1 : this.numeroJogadores;
     let tJogo = this.ignorarTempoJogo ? -1 : this.tempoJogo;
-    this.jogoService.getJogosSugeridos(nJogadores,tJogo,this.categorias)
+    this.jogoService.getJogosSugeridos(nJogadores,tJogo,CategoriaSelectComponent.categoriasEscolhidas)
       .subscribe(jogos => this.jogos = jogos);
     if (this.jogos.length <= 0) {
       this.jogoService.getJogosPossiveis(nJogadores,tJogo)
         .subscribe(jogos => this.jogos = jogos); 
     }
     this.toggleFiltros();
+  }
+
+  newJogo(): void {
+
   }
 
 }

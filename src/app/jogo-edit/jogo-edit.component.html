@@ -2,7 +2,7 @@
 	<button class="delete" (click)="onDelete(jogo)">Deletar</button><br>
 	<button class="save" (click)="onSave(jogo)">Salvar</button><br>
 	<label>
-		Nome do Jogo: <input [(ngModel)]="jogo.nome" maxlength="180" placeholder="Nome" value="{{jogo.nome}}">
+		<h2>Nome do Jogo: </h2><input [(ngModel)]="jogo.nome" maxlength="180" placeholder="Nome" value="{{jogo.nome}}">
 	</label><br>
 	<label>
 		<ion-range-slider #sliderJogadores type="number" min="1"
@@ -12,26 +12,33 @@
           [to]="jogo.maxJogadores"
           to_shadow="true"
           grid="true"
-          grid_num="10"
+          grid_num="15"
           postfix=" jogadores"
           (onFinish)="adjustNumeroJogadores(sliderJogadores.from,sliderJogadores.to)"></ion-range-slider><br>
           <input type="checkbox" [(ngModel)]="maisDe30" (change)="adjustNumeroJogadores(sliderJogadores.from,sliderJogadores.to)"> Mais de 30 jogadores
 	</label><br>
 	<label>
-		Tempo de Jogo: {{ jogo.tempoJogo < 5 ? "< 5" : (jogo.tempoJogo > 600) ? "600+" : jogo.tempoJogo }} minutos<br>
+		<h2>Categorias:</h2>
+		<app-categoria-select></app-categoria-select>
+	</label><br>
+	<label>
+		<h2>Tempo de Jogo:</h2> {{ jogo.tempoJogo < 5 ? "< 5" : (jogo.tempoJogo > 600) ? "600+" : jogo.tempoJogo }} minutos<br>
 		<input [(ngModel)]="jogo.tempoJogo" type="range" min="0" max="605" step="5" value="{{jogo.tempoJogo}}">
 	</label><br>
 	<label>
-		Descrição: <textarea rows="20" cols="100" maxlength="2000" [(ngModel)]="jogo.descricao" placeholder="Descrição">{{jogo.descricao}}</textarea>
+		<h2>Descrição:</h2> <textarea rows="20" cols="100" maxlength="2000" [(ngModel)]="jogo.descricao" placeholder="Descrição">{{jogo.descricao}}</textarea>
 	</label><br>
 	<label>
-		Imagem Escolhida: <input [(ngModel)]="jogo.imagemJogo" type="file">
-		<img src="{{ jogo.imagemJogo }}" alt="../assets/default-image.png"><br>
+		<h2>Capa do Jogo:</h2> <input [(ngModel)]="jogo.imagemJogo" type="file">
+		<img src="{{ jogo.imagemJogo }}" alt="Capa do Jogo"><br>
 	</label>
 	<label>
-		Link do Manual: <input [(ngModel)]="jogo.linkManual" maxlength="200" placeholder="Link do Manual" value="{{jogo.linkManual}}">
+		<h2>Link do Manual:</h2> <input [(ngModel)]="jogo.linkManual" maxlength="200" placeholder="Link do Manual" value="{{jogo.linkManual}}">
 	</label><br>
 	<label>
-		Link do Desenvolvedor: <input [(ngModel)]="jogo.linkDesenvolvedor" maxlength="200" placeholder="Link do Desenvolvedor" value="{{jogo.linkDesenvolvedor}}">
+		<h2>Link do Desenvolvedor:</h2> <input [(ngModel)]="jogo.linkDesenvolvedor" maxlength="200" placeholder="Link do Desenvolvedor" value="{{jogo.linkDesenvolvedor}}">
+	</label>
+	<label>
+		<h4><input type="checkbox" [(ngModel)]="jogo.emDestaque" [checked]="jogo.emDestaque"> Escolha do Editor</h4>
 	</label>
 </div>

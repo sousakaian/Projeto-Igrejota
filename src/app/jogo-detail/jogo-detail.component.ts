@@ -27,7 +27,7 @@ export class JogoDetailComponent implements OnInit {
 
   getJogo(): void {
   	const id = +this.route.snapshot.paramMap.get('id');
-  	this.jogoService.getJogo(id)
+  	this.jogoService.get(id)
   		.subscribe(jogo => this.jogo = jogo);
   }
 

@@ -1,3 +1,7 @@
-<p>
-  categoria-edit works!
-</p>
+<ul class="categorias">
+	<button class="save" (click)="saveAll()">Salvar</button><br>
+	<li *ngFor="let categoria of categorias">
+		{{ categoria.id }} <input type="text" maxlength="100" (click)="toggleCategoria(categoria)" value="{{ categoria.nome }}" placeholder="Categoria"> 
+		<button class="delete" (click)="onDelete(categoria)">Deletar</button><br>
+	</li>
+</ul>

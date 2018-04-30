@@ -18,7 +18,7 @@ export class NoticiaService {
   	return of(NOTICIAS[0]);
   }
 
-  getNoticia(id: number): Observable<Noticia> {
+  get(id: number): Observable<Noticia> {
   	return of(NOTICIAS.find(noticia => noticia.id === id));
   }
 
@@ -33,6 +33,10 @@ export class NoticiaService {
     NOTICIAS[index].conteudo = noticia.conteudo;
     NOTICIAS[index].dataEdicao = new Date(Date.now());
     NOTICIAS[index].imagemDestaque = noticia.imagemDestaque;
+  }
+
+  add(): void {
+
   }
 
 }

@@ -27,7 +27,7 @@ export class NoticiaDetailComponent implements OnInit {
 
   getNoticia(): void {
   	const id = +this.route.snapshot.paramMap.get('id');
-  	this.noticiaService.getNoticia(id)
+  	this.noticiaService.get(id)
   		.subscribe(noticia => this.noticia = noticia);
   }
 
