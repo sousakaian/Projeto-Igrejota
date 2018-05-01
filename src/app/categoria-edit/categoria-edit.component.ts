@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { CategoriaService } from '../categoria.service';
 import { Categoria } from '../categoria';
 
@@ -11,12 +10,11 @@ import { Categoria } from '../categoria';
 })
 export class CategoriaEditComponent implements OnInit {
   @Input() categorias: Categoria[];
+  enviado: Boolean;
 
   constructor(
-  	  private categoriaService: CategoriaService,
-  	  private route: ActivatedRoute,
-	  private router: Router,
-	  private location: Location
+  	private categoriaService: CategoriaService,
+	  private router: Router
 	) {
 
   }
@@ -30,11 +28,23 @@ export class CategoriaEditComponent implements OnInit {
   		.subscribe(categorias => this.categorias = categorias);
   }
 
+  categoriasValidas(): Boolean {
+    for (let categoria of this.categorias) {
+      if (categoria.nome === "") {
+        return false;
+      }
+    }
+    return true;
+  }
+
   saveAll(): void {
-  	for (let categoria of this.categorias) {
-  		this.onSave(categoria);
-  	}
-  	this.router.navigate(['/inicio']);
+    this.enviado = true;
+    if (this.categoriasValidas()) {
+    	for (let categoria of this.categorias) {
+    		this.onSave(categoria);
+    	}
+    	this.router.navigate(['/inicio']);
+    }
   }
 
   onSave(categoria: Categoria): void {

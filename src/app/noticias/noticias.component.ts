@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Noticia } from '../noticia';
 import { NoticiaService } from '../noticia.service';
+import { AuthService } from '../auth.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-noticias',
@@ -11,9 +13,12 @@ import { NoticiaService } from '../noticia.service';
 export class NoticiasComponent implements OnInit {
   noticias: Noticia[] = [];
   noticiaSelecionada: Noticia;
-  bolsista: Boolean = true;
 
-  constructor(private noticiaService: NoticiaService) {
+  constructor(
+    private noticiaService: NoticiaService,
+    private auth: AuthService
+    ) {
+    
   }
 
   ngOnInit() {

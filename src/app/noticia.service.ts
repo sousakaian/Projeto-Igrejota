@@ -4,6 +4,7 @@ import { Noticia } from './noticia';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { MessageService } from './message.service';
+import * as moment from 'moment';
 
 @Injectable()
 export class NoticiaService {
@@ -31,7 +32,7 @@ export class NoticiaService {
     let index = NOTICIAS.indexOf(noticia);
     NOTICIAS[index].titulo = noticia.titulo;
     NOTICIAS[index].conteudo = noticia.conteudo;
-    NOTICIAS[index].dataEdicao = new Date(Date.now());
+    NOTICIAS[index].dataEdicao = moment();
     NOTICIAS[index].imagemDestaque = noticia.imagemDestaque;
   }
 
@@ -40,7 +41,8 @@ export class NoticiaService {
   }
 
   generateEmptyNoticia(): Observable<Noticia> {
-    return of({id: -1, titulo: "", conteudo: "", dataCriacao: new Date(Date.now()), dataEdicao: undefined, imagemDestaque: ""});
+    let momento = moment();
+    return of({id: -1, titulo: "", conteudo: "", dataCriacao: momento, dataEdicao: momento, imagemDestaque: ""});
   }
 
 }

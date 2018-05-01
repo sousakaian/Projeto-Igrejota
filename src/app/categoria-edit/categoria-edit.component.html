@@ -1,7 +1,10 @@
 <ul class="categorias">
-	<button class="save" (click)="saveAll()">Salvar</button><br>
+	<button class="save" (click)="saveAll()">Salvar Categorias</button><br>
 	<li *ngFor="let categoria of categorias">
-		{{ categoria.id }} <input type="text" maxlength="100" [(ngModel)]="categoria.nome" value="{{ categoria.nome }}" placeholder="Categoria"> 
+		{{ categoria.id }} <input type="text" maxlength="100" [(ngModel)]="categoria.nome" value="{{ categoria.nome }}" placeholder="Categoria">
+		<div *ngIf="categoria.nome === '' && enviado" class="alert-danger">
+			E necessário um nome para a categoria.
+		</div>
 		<button class="delete" (click)="onDelete(categoria)">Deletar</button><br>
 	</li>
 	<button class="add" (click)="addCategoria()">Nova Categoria</button><br>

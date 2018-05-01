@@ -3,6 +3,7 @@ import { Noticia } from '../noticia';
 import { NoticiaService } from '../noticia.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-noticia-edit',
@@ -12,6 +13,7 @@ import { Location } from '@angular/common';
 
 export class NoticiaEditComponent implements OnInit {
   @Input() noticia: Noticia;
+  enviado: Boolean;
 
   constructor(
 	  private noticiaService: NoticiaService,
@@ -42,8 +44,20 @@ export class NoticiaEditComponent implements OnInit {
   	this.router.navigate(["/noticias"]);
   }
 
-  onSave(noticia: Noticia) {
-  	noticia.id === -1 ? this.noticiaService.add(noticia) : this.noticiaService.update(noticia);
-  	this.router.navigate(["/noticias"]);
+  noticiaValida(): Boolean {
+    return this.noticia.titulo !== '' && this.noticia.conteudo !== '';
   }
+
+  onSave(noticia: Noticia) {
+    this.enviado = true
+    if (this.noticiaValida()) {
+  	  noticia.id === -1 ? this.noticiaService.add(noticia) : this.noticiaService.update(noticia);
+      this.router.navigate(["/noticia/"+noticia.id]);
+    }
+  }
+
+  onCancel() {
+    this.router.navigate(["/noticias"]);
+  }
+
 }

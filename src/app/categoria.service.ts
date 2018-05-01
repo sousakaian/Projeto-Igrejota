@@ -39,7 +39,7 @@ export class CategoriaService {
   }
 
   generateEmptyCategoria(): Observable<Categoria> {
-    return of({id: 0, nome: ""});
+    return of({id: -1, nome: ""});
   }
 
 }

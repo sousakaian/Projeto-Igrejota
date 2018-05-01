@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonRangeSliderModule } from "ng2-ion-range-slider";
+import { IonRangeSliderModule } from 'ng2-ion-range-slider';
 
 import { AppComponent } from './app.component';
 import { NoticiasComponent } from './noticias/noticias.component';
@@ -23,7 +23,12 @@ import { AppRoutingModule } from './/app-routing.module';
 import { MainPageComponent } from './main-page/main-page.component';
 import { JogoService } from './jogo.service';
 import { CategoriaService } from './categoria.service';
+import { AuthService } from './auth.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuardService } from './auth-guard.service';
+import { LoginComponent } from './login/login.component';
+import { BolsistaService } from './bolsista.service';
+import { JogosDestaqueComponent } from './jogos-destaque/jogos-destaque.component';
 
 
 @NgModule({
@@ -42,7 +47,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     CategoriaEditComponent,
     MessagesComponent,
     MainPageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent,
+    JogosDestaqueComponent
   ],
   imports: [
     BrowserModule,
@@ -51,10 +58,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     IonRangeSliderModule
   ],
   providers: [
+    AuthService,
     NoticiaService,
     MessageService,
     JogoService,
-    CategoriaService
+    CategoriaService,
+    AuthGuardService,
+    BolsistaService
   ],
   bootstrap: [AppComponent]
 })

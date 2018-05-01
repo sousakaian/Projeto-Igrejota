@@ -3,7 +3,6 @@ import { Jogo } from '../jogo';
 import { CategoriaSelectComponent } from '../categoria-select/categoria-select.component'
 import { JogoService } from '../jogo.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { IonRangeSliderComponent } from "ng2-ion-range-slider";
 
 @Component({
@@ -16,12 +15,12 @@ export class JogoEditComponent implements OnInit {
   @Input() jogo: Jogo;
   @ViewChild('sliderJogadores') sliderJogadores: IonRangeSliderComponent;
   maisDe30: Boolean;
+  enviado: Boolean;
 
   constructor(
 	  private jogoService: JogoService,
 	  private route: ActivatedRoute,
-	  private router: Router,
-	  private location: Location
+	  private router: Router
   ) {
   	
   }
@@ -48,15 +47,24 @@ export class JogoEditComponent implements OnInit {
     this.jogo.maxJogadores = this.maisDe30 ? 31 : maxJogadores;
   }
 
+  validarJogo(): Boolean {
+    return this.jogo.nome !== '' && this.jogo.descricao !== ''
+  }
+
   onSave(jogo: Jogo): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    id === -1 ? this.jogoService.add(jogo) : this.jogoService.edit(jogo);
-  	this.router.navigate(['/jogo/'+jogo.id]);
+    this.enviado = true;
+    if (this.validarJogo()) {
+      jogo.id === -1 ? this.jogoService.add(jogo) : this.jogoService.edit(jogo);
+    	this.router.navigate(['/jogo/'+jogo.id]);
+    }
   }
 
   onDelete(jogo: Jogo): void {
   	this.jogoService.remove(jogo.id);
-  	this.router.navigate(['/jogos'])
+  	this.router.navigate(['/jogos']);
   }
 
+  onCancel(): void {
+    this.router.navigate(['/jogos']);
+  }
 }

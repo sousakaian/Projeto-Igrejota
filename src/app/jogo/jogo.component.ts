@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Jogo } from '../jogo';
 import { JogoService } from '../jogo.service';
+import { AuthService } from '../auth.service';
 import { Categoria } from '../categoria';
 import { CATEGORIAS } from '../mock-categorias';
 import { CategoriaSelectComponent } from '../categoria-select/categoria-select.component'
@@ -14,17 +15,23 @@ import { CategoriaSelectComponent } from '../categoria-select/categoria-select.c
 export class JogoComponent implements OnInit {
   jogos: Jogo[];
   jogoSelecionado: Jogo;
-  bolsista: Boolean = true;
+  termoBusca: "";
   metodoOrganizacao: string = "";
   inverterOrdem: Boolean = false;
   mensagemInverter: string = "Normal";
   mostrarFiltros: Boolean = false;
+  mostrarBusca: Boolean = false;
   numeroJogadores: number = 4;
   ignorarJogadores: Boolean = false;
-  tempoJogo: number = 40;
+  tempoJogo: number = 60;
   ignorarTempoJogo: Boolean = false;
 
-  constructor(private jogoService: JogoService) { }
+  constructor(
+    private jogoService: JogoService,
+    public auth: AuthService
+    ) {
+
+  }
 
   ngOnInit() {
   	this.getJogos();
@@ -38,6 +45,13 @@ export class JogoComponent implements OnInit {
 
   onSelect(jogo: Jogo): void {
   	this.jogoSelecionado = jogo;
+  }
+
+  pesquisaAvancada(termo: string): void {
+    this.jogoService.getBuscaJogos(termo)
+      .subscribe(jogos => this.jogos = jogos);
+    this.mostrarBusca = false;
+    this.metodoOrganizacao = "";
   }
 
   organizar(): void {
@@ -94,19 +108,28 @@ export class JogoComponent implements OnInit {
     if (this.inverterOrdem) {
       this.jogos.reverse();
     }
+
   }
 
   toggleInverter(): void {
     this.inverterOrdem = !this.inverterOrdem;
     this.mensagemInverter = this.inverterOrdem ? "Inversa" : "Normal"
-    this.organizar();
-    if (!this.inverterOrdem) {
-      this.jogos.reverse();
-    }
+    this.jogos.reverse()
+  }
+
+  toggleBusca(): void {
+    this.mostrarBusca = !this.mostrarBusca;
+    this.limparFiltros();
   }
 
   toggleFiltros(): void {
     this.mostrarFiltros = !this.mostrarFiltros;
+    this.limparBusca();
+  }
+
+  limparBusca(): void {
+    this.termoBusca = "";
+    this.mostrarBusca = false
   }
 
   limparFiltros(): void {
@@ -114,8 +137,9 @@ export class JogoComponent implements OnInit {
     this.ignorarJogadores = false;
     this.tempoJogo = 40;
     this.ignorarTempoJogo = false;
+    CategoriaSelectComponent.categoriasEscolhidas = [];
+    this.mostrarFiltros = false;
     this.getJogos();
-    this.toggleFiltros();
   }
 
   filtrar(): void {

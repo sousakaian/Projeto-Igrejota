@@ -1,15 +1,22 @@
 <div *ngIf="noticia">
-	<button class="delete" (click)="onDelete(noticia)">Deletar</button><br>
+	<button *ngIf="noticia.id === -1" class="cancel" (click)="onCancel()">Cancelar Edição</button>
+	<button *ngIf="noticia.id !== -1" class="delete" (click)="onDelete(noticia)">Deletar</button><br>
 	<button class="save" (click)="onSave(noticia)">Salvar</button><br>
 	<label>
 		Título da Notícia: <input [(ngModel)]="noticia.titulo" maxlength="150" placeholder="Título" value="{{noticia.titulo}}">
+		<div *ngIf="noticia.titulo === '' && enviado" class="alert alert-danger">
+			É necessario um título para a notícia.
+		</div>
 	</label><br>
 	<label>
 		Descrição:<br>
 		<textarea rows="20" cols="100" maxlength="2000" [(ngModel)]="noticia.conteudo" type="textarea" placeholder="Descrição">{{noticia.conteudo}}</textarea>
+		<div *ngIf="noticia.conteudo === '' && enviado" class="alert-danger">
+			É necessario uma descrição.
+		</div>
 	</label><br>
 	<label>
 		Imagem Escolhida: <input [(ngModel)]="noticia.imagemDestaque" type="file">
-		<img src="{{ noticia.imagemDestaque }}" alt="../assets/default-image.png"><br>
+		<img *ngIf="noticia.imagemDestaque !== ''" src="{{ noticia.imagemDestaque }}" alt="{{noticia.titulo}}"><br>
 	</label>
 </div>

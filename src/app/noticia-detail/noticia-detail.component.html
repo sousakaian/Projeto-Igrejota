@@ -1,9 +1,9 @@
 <div>
 	<h3>{{ noticia.titulo }}</h3>
-	<img src="{{ noticia.imagemDestaque }}" alt="../assets/default-image.png"><br>
+	<img *ngIf="noticia.imagemDestaque !== ''" src="{{ noticia.imagemDestaque }}" alt="{{noticia.titulo}}"><br>
 	<p>{{ noticia.conteudo }}</p>
 	<p *ngIf="noticia.dataEdicao && noticia.dataEdicao !== noticia.dataCriacao">
-		Editado em {{ noticia.dataEdicao }}
+		Ultima edição {{ noticia.dataEdicao.fromNow() }}
 	</p>
-	<p>Criado em {{ noticia.dataCriacao }}</p>
+	<p>Criado em {{ noticia.dataCriacao.format('LLL') }}</p>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -8,12 +9,27 @@ import { Router } from '@angular/router';
 })
 export class TopbarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+  	private router: Router,
+  	public auth: AuthService
+  	) {
+
+  }
 
   ngOnInit() {
+  	
   }
 
   goToInicio(): void {
+  	this.router.navigate(['/inicio']);
+  }
+
+  entrar():void {
+  	this.router.navigate(['/login']);
+  }
+
+  sair(): void {
+  	this.auth.logout();
   	this.router.navigate(['/inicio']);
   }
 

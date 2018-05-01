@@ -1,19 +1,10 @@
 <h2>Jogos</h2>
 <ul class="jogos">
-	<button (click)="toggleFiltros()">Filtros</button>
-	<div class="filtros" *ngIf="mostrarFiltros">
-		<button (click)="limparFiltros()">Limpar</button>
-		<h3>Número de Jogadores: {{ ignorarJogadores ? 'Qualquer um' : (numeroJogadores > 30 ? '30+' : numeroJogadores) }}</h3>
-		<input [(ngModel)]="numeroJogadores" type="range" min="1" max="31" step="1" value="{{numeroJogadores}}"><br>
-		<input type="checkbox" [(ngModel)]="ignorarJogadores"> Ignorar número de jogadores<br>
-
-		<h3>Tempo de Jogo: {{ ignorarTempoJogo ? 'Qualquer um' : (tempoJogo < 5 ? "< 5" : (tempoJogo > 600) ? "600+" : tempoJogo) + 'minutos'}}</h3>
-		<input [(ngModel)]="tempoJogo" type="range" min="0" max="605" step="5" value="{{tempoJogo}}"><br>
-		<input type="checkbox" [(ngModel)]="ignorarTempoJogo"> Ignorar tempo de jogo<br>
-
-		<h3>Categorias</h3>
-		<app-categoria-select></app-categoria-select>
-		<button (click)="filtrar()">Aplicar</button>
+	<button (click)="toggleBusca()">Pesquisar</button>
+	ou
+	<button (click)="toggleFiltros()">Usar Filtros</button><br>
+	<div class="busca" *ngIf="mostrarBusca">
+		<input type="text" [(ngModel)]="termoBusca" placeholder="Pesquisar..."><button (click)="limparBusca()">Limpar</button><button (click)="pesquisaAvancada(termoBusca)">Pesquisar</button>
 	</div>
 	<img src="" alt="Organização: ">
 	<select (change)="organizar()" [(ngModel)]="metodoOrganizacao">
@@ -23,12 +14,30 @@
 	  <option value="Tempo de Jogo">Tempo de Jogo</option>
 	</select>
 	<button (click)="toggleInverter()">{{mensagemInverter}}</button>
+	<div class="filtros" *ngIf="mostrarFiltros">
+		<button (click)="limparFiltros()">Limpar</button>
+		<h3>Número de Jogadores: {{ ignorarJogadores ? 'Qualquer um' : (numeroJogadores > 30 ? '30+' : numeroJogadores) }}</h3>
+		<div *ngIf="!ignorarJogadores">
+			<input [(ngModel)]="numeroJogadores" type="range" min="1" max="31" step="1" value="{{numeroJogadores}}"><br>
+		</div>
+		<input type="checkbox" [(ngModel)]="ignorarJogadores"> Ignorar número de jogadores<br>
+
+		<h3>Tempo de Jogo: {{ ignorarTempoJogo ? 'Qualquer um' : (tempoJogo < 30 ? "< 30 minutos" : (tempoJogo > 600) ? "> 10 horas" : tempoJogo+' minutos') }}</h3>
+		<div *ngIf="!ignorarTempoJogo">
+			<input [(ngModel)]="tempoJogo" type="range" min="0" max="630" step="30" value="{{tempoJogo}}"><br>
+		</div>
+		<input type="checkbox" [(ngModel)]="ignorarTempoJogo"> Ignorar tempo de jogo<br>
+
+		<h3>Categorias</h3>
+		<app-categoria-select></app-categoria-select>
+		<button (click)="filtrar()">Aplicar</button>
+	</div>
 	<li *ngFor="let jogo of jogos" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
-		<a routerLink="{{ bolsista ? '/jogo/edit/'+jogo.id : '/jogo/'+jogo.id }}">
-			<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="../assets/default-image.png">
-			<h3>{{ jogo.nome | uppercase }}</h3>
+		<a routerLink="{{ auth.loggedIn() ? '/jogo/edit/'+jogo.id : '/jogo/'+jogo.id }}">
+			<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
+			<h3>{{ jogo.nome | uppercase }} <img *ngIf="jogo.emDestaque" src="" alt="Em Destaque"></h3>
 			<h4>{{ jogo.tempoJogo+'min - '+ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' | lowercase }}</h4>
 		</a>
 	</li>
 </ul>
-<a routerLink="/jogo/edit/-1" *ngIf="bolsista">Adicionar Jogo</a>
+<a routerLink="/jogo/edit/-1" *ngIf="auth.loggedIn()">Adicionar Jogo</a>
