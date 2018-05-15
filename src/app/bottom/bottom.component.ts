@@ -14,6 +14,10 @@ export class BottomComponent implements OnInit {
   ngOnInit() {
   }
 
+  goToInicio(): void {
+    this.router.navigate(['/inicio']);
+  }
+
   goToAcervo(): void {
   	this.router.navigate(['/jogos']);
   }
@@ -23,11 +27,7 @@ export class BottomComponent implements OnInit {
   }
 
   goToCalendario(): void {
-
-  }
-
-  goToEdit(): void {
-  	
+    this.router.navigate(['/calendario']);
   }
 
 }

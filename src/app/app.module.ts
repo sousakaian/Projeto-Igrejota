@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonRangeSliderModule } from 'ng2-ion-range-slider';
+import { CalendarModule } from 'angular-calendar';
 
 import { AppComponent } from './app.component';
 import { NoticiasComponent } from './noticias/noticias.component';
@@ -29,6 +31,9 @@ import { AuthGuardService } from './auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { BolsistaService } from './bolsista.service';
 import { JogosDestaqueComponent } from './jogos-destaque/jogos-destaque.component';
+import { CalendarioComponent } from './calendario/calendario.component';
+import { DiaPresencaComponent } from './dia-presenca/dia-presenca.component';
+import { ListaAlunosComponent } from './lista-alunos/lista-alunos.component';
 
 
 @NgModule({
@@ -49,13 +54,18 @@ import { JogosDestaqueComponent } from './jogos-destaque/jogos-destaque.componen
     MainPageComponent,
     PageNotFoundComponent,
     LoginComponent,
-    JogosDestaqueComponent
+    JogosDestaqueComponent,
+    CalendarioComponent,
+    DiaPresencaComponent,
+    ListaAlunosComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    IonRangeSliderModule
+    IonRangeSliderModule,
+    BrowserAnimationsModule,
+    CalendarModule.forRoot()
   ],
   providers: [
     AuthService,

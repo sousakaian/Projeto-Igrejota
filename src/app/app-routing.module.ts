@@ -10,17 +10,22 @@ import { CategoriaEditComponent } from './categoria-edit/categoria-edit.componen
 import { MainPageComponent } from './main-page/main-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
+import { CalendarioComponent } from './calendario/calendario.component';
+import { DiaPresencaComponent } from './dia-presenca/dia-presenca.component';
+import { ListaAlunosComponent } from './lista-alunos/lista-alunos.component';
 import { AppComponent } from './app.component';
 import { AuthGuardService as AuthGuard } from './auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: 'inicio', component: MainPageComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'noticias', component: NoticiasComponent },
   { path: 'noticia/:id', component: NoticiaDetailComponent },
   { path: 'noticia/edit/:id', component: NoticiaEditComponent, canActivate: [AuthGuard] },
   { path: 'categorias/edit', component: CategoriaEditComponent, canActivate: [AuthGuard] },
+  { path: 'calendario', component: CalendarioComponent},
+  { path: 'calendario/:dia-:mes-:ano', component: DiaPresencaComponent},
+  { path: 'calendario/add/:dia-:mes-:ano', component: ListaAlunosComponent},
   { path: 'jogos', component: JogoComponent },
   { path: 'jogo/:id', component: JogoDetailComponent },
   { path: 'jogo/edit/:id', component: JogoEditComponent, canActivate: [AuthGuard] },

@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   entrar() {
   	this.enviado = true;
   	this.auth.login(this.login,this.senha)
-      .subscribe(login => login ? this.router.navigate(['/inicio']) : this.router.navigate(['/login']));
+      .subscribe(login => login ? this.router.navigate([this.router.url]) : this.router.navigate(['/inicio']));
   }
 
 }

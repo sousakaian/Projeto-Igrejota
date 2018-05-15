@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./topbar.component.css']
 })
 export class TopbarComponent implements OnInit {
+  mostrarMenu: Boolean = false
 
   constructor(
   	private router: Router,
@@ -20,12 +21,16 @@ export class TopbarComponent implements OnInit {
   	
   }
 
-  goToInicio(): void {
-  	this.router.navigate(['/inicio']);
+  toggleMenu(): void {
+    this.mostrarMenu = !this.mostrarMenu
   }
 
-  entrar():void {
-  	this.router.navigate(['/login']);
+  goToGerenciarPerfil(): void {
+    
+  }
+
+  goToGerenciarApp(): void {
+
   }
 
   sair(): void {

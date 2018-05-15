@@ -33,11 +33,12 @@
 		<button (click)="filtrar()">Aplicar</button>
 	</div>
 	<li *ngFor="let jogo of jogos" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
-		<a routerLink="{{ auth.loggedIn() ? '/jogo/edit/'+jogo.id : '/jogo/'+jogo.id }}">
+		<a routerLink="{{ '/jogo/'+jogo.id }}">
 			<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
 			<h3>{{ jogo.nome | uppercase }} <img *ngIf="jogo.emDestaque" src="" alt="Em Destaque"></h3>
 			<h4>{{ jogo.tempoJogo+'min - '+ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' | lowercase }}</h4>
 		</a>
+		<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()">Edit</a>
 	</li>
 </ul>
 <a routerLink="/jogo/edit/-1" *ngIf="auth.loggedIn()">Adicionar Jogo</a>

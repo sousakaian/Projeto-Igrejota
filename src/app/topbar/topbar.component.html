@@ -1,9 +1,22 @@
 <header>
-	<button (click)="goToInicio()">
+	<a routerLink="/inicio">
 		<h1>Igrejota <img src="" alt=""></h1>
-	</button>
+	</a>
 	<h3>{{ auth.getLoggedUser() | uppercase }}</h3>
-	<button *ngIf="auth.loggedIn()" (click)="sair()">Sair</button>
-	<button *ngIf="!auth.loggedIn()" (click)="entrar()">Entrar</button>
+	<button (click)="toggleMenu()"><img *ngIf="auth.loggedIn()" src="" alt="Menu">{{ !auth.loggedIn() ? "Entrar" : "" }}</button>
 </header>
+<div class="dropdown-menu" *ngIf="mostrarMenu">
+	<ul *ngIf="auth.loggedIn()">
+		<li>
+			<button (click)="goToGerenciarPerfil()">Gerenciar Perfil</button>
+		</li>
+		<li>
+			<button (click)="goToGerenciarApp()">Gerenciar Aplicativo</button>
+		</li>
+		<li>
+			<button (click)="sair()">Sair</button>
+		</li>
+	</ul>
+	<app-login *ngIf="!auth.loggedIn()"></app-login>
+</div>
 <app-messages></app-messages>
