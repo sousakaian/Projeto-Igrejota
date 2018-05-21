@@ -1,3 +1,33 @@
-<p>
-  dia-presenca works!
-</p>
+<h1>
+	Calendário
+</h1>
+<div class="date">
+	<img class="icon" src="" alt="">
+	<h4></h4>
+</div>
+<div *ngIf="isIgrejotaDay">
+	<ul>
+		<li *ngFor="let aluno of alunosPresentes">
+			<p>{{ aluno.nome }}</p>
+			<button *ngIf="auth.loggedIn()" (onClick)="">Remove</button>
+		</li>
+	</ul>
+	<button *ngIf="auth.loggedIn()" (onClick)="">Marcar Nova Presença</button>
+</div>
+<div *ngIf="!isIgrejotaDay">
+	<h2>Este dia não possui eventos</h2>
+	<div *ngIf="auth.loggedIn()">
+		<h3>Deseja adicionar um novo?</h3>
+		<div class="form-adicionar-dia" *ngFor="let evento of eventosDiaIgrejota">
+			<h4>Descrição do Evento:<input type="text" [(ngModel)]="evento.descricao"></h4>
+			<h4>Tipo de Evento: 
+				<select [(ngModel)]="evento.tipo">
+					<option value="TipoDia.Normal">Normal</option>
+					<option value="TipoDia.Evento">Evento</option>
+				</select>
+			</h4>
+			<button (onClick)="deletar(evento)">Deletar</button>
+		</div>
+		<button (onClick)="adicionarEvento()">Adicionar Evento</button>
+	</div>
+</div>

@@ -1,29 +1,29 @@
  <div class="row text-center">
       <div class="col-md-4">
         <div class="btn-group">
-          <div
+          <button
             class="btn btn-primary"
             mwlCalendarPreviousView
             [view]="view"
             [(viewDate)]="viewDate"
             (viewDateChange)="viewDateChange.next(viewDate)">
             Anterior
-          </div>
-          <div
+          </button>
+          <button
             class="btn btn-outline-secondary"
             mwlCalendarToday
             [(viewDate)]="viewDate"
             (viewDateChange)="viewDateChange.next(viewDate)">
             Hoje
-          </div>
-          <div
+          </button>
+          <button
             class="btn btn-primary"
             mwlCalendarNextView
             [view]="view"
             [(viewDate)]="viewDate"
             (viewDateChange)="viewDateChange.next(viewDate)">
             Próximo
-          </div>
+          </button>
         </div>
       </div>
       <div class="col-md-4">
@@ -39,7 +39,7 @@
         *ngSwitchCase="'month'"
         [viewDate]="viewDate"
         [events]="events"
-        (dayClicked)="clickedDate = $event.day.date">
+        (dayClicked)="clickedDate = $event.day.date; this.onDaySelect()">
       </mwl-calendar-month-view>
       <mwl-calendar-week-view
         *ngSwitchCase="'week'"

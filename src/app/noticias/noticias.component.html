@@ -5,7 +5,7 @@
 			<h3>{{ noticia.titulo }}</h3>
 			<h5>{{ noticia.dataEdicao.fromNow() }}</h5>
 		</a>
-		<a routerLink="{{'/noticia/edit'+noticia.id}}">Edit</a>
+		<a *ngIf="auth.loggedIn()" routerLink="{{'/noticia/edit'+noticia.id}}">Edit</a>
 	</li>
 </ul>
 <a *ngIf="auth.loggedIn()" routerLink="/noticia/edit/-1">Adicionar Notícia</a>

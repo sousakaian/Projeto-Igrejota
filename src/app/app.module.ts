@@ -34,6 +34,7 @@ import { JogosDestaqueComponent } from './jogos-destaque/jogos-destaque.componen
 import { CalendarioComponent } from './calendario/calendario.component';
 import { DiaPresencaComponent } from './dia-presenca/dia-presenca.component';
 import { ListaAlunosComponent } from './lista-alunos/lista-alunos.component';
+import { DiasigrejotaService } from './diasigrejota.service';
 
 
 @NgModule({
@@ -57,7 +58,7 @@ import { ListaAlunosComponent } from './lista-alunos/lista-alunos.component';
     JogosDestaqueComponent,
     CalendarioComponent,
     DiaPresencaComponent,
-    ListaAlunosComponent,
+    ListaAlunosComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +75,8 @@ import { ListaAlunosComponent } from './lista-alunos/lista-alunos.component';
     JogoService,
     CategoriaService,
     AuthGuardService,
-    BolsistaService
+    BolsistaService,
+    DiasigrejotaService
   ],
   bootstrap: [AppComponent]
 })

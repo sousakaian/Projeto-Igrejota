@@ -15,6 +15,9 @@ import {
 } from 'date-fns';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CalendarEvent } from 'angular-calendar';
+import { DiasigrejotaService } from '../diasigrejota.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 
 export const DATE_TIME_PICKER_CONTROL_VALUE_ACCESSOR: any = {
@@ -54,17 +57,24 @@ export class CalendarioComponent implements ControlValueAccessor, OnInit {
   viewDate: Date = moment().toDate();
 
   events: CalendarEvent[] = [];
-
+  
   clickedDate: moment.Moment;
 
-  ngOnInit() {
+  constructor(
+  	private cdr: ChangeDetectorRef,
+  	public auth: AuthService,
+  	public diaigrejotaService: DiasigrejotaService,
+  	public router: Router
+  ) {
+
   }
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  ngOnInit() {
+  	this.getEventos();
+  }
 
   writeValue(date: Date): void {
     this.date = moment(date);
-    console.log(date);
 
     this.dateStruct = moment(date).add(1, 'month');
 
@@ -88,6 +98,17 @@ export class CalendarioComponent implements ControlValueAccessor, OnInit {
   }
 
   displayMonthYear(date: Date) {
-  	return moment().year(date.getFullYear()).month(date.getMonth()).format('MMMM [de] YYYY')
+  	return moment().year(date.getFullYear()).month(date.getMonth()).format('MMMM [de] YYYY');
+  }
+
+  onDaySelect() {
+  	console.log(this.clickedDate)
+  	this.router.navigate(['calendario/'+moment(this.clickedDate).format('DD-MM-YYYY')]);
+  }
+
+  getEventos() {
+  	var calendarReceiver: Array<CalendarEvent>;
+  	this.diaigrejotaService.getEventos(this.viewDate)
+  		.subscribe(eventos => this.events = eventos);
   }
 }
