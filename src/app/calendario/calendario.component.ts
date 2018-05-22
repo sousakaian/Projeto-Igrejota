@@ -102,7 +102,6 @@ export class CalendarioComponent implements ControlValueAccessor, OnInit {
   }
 
   onDaySelect() {
-  	console.log(this.clickedDate)
   	this.router.navigate(['calendario/'+moment(this.clickedDate).format('DD-MM-YYYY')]);
   }
 

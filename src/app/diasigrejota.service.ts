@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { DiaIgrejota } from './diaigrejota';
+import { DiaIgrejota, TipoDia } from './diaigrejota';
 import { DIASIGREJOTA } from './mock-diasigrejota';
 import { CalendarEvent } from 'angular-calendar';
+import { AlunosService } from './alunos.service';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { MessageService } from './message.service';
@@ -10,7 +11,7 @@ import * as moment from 'moment';
 @Injectable()
 export class DiasigrejotaService {
 
-  constructor() { }
+  constructor(private alunosService: AlunosService) { }
 
   getEventos(date: Date): Observable<CalendarEvent[]> {
   	var eventosMes: DiaIgrejota[] = [];
@@ -32,7 +33,30 @@ export class DiasigrejotaService {
   	return of(DIASIGREJOTA.filter(data => data.dia.isSame(mes,"month") && data.dia.isSame(mes,"year")));
   }
 
-  getDia(dia: Date): Observable<DiaIgrejota> {
-  	return of(DIASIGREJOTA.find(data => data.dia.isSame(dia,"day")));
+  getDia(dia: Date): Observable<DiaIgrejota[]> {
+  	return of(DIASIGREJOTA.filter(data => data.dia.isSame(dia,"day")));
+  }
+
+  add(date: Date) {
+    let dia: DiaIgrejota = {dia: moment(date),descricao: "", tipo: TipoDia.Normal};
+    DIASIGREJOTA.push(dia);
+  }
+
+  edit(evento: DiaIgrejota) {
+    let index = DIASIGREJOTA.findIndex(e => e.dia === evento.dia && evento.descricao === e.descricao && evento.tipo === e.tipo)
+    DIASIGREJOTA[index].dia = evento.dia;
+    DIASIGREJOTA[index].tipo = evento.tipo;
+    DIASIGREJOTA[index].descricao = evento.descricao;
+  }
+
+  remove(evento: DiaIgrejota) {
+    let index = DIASIGREJOTA.findIndex(e => e.dia === evento.dia && evento.descricao === e.descricao && evento.tipo === e.tipo)
+    DIASIGREJOTA.splice(index,1);
+    this.getDia(evento.dia.toDate())
+      .subscribe(eventos => {
+        if (eventos.length <= 0) {
+          this.alunosService.removePresencasFrom(evento.dia.toDate());
+        }
+      })
   }
 }

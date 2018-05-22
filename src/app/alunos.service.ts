@@ -12,6 +12,7 @@ import * as moment from 'moment';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AlunosService {
 
   constructor() { }
@@ -20,17 +21,28 @@ export class AlunosService {
   	return of(ALUNOS);
   }
 
+  getAlunosSemPresenca(dia: Date): Observable<Aluno[]> {
+    let presencas = PRESENCAS.filter(presenca => presenca.diaPresenca.isSame(dia, "day"))
+    var alunos: Aluno[] = []
+    for (let aluno of ALUNOS) {
+      if (presencas.findIndex(p => p.aluno.matricula === aluno.matricula) === -1) {
+        alunos.push(aluno)
+      }
+    }
+    return of(alunos)
+  }
+
   getPresencas(dia: Date): Observable<Presenca[]> {
   	return of(PRESENCAS.filter(presenca => presenca.diaPresenca.isSame(dia, "day")));
   }
 
-  addPresenca(aluno: Aluno, bolsista: Bolsista, dia: Date) {
+  addPresenca(aluno: Aluno, bolsista: string, dia: Date) {
   	let p: Presenca = {aluno: aluno, bolsista: bolsista, diaPresenca: moment(dia)} ;
   	PRESENCAS.push(p);
   }
 
   removePresenca(aluno: Aluno, dia: Date) {
-  	let index = PRESENCAS.indexOf(PRESENCAS.find(presenca => presenca.aluno === aluno && presenca.diaPresenca.isSame(dia, "day")));
+  	let index = PRESENCAS.findIndex(presenca => presenca.aluno === aluno && presenca.diaPresenca.isSame(dia, "day"));
   	PRESENCAS.splice(index, 1);
   }
 
@@ -39,11 +51,11 @@ export class AlunosService {
   }
 
   edit(aluno: Aluno) {
-  	let index = ALUNOS.indexOf(ALUNOS.find(a => a.matricula === aluno.matricula));
+  	let index = ALUNOS.findIndex(a => a.matricula === aluno.matricula);
   }
 
   remove(matricula: number) {
-  	let index = ALUNOS.indexOf(ALUNOS.find(a => a.matricula === matricula));
+  	let index = ALUNOS.findIndex(a => a.matricula === matricula);
   	this.removePresencasOf(ALUNOS.splice(index, 1)[0]);
   }
 
@@ -52,5 +64,16 @@ export class AlunosService {
   		let index = PRESENCAS.indexOf(PRESENCAS.find(a => a.aluno.matricula === presenca.aluno.matricula));
   		PRESENCAS.splice(index, 1);
   	}
+  }
+
+  removePresencasFrom(day: Date) {
+  	this.getPresencas(day)
+  		.subscribe(presencas => {
+  			for (let p of presencas) {
+  				let index = PRESENCAS.findIndex(p => p.diaPresenca.isSame(day,"day"))
+  				PRESENCAS.splice(index,1)
+  			}
+  		})
+
   }
 }

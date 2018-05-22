@@ -35,6 +35,7 @@ export class TopbarComponent implements OnInit {
 
   sair(): void {
   	this.auth.logout();
+    this.mostrarMenu = false
   	this.router.navigate(['/inicio']);
   }
 

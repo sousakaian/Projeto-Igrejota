@@ -1,3 +1,9 @@
-<p>
-  lista-alunos works!
-</p>
+<input type="text" [(ngModel)]="termoBusca" placeholder="Pesquisar..."><br>
+<button (click)="adicionarPresencas()">Confirmar</button>
+<ul>
+	<li *ngFor="let aluno of listaAlunos">
+		<button>Editar</button>
+		<p>{{ aluno.nome }}</p>
+		<input type="checkbox" [checked]="alunoChecado(aluno)" (click)="toggleAluno(aluno)">
+	</li>
+</ul>

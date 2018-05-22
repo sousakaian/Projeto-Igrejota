@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   loginValido: boolean;
   senha: string;
   senhaValida: boolean;
-  previousUrl: string = "/login";
 
   constructor(
     public auth: AuthService,

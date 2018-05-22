@@ -5,29 +5,35 @@
 	<img class="icon" src="" alt="">
 	<h4></h4>
 </div>
-<div *ngIf="isIgrejotaDay">
-	<ul>
-		<li *ngFor="let aluno of alunosPresentes">
-			<p>{{ aluno.nome }}</p>
-			<button *ngIf="auth.loggedIn()" (onClick)="">Remove</button>
-		</li>
-	</ul>
-	<button *ngIf="auth.loggedIn()" (onClick)="">Marcar Nova Presença</button>
-</div>
 <div *ngIf="!isIgrejotaDay">
-	<h2>Este dia não possui eventos</h2>
+	<h2>Sem eventos</h2>
 	<div *ngIf="auth.loggedIn()">
 		<h3>Deseja adicionar um novo?</h3>
-		<div class="form-adicionar-dia" *ngFor="let evento of eventosDiaIgrejota">
-			<h4>Descrição do Evento:<input type="text" [(ngModel)]="evento.descricao"></h4>
-			<h4>Tipo de Evento: 
-				<select [(ngModel)]="evento.tipo">
-					<option value="TipoDia.Normal">Normal</option>
-					<option value="TipoDia.Evento">Evento</option>
-				</select>
-			</h4>
-			<button (onClick)="deletar(evento)">Deletar</button>
-		</div>
-		<button (onClick)="adicionarEvento()">Adicionar Evento</button>
 	</div>
+</div>
+<div *ngIf="isIgrejotaDay">
+	<h3 *ngIf="alunosDiaIgrejota.length <= 0">Nenhum aluno presente</h3>
+	<ul>
+		<li *ngFor="let presenca of alunosDiaIgrejota">
+			<p>{{ presenca.aluno.nome }}</p>
+			<button *ngIf="auth.loggedIn()" (click)="remover(presenca)">Remove</button>
+		</li>
+	</ul>
+	<div *ngIf="auth.loggedIn()">
+		<button (click)="adicionarPresenca()">Marcar Nova Presença</button><br>
+		<h2>Lista de Eventos</h2>
+	</div>
+</div>
+<div class="editor" *ngIf="auth.loggedIn()">
+	<div class="form-adicionar-dia" *ngFor="let evento of eventosDiaIgrejota">
+		<h4>Descrição do Evento:<input type="text" [(ngModel)]="evento.descricao"></h4>
+		<h4>Tipo de Evento: 
+			<select [(ngModel)]="evento.tipo">
+				<option [ngValue]="tiposDia.Normal" [selected]="evento.tipo === tiposDia.Normal">Normal</option>
+				<option [ngValue]="tiposDia.Evento" [selected]="evento.tipo === tiposDia.Evento">Evento</option>
+			</select>
+		</h4>
+		<button (click)="deletar(evento)">Deletar</button>
+	</div>
+	<button (click)="adicionarEvento()">Adicionar Evento</button>
 </div>

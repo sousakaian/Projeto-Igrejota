@@ -4,6 +4,6 @@ import * as moment from 'moment';
 
 export class Presenca {
 	aluno: Aluno
-	bolsista: Bolsista
+	bolsista: string
 	diaPresenca: moment.Moment
 }
