@@ -14,7 +14,11 @@ export class ListaAlunosComponent implements OnInit {
   date: moment.Moment
   termoBusca: string;
   listaAlunos: Aluno[] = [];
+  listaEdicao: Aluno[] = [];
+  listaMostrados: Aluno[] = [];
   listaSelecionados: Aluno[] = [];
+  showFormNovoAluno: boolean;
+  novoAluno: Aluno = {matricula: undefined, nome: undefined};
 
   constructor(
   	public auth: AuthService,
@@ -28,6 +32,7 @@ export class ListaAlunosComponent implements OnInit {
   ngOnInit() {
   	this.date = moment(this.route.snapshot.paramMap.get("data"),"DD-MM-YYYY")
   	this.getAlunos()
+  	this.listaMostrados = this.listaAlunos
   }
 
   getAlunos() {
@@ -56,17 +61,37 @@ export class ListaAlunosComponent implements OnInit {
   	return this.listaSelecionados.includes(aluno)
   }
 
-  addAlunoToSelecionados(categoria: Aluno): void {
-  	this.listaSelecionados.push(categoria);
+  alunoEmEdicao(aluno: Aluno): Boolean {
+  	return this.listaEdicao.includes(aluno)
   }
 
-  removeAlunoToSelecionados(categoria: Aluno): void {
-  	let index = this.listaSelecionados.indexOf(categoria);
-  	this.listaSelecionados.splice(index,1);
+  addAluno(aluno: Aluno, lista: Aluno[]): void {
+  	lista.push(aluno);
+  }
+
+  removeAluno(aluno: Aluno, lista: Aluno[]): void {
+  	let index = lista.indexOf(aluno);
+  	lista.splice(index,1);
   }
 
   toggleAluno(aluno: Aluno): void {
-  	this.listaSelecionados.includes(aluno) ? this.removeAlunoToSelecionados(aluno) : this.addAlunoToSelecionados(aluno);
-    console.log(this.listaSelecionados);
+  	this.listaSelecionados.includes(aluno) ? this.removeAluno(aluno, this.listaSelecionados) : this.addAluno(aluno, this.listaSelecionados);
+  }
+
+  toggleEditAluno(aluno: Aluno) {
+  	this.listaEdicao.includes(aluno) ? this.removeAluno(aluno, this.listaEdicao) : this.addAluno(aluno, this.listaEdicao);
+  }
+
+  search() {
+  	this.listaMostrados = this.listaAlunos.filter(a => a.nome.includes(this.termoBusca));
+  }
+
+  cadastrar() {
+  	let aluno: Aluno = {matricula: this.novoAluno.matricula, nome: this.novoAluno.nome}
+  	this.alunosService.add(aluno);
+  	this.novoAluno = {matricula: undefined, nome: undefined};
+  	this.showFormNovoAluno = false;
+  	this.getAlunos();
+  	this.listaMostrados = this.listaAlunos
   }
 }

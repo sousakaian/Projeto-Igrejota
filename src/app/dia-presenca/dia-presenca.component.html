@@ -5,7 +5,7 @@
 	<img class="icon" src="" alt="">
 	<h4></h4>
 </div>
-<div *ngIf="!isIgrejotaDay">
+<div *ngIf="eventosDiaIgrejota.length <= 0">
 	<h2>Sem eventos</h2>
 	<div *ngIf="auth.loggedIn()">
 		<h3>Deseja adicionar um novo?</h3>

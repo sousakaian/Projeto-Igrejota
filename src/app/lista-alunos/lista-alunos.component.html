@@ -1,9 +1,18 @@
-<input type="text" [(ngModel)]="termoBusca" placeholder="Pesquisar..."><br>
+<div class="form-aluno" *ngIf="showFormNovoAluno">
+	Matricula: <input type="number" [(ngModel)]="novoAluno.matricula"><br>
+	Nome: <input type="text" [(ngModel)]="novoAluno.nome"><br>
+	<button class="confirm" (click)="cadastrar()">Cadastrar</button>
+</div>
+<input type="text" [(ngModel)]="termoBusca" (changed)="search()" placeholder="Pesquisar..."><br>
 <button (click)="adicionarPresencas()">Confirmar</button>
 <ul>
 	<li *ngFor="let aluno of listaAlunos">
-		<button>Editar</button>
-		<p>{{ aluno.nome }}</p>
-		<input type="checkbox" [checked]="alunoChecado(aluno)" (click)="toggleAluno(aluno)">
+		<div *ngIf="listaMostrados.includes(aluno)">
+			<button (click)="toggleEditAluno(aluno)">{{ alunoEmEdicao(aluno) ? "Salvar" : "Editar" }}</button>
+			<p *ngIf="!alunoEmEdicao(aluno)">{{ aluno.nome }}</p>
+			<input type="text" [(ngModel)]="aluno.nome" *ngIf="alunoEmEdicao(aluno)" placeholder="Aluno">
+			<input type="checkbox" [checked]="alunoChecado(aluno)" (click)="toggleAluno(aluno)">
+		</div>
 	</li>
 </ul>
+<button class="add-aluno" (click)="showFormNovoAluno = !showFormNovoAluno">Adicionar Aluno</button>
