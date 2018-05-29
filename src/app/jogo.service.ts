@@ -11,21 +11,6 @@ export class JogoService {
 
   constructor(private messageService: MessageService) { }
 
-  private isValidJogo(jogo: Jogo): Boolean {
-    if (jogo.id <= 0) {
-      this.messageService.add("Id do jogo inválido!");
-    } else if (jogo.nome === "") {
-      this.messageService.add("Nome do jogo inválido!");
-    } else if (jogo.minJogadores >= 0 && jogo.maxJogadores >= jogo.minJogadores && jogo.maxJogadores <= 31) {
-      this.messageService.add("Número de jogadores inválido!");
-    } else if (jogo.tempoJogo >= 0 && jogo.tempoJogo <= 610) {
-      this.messageService.add("Tempo do jogo inválido!");
-    } else {
-      return true
-    }
-    return false
-  }
-
   private isUniqueJogo(jogo: Jogo): Boolean {
     this.messageService.add("Jogo já existente");
     return JOGOS.findIndex(j => j.id === jogo.id) === -1;
