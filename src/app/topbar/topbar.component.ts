@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-topbar',
@@ -12,7 +13,8 @@ export class TopbarComponent implements OnInit {
 
   constructor(
   	private router: Router,
-  	public auth: AuthService
+    private messageService: MessageService,
+  	public auth: AuthService,
   	) {
 
   }
@@ -26,17 +28,18 @@ export class TopbarComponent implements OnInit {
   }
 
   goToGerenciarPerfil(): void {
-    
+    this.messageService.clear();
   }
 
   goToGerenciarApp(): void {
-
+    this.messageService.clear();
   }
 
   sair(): void {
   	this.auth.logout();
     this.mostrarMenu = false
   	this.router.navigate(['/inicio']);
+    this.messageService.clear();
   }
 
 }

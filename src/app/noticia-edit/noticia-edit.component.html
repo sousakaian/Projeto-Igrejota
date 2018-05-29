@@ -1,7 +1,8 @@
 <div *ngIf="noticia">
-	<button *ngIf="noticia.id === -1" class="cancel" (click)="onCancel()">Cancelar Edição</button>
-	<button *ngIf="noticia.id !== -1" class="delete" (click)="onDelete(noticia)">Deletar</button><br>
-	<button class="save" (click)="onSave(noticia)">Salvar</button><br>
+	<h1>Editar Notícia</h1>
+	<button *ngIf="noticia.id === -1" class="cancel" (click)="onCancel()">Cancelar</button>
+	<button *ngIf="noticia.id !== -1" class="delete" (click)="onDelete()">Deletar</button><br>
+	<button class="save" (click)="onSave()">Salvar</button><br>
 	<label>
 		Título da Notícia: <input [(ngModel)]="noticia.titulo" maxlength="150" placeholder="Título" value="{{noticia.titulo}}">
 		<div *ngIf="noticia.titulo === '' && enviado" class="alert alert-danger">
@@ -20,3 +21,4 @@
 		<img *ngIf="noticia.imagemDestaque !== ''" src="{{ noticia.imagemDestaque }}" alt="{{noticia.titulo}}"><br>
 	</label>
 </div>
+<app-page-not-found *ngIf="!noticia"></app-page-not-found>

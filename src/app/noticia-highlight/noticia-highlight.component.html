@@ -1,5 +1,6 @@
-<div *ngIf="noticiaDestacada">
+<div *ngIf="noticiaDestacada" (click)="goToNoticia">
 	<h2>Em destaque</h2>
 	<img src="{{ noticiaDestacada.imagemDestaque !== '' ? noticiaDestacada.imagemDestaque : '../assets/default-image.png' }}" alt=""><br>
 	<h3>{{noticiaDestacada.titulo | uppercase}}</h3>
 </div>
+<h2 *ngIf="!noticiaDestacada">Não existem notícias em destaque!</h2>

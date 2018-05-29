@@ -1,4 +1,6 @@
+<h1>Lista de Alunos</h1>
 <div class="form-aluno" *ngIf="showFormNovoAluno">
+	<h2>Cadastrar Aluno</h2>
 	Matricula: <input type="number" [(ngModel)]="novoAluno.matricula"><br>
 	Nome: <input type="text" [(ngModel)]="novoAluno.nome"><br>
 	<button class="confirm" (click)="cadastrar()">Cadastrar</button>

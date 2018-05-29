@@ -1,9 +1,6 @@
-<h1>
-	Calendário
-</h1>
 <div class="date">
 	<img class="icon" src="" alt="">
-	<h4></h4>
+	<h1>{{ this.selectedDay.format("DD/MM/YYYY") }}</h1>
 </div>
 <div *ngIf="eventosDiaIgrejota.length <= 0">
 	<h2>Sem eventos</h2>
@@ -11,8 +8,18 @@
 		<h3>Deseja adicionar um novo?</h3>
 	</div>
 </div>
+<div *ngIf="!auth.loggedIn()">
+	<h2>Lista de Eventos</h2>
+	<ul>
+		<li *ngFor="let evento of eventosDiaIgrejota">
+			<h3>{{ evento.descricao }}</h3>
+			<h4>{{ evento.tipo === tiposDia.Normal ? "Encontro" : "Evento" }}</h4>
+		</li>
+	</ul>
+</div>
 <div *ngIf="isIgrejotaDay">
 	<h3 *ngIf="alunosDiaIgrejota.length <= 0">Nenhum aluno presente</h3>
+	<h3 *ngIf="alunosDiaIgrejota.length > 0">Alunos Presentes</h3>
 	<ul>
 		<li *ngFor="let presenca of alunosDiaIgrejota">
 			<p>{{ presenca.aluno.nome }}</p>
@@ -29,7 +36,7 @@
 		<h4>Descrição do Evento:<input type="text" [(ngModel)]="evento.descricao"></h4>
 		<h4>Tipo de Evento: 
 			<select [(ngModel)]="evento.tipo">
-				<option [ngValue]="tiposDia.Normal" [selected]="evento.tipo === tiposDia.Normal">Normal</option>
+				<option [ngValue]="tiposDia.Normal" [selected]="evento.tipo === tiposDia.Normal">Encontro</option>
 				<option [ngValue]="tiposDia.Evento" [selected]="evento.tipo === tiposDia.Evento">Evento</option>
 			</select>
 		</h4>

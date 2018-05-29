@@ -1,9 +1,11 @@
-<div>
-	<h3>{{ noticia.titulo }}</h3>
+<div *ngIf="noticia">
+	<a *ngIf="auth.loggedIn()" routerLink="{{'/noticia/edit/'+noticia.id}}" (click)="messageService.clear()">Edit</a>
+	<h1>{{ noticia.titulo }}</h1>
 	<img *ngIf="noticia.imagemDestaque !== ''" src="{{ noticia.imagemDestaque }}" alt="{{noticia.titulo}}"><br>
 	<p>{{ noticia.conteudo }}</p>
-	<p *ngIf="noticia.dataEdicao && noticia.dataEdicao !== noticia.dataCriacao">
+	<h4 *ngIf="noticia.dataEdicao && noticia.dataEdicao !== noticia.dataCriacao">
 		Ultima edição {{ noticia.dataEdicao.fromNow() }}
-	</p>
-	<p>Criado em {{ noticia.dataCriacao.format('LLL') }}</p>
+	</h4>
+	<h5>Criado em {{ noticia.dataCriacao.format('LLL') }}</h5>
 </div>
+<app-page-not-found *ngIf="!noticia"></app-page-not-found>

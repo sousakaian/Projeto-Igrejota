@@ -1,7 +1,8 @@
 <div *ngIf="jogo">
-	<button *ngIf="id === -1" class="cancel" (click)="onCancel()">Cancelar Edição</button>
-	<button *ngIf="id !== -1" class="delete" (click)="onDelete(jogo)">Deletar</button><br>
-	<button class="save" (click)="onSave(jogo)">Salvar</button><br>
+	<h1>Editar Jogo</h1>
+	<button *ngIf="id === -1" class="cancel" (click)="onCancel()">Cancelar</button>
+	<button *ngIf="id !== -1" class="delete" (click)="onDelete()">Deletar</button><br>
+	<button class="save" (click)="onSave()">Salvar</button><br>
 	<label>
 		<h2>Nome do Jogo: </h2><input [(ngModel)]="jogo.nome" maxlength="180" placeholder="Nome" value="{{jogo.nome}}">
 	</label>
@@ -30,7 +31,7 @@
 	</label><br>
 	<label>
 		<h2>Tempo de Jogo:</h2> {{ jogo.tempoJogo < 5 ? "< 5" : (jogo.tempoJogo > 600) ? "600+" : jogo.tempoJogo }} minutos<br>
-		<input [(ngModel)]="jogo.tempoJogo" type="range" min="0" max="630" step="30" value="{{jogo.tempoJogo}}">
+		<input [(ngModel)]="jogo.tempoJogo" type="range" min="0" max="610" step="10" value="{{jogo.tempoJogo}}">
 	</label><br>
 	<label>
 		<h2>Descrição:</h2> <textarea rows="20" cols="100" maxlength="2000" [(ngModel)]="jogo.descricao" placeholder="Descrição">{{jogo.descricao}}</textarea>
@@ -50,3 +51,4 @@
 		<h2>Link do Desenvolvedor:</h2> <input [(ngModel)]="jogo.linkDesenvolvedor" maxlength="200" placeholder="Link do Desenvolvedor" value="{{jogo.linkDesenvolvedor}}">
 	</label>
 </div>
+<app-page-not-found></app-page-not-found>

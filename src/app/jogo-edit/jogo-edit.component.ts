@@ -4,6 +4,7 @@ import { CategoriaSelectComponent } from '../categoria-select/categoria-select.c
 import { JogoService } from '../jogo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonRangeSliderComponent } from "ng2-ion-range-slider";
+import { MessageService } from "../message.service";
 
 @Component({
   selector: 'app-jogo-edit',
@@ -20,7 +21,8 @@ export class JogoEditComponent implements OnInit {
   constructor(
 	  private jogoService: JogoService,
 	  private route: ActivatedRoute,
-	  private router: Router
+	  private router: Router,
+    private messageService: MessageService
   ) {
   	
   }
@@ -33,7 +35,9 @@ export class JogoEditComponent implements OnInit {
 
   getJogo(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    if (id === -1) {
+    if (id < -1) {
+      return
+    } else if (id === -1) {
       this.jogoService.generateEmptyJogo()
         .subscribe(jogo => this.jogo = jogo);
     } else {
@@ -48,23 +52,49 @@ export class JogoEditComponent implements OnInit {
   }
 
   validarJogo(): Boolean {
-    return this.jogo.nome !== '' && this.jogo.descricao !== ''
+    if (this.jogo.id <= 0) {
+      this.messageService.add("Id do jogo inválido!");
+    } else if (this.jogo.nome === "") {
+      this.messageService.add("Nome do jogo inválido!");
+    } else if (this.jogo.minJogadores >= 0 && this.jogo.maxJogadores >= this.jogo.minJogadores && this.jogo.maxJogadores <= 31) {
+      this.messageService.add("Número de jogadores inválido!");
+    } else if (this.jogo.tempoJogo >= 0 && this.jogo.tempoJogo <= 610) {
+      this.messageService.add("Tempo do jogo inválido!");
+    } else if (this.jogo.descricao === "") {
+      this.messageService.add("Descrição inválida");
+    } else {
+      return true
+    }
+    return false
   }
 
-  onSave(jogo: Jogo): void {
+  onSave(): void {
     this.enviado = true;
     if (this.validarJogo()) {
-      jogo.id === -1 ? this.jogoService.add(jogo) : this.jogoService.edit(jogo);
-    	this.router.navigate(['/jogo/'+jogo.id]);
+      this.jogo.id === -1 ? this.jogoService.add(this.jogo) : this.jogoService.edit(this.jogo);
+      this.router.navigate(['/jogo/'+this.jogo.id]);
     }
   }
 
-  onDelete(jogo: Jogo): void {
-  	this.jogoService.remove(jogo.id);
-  	this.router.navigate(['/jogos']);
+  static alertCancel(sender: JogoEditComponent) {
+    sender.messageService.clear();
+  }
+
+  onDelete(): void {
+  	this.messageService.displayAlert("Você têm certeza que deseja deletar esse jogo?", JogoEditComponent.confirmDelete, JogoEditComponent.alertCancel, this);
+  }
+
+  static confirmDelete(sender: JogoEditComponent) {
+    sender.jogoService.remove(sender.jogo.id);
+    sender.router.navigate(['/jogos']);
   }
 
   onCancel(): void {
-    this.router.navigate(['/jogos']);
+    this.messageService.displayAlert("Você têm certeza que deseja cancelar a edição? As alterações feitas não serão salvas.", JogoEditComponent.confirmCancel, JogoEditComponent.alertCancel, this);
+  }
+
+  static confirmCancel(sender: JogoEditComponent) {
+    sender.router.navigate(['/jogos']);
+    sender.messageService.clear();
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Noticia } from '../noticia';
 import { NoticiaService } from '../noticia.service';
+import { MessageService } from '../message.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
@@ -17,6 +18,7 @@ export class NoticiaEditComponent implements OnInit {
 
   constructor(
 	  private noticiaService: NoticiaService,
+    private messageService: MessageService,
 	  private route: ActivatedRoute,
 	  private router: Router,
 	  private location: Location
@@ -30,7 +32,9 @@ export class NoticiaEditComponent implements OnInit {
 
   getNoticia(): void {
   	const id = +this.route.snapshot.paramMap.get('id');
-    if (id === -1) {
+    if (id < -1) {
+      return
+    } else if (id === -1) {
   	  this.noticiaService.generateEmptyNoticia()
         .subscribe(noticia => this.noticia = noticia);
     } else {
@@ -40,24 +44,38 @@ export class NoticiaEditComponent implements OnInit {
   }
 
   onDelete(noticia: Noticia) {
-  	this.noticiaService.remove(noticia.id);
-  	this.router.navigate(["/noticias"]);
+  	this.messageService.displayAlert("Você têm certeza que deseja deletar a notícia?",NoticiaEditComponent.confirmDelete,NoticiaEditComponent.cancelAlert,this);
+  }
+
+  static cancelAlert(sender: NoticiaEditComponent) {
+
+  }
+
+  static confirmDelete(sender: NoticiaEditComponent) {
+    sender.noticiaService.remove(sender.noticia.id);
+    sender.router.navigate(["/noticias"]);
   }
 
   noticiaValida(): Boolean {
     return this.noticia.titulo !== '' && this.noticia.conteudo !== '';
   }
 
-  onSave(noticia: Noticia) {
+  onSave() {
     this.enviado = true
     if (this.noticiaValida()) {
-  	  noticia.id === -1 ? this.noticiaService.add(noticia) : this.noticiaService.update(noticia);
-      this.router.navigate(["/noticia/"+noticia.id]);
+  	  this.noticia.id === -1 ? this.noticiaService.add(this.noticia) : this.noticiaService.update(this.noticia);
+      this.router.navigate(["/noticia/"+this.noticia.id]);
+      this.messageService.clear();
     }
   }
 
   onCancel() {
-    this.router.navigate(["/noticias"]);
+    this.messageService.displayAlert("Você têm certeza que deseja cancelar a notícia?",NoticiaEditComponent.confirmCancel,NoticiaEditComponent.cancelAlert,this);
+  }
+
+  static confirmCancel(sender: any) {
+    sender.router.navigate(["/noticias"]);
+    sender.messageService.clear();
   }
 
 }

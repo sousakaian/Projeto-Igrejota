@@ -22,9 +22,9 @@
 		</div>
 		<input type="checkbox" [(ngModel)]="ignorarJogadores"> Ignorar número de jogadores<br>
 
-		<h3>Tempo de Jogo: {{ ignorarTempoJogo ? 'Qualquer um' : (tempoJogo < 30 ? "< 30 minutos" : (tempoJogo > 600) ? "> 10 horas" : tempoJogo+' minutos') }}</h3>
+		<h3>Tempo de Jogo: {{ ignorarTempoJogo ? 'Qualquer um' : (tempoJogo < 10 ? "< 10 minutos" : (tempoJogo > 600) ? "> 10 horas" : tempoJogo+' minutos') }}</h3>
 		<div *ngIf="!ignorarTempoJogo">
-			<input [(ngModel)]="tempoJogo" type="range" min="0" max="630" step="30" value="{{tempoJogo}}"><br>
+			<input [(ngModel)]="tempoJogo" type="range" min="0" max="610" step="10" value="{{tempoJogo}}"><br>
 		</div>
 		<input type="checkbox" [(ngModel)]="ignorarTempoJogo"> Ignorar tempo de jogo<br>
 
@@ -33,12 +33,12 @@
 		<button (click)="filtrar()">Aplicar</button>
 	</div>
 	<li *ngFor="let jogo of jogos" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
-		<a routerLink="{{ '/jogo/'+jogo.id }}">
+		<a routerLink="{{ '/jogo/'+jogo.id }}" (click)="messageService.clear()">
 			<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
 			<h3>{{ jogo.nome | uppercase }} <img *ngIf="jogo.emDestaque" src="" alt="Em Destaque"></h3>
 			<h4>{{ jogo.tempoJogo+'min - '+ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' | lowercase }}</h4>
 		</a>
-		<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()">Edit</a>
+		<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()">Edit</a>
 	</li>
 </ul>
-<a routerLink="/jogo/edit/-1" *ngIf="auth.loggedIn()">Adicionar Jogo</a>
+<a routerLink="/jogo/edit/-1" *ngIf="auth.loggedIn()" (click)="messageService.clear()">Adicionar Jogo</a>

@@ -11,7 +11,12 @@ import * as moment from 'moment';
 @Injectable()
 export class DiasigrejotaService {
 
-  constructor(private alunosService: AlunosService) { }
+  constructor(
+    private alunosService: AlunosService,
+    private messageService: MessageService
+    ) {
+
+  }
 
   getEventos(date: Date): Observable<CalendarEvent[]> {
   	var eventosMes: DiaIgrejota[] = [];
@@ -40,6 +45,7 @@ export class DiasigrejotaService {
   add(date: Date) {
     let dia: DiaIgrejota = {dia: moment(date),descricao: "", tipo: TipoDia.Normal};
     DIASIGREJOTA.push(dia);
+    this.messageService.add("Dia adicionado com sucesso!");
   }
 
   edit(evento: DiaIgrejota) {
@@ -47,6 +53,7 @@ export class DiasigrejotaService {
     DIASIGREJOTA[index].dia = evento.dia;
     DIASIGREJOTA[index].tipo = evento.tipo;
     DIASIGREJOTA[index].descricao = evento.descricao;
+    this.messageService.add("Dia editado!");
   }
 
   remove(evento: DiaIgrejota) {
@@ -58,5 +65,6 @@ export class DiasigrejotaService {
           this.alunosService.removePresencasFrom(evento.dia.toDate());
         }
       })
+    this.messageService.add("Dia removido do sistema!");
   }
 }

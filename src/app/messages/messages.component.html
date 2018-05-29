@@ -1,4 +1,11 @@
-<div *ngIf="messageService.messages.length">
+<div class="message" *ngIf="messageService.messages.length">
   <button class="clear" (click)="messageService.clear()">Limpar</button>
   <div *ngFor='let message of messageService.messages' class="message"> {{message}} </div>
+</div>
+<div class="overlay" *ngIf="messageService.hasAlert()">
+	<div class="alert-dialog">
+		<p>{{ messageService.alert.message }}</p>
+		<button (click)="messageService.yes()">Sim</button>
+		<button (click)="messageService.no()">Não</button>
+	</div>
 </div>

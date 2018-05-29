@@ -21,6 +21,9 @@ export class BolsistaService {
     validateLogin(login: string, senha: string): Observable<boolean> {
     	var bolsista: Bolsista;
     	this.getBolsista(login).subscribe(user => bolsista = user)
-    	return of(bolsista.senha === senha && bolsista.login === login);
+        if (!bolsista) {
+    	    return of(false);
+        }
+        return of(bolsista.senha === senha && bolsista.login === login);
     }
 }

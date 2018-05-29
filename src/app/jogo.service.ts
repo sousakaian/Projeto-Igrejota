@@ -11,6 +11,26 @@ export class JogoService {
 
   constructor(private messageService: MessageService) { }
 
+  private isValidJogo(jogo: Jogo): Boolean {
+    if (jogo.id <= 0) {
+      this.messageService.add("Id do jogo inválido!");
+    } else if (jogo.nome === "") {
+      this.messageService.add("Nome do jogo inválido!");
+    } else if (jogo.minJogadores >= 0 && jogo.maxJogadores >= jogo.minJogadores && jogo.maxJogadores <= 31) {
+      this.messageService.add("Número de jogadores inválido!");
+    } else if (jogo.tempoJogo >= 0 && jogo.tempoJogo <= 610) {
+      this.messageService.add("Tempo do jogo inválido!");
+    } else {
+      return true
+    }
+    return false
+  }
+
+  private isUniqueJogo(jogo: Jogo): Boolean {
+    this.messageService.add("Jogo já existente");
+    return JOGOS.findIndex(j => j.id === jogo.id) === -1;
+  }
+
   private checarTempo(tempoDisponivel: number, margem: number, jogo: Jogo): Boolean {
   	console.log(jogo.tempoJogo-margem,jogo.tempoJogo+margem);
 	  return tempoDisponivel >= (jogo.tempoJogo - margem) && tempoDisponivel <= (jogo.tempoJogo + margem);
@@ -52,7 +72,11 @@ export class JogoService {
       }
     }
 
-    this.messageService.add(jogosEncontrados.length+" resultados para '"+termo+"'");
+    if (jogosEncontrados.length > 0) {
+      this.messageService.add(jogosEncontrados.length +" resultados para '"+termo+"'");
+    } else {
+      this.messageService.add("Não foram encontrados resultados para '"+termo+"'");
+    }
     return of(jogosEncontrados);
   }
 
@@ -67,15 +91,18 @@ export class JogoService {
   	JOGOS[index].descricao = jogo.descricao;
   	JOGOS[index].linkManual = jogo.linkManual;
   	JOGOS[index].linkDesenvolvedor = jogo.linkDesenvolvedor;
+    this.messageService.add("Jogo editado!");
   }
 
   remove(id: number): void {
   	let index = JOGOS.indexOf(JOGOS.find(jogo => jogo.id === id));
   	JOGOS.splice(index, 1);
+    this.messageService.add("Jogo deletado!");
   }
 
   add(jogo: Jogo): void {
     JOGOS.push(jogo);
+    this.messageService.add("Jogo adicionado!");
   }
 
   generateEmptyJogo(): Observable<Jogo> {

@@ -2,10 +2,11 @@
 <div class="jogos-destaque">
 	<ul class="jogos">
 		<li *ngFor="let jogo of jogos" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
-		<a routerLink="{{ auth.loggedIn() ? '/jogo/edit/'+jogo.id : '/jogo/'+jogo.id }}">
-			<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
-			<h4>{{ jogo.nome | uppercase }}</h4>
-		</a>
-	</li>
+			<a routerLink="{{ auth.loggedIn() ? '/jogo/edit/'+jogo.id : '/jogo/'+jogo.id }}" (click)="messageService.clear()">
+				<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
+				<h4>{{ jogo.nome | uppercase }}</h4>
+			</a>
+		</li>
 	</ul>
+	<h2 *ngIf="jogos.length <= 0">Não existem jogos em destaque!</h2>
 </div>

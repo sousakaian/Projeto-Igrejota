@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Noticia } from '../noticia';
 import { NoticiaService } from '../noticia.service';
 import { AuthService } from '../auth.service';
+import { MessageService } from '../message.service';
 import * as moment from 'moment';
 
 @Component({
@@ -16,6 +17,7 @@ export class NoticiasComponent implements OnInit {
 
   constructor(
     private noticiaService: NoticiaService,
+    private messageService: MessageService,
     private auth: AuthService
     ) {
     

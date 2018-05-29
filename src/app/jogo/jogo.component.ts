@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { Categoria } from '../categoria';
 import { CATEGORIAS } from '../mock-categorias';
 import { CategoriaSelectComponent } from '../categoria-select/categoria-select.component'
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-jogo',
@@ -28,6 +29,7 @@ export class JogoComponent implements OnInit {
 
   constructor(
     private jogoService: JogoService,
+    private messageService: MessageService,
     public auth: AuthService
     ) {
 
@@ -48,6 +50,10 @@ export class JogoComponent implements OnInit {
   }
 
   pesquisaAvancada(termo: string): void {
+    this.messageService.clear();
+    if (termo === "" || !termo) {
+      return
+    }
     this.jogoService.getBuscaJogos(termo)
       .subscribe(jogos => this.jogos = jogos);
     this.mostrarBusca = false;
@@ -143,6 +149,7 @@ export class JogoComponent implements OnInit {
   }
 
   filtrar(): void {
+    this.messageService.clear()
     let nJogadores = this.ignorarJogadores ? -1 : this.numeroJogadores;
     let tJogo = this.ignorarTempoJogo ? -1 : this.tempoJogo;
     this.jogoService.getJogosSugeridos(nJogadores,tJogo,CategoriaSelectComponent.categoriasEscolhidas)

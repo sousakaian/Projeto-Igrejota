@@ -21,12 +21,13 @@ export class AuthService {
 	    var autenticado;
 	    this.bolsistaService.validateLogin(user, password)
 	    	.subscribe(aut => autenticado = aut);
-	    if (autenticado) {
-	    	this.setSession({user: user, expiraEm: 180});
-	    	return of(true);
+	    if (!autenticado) {
+	    	this.messageService.add("Login e/ou senha inválidos");
+	    	return of(false);
 	    }
-	    this.messageService.add("Login e/ou senha inválidos");
-	    return of(false);
+    	this.setSession({user: user, expiraEm: 180});
+    	return of(true);
+	    
 	}
 	      
 	private setSession(authResult) {

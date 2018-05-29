@@ -2,11 +2,13 @@
 	<a routerLink="/inicio">
 		<h1>Igrejota <img src="" alt=""></h1>
 	</a>
-	<h3>{{ auth.getLoggedUser() | uppercase }}</h3>
 	<button (click)="toggleMenu()"><img *ngIf="auth.loggedIn()" src="" alt="Menu">{{ !auth.loggedIn() ? "Entrar" : "" }}</button>
 </header>
 <div class="dropdown-menu" *ngIf="mostrarMenu">
 	<ul *ngIf="auth.loggedIn()">
+		<li>
+			<h3>{{ auth.getLoggedUser() | uppercase }}</h3>
+		</li>
 		<li>
 			<button (click)="goToGerenciarPerfil()">Gerenciar Perfil</button>
 		</li>

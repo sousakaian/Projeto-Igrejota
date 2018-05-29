@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-bottom',
@@ -9,25 +10,34 @@ import { Router } from '@angular/router';
 export class BottomComponent implements OnInit {
   bolsista: Boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private messageService: MessageService
+    ) {
+
+  }
 
   ngOnInit() {
   }
 
   goToInicio(): void {
     this.router.navigate(['/inicio']);
+    this.messageService.clear();
   }
 
   goToAcervo(): void {
   	this.router.navigate(['/jogos']);
+    this.messageService.clear();
   }
 
   goToNoticias(): void {
   	this.router.navigate(['/noticias']);
+    this.messageService.clear();
   }
 
   goToCalendario(): void {
     this.router.navigate(['/calendario']);
+    this.messageService.clear();
   }
 
 }

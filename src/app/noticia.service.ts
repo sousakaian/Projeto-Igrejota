@@ -26,6 +26,7 @@ export class NoticiaService {
   remove(id: number): void {
     let index = NOTICIAS.indexOf(NOTICIAS.find(noticia => noticia.id === id));
     NOTICIAS.splice(index,1);
+    this.messageService.add("Notícia removida!");
   }
 
   update(noticia: Noticia): void {
@@ -34,10 +35,12 @@ export class NoticiaService {
     NOTICIAS[index].conteudo = noticia.conteudo;
     NOTICIAS[index].dataEdicao = moment();
     NOTICIAS[index].imagemDestaque = noticia.imagemDestaque;
+    this.messageService.add("Notícia editada!");
   }
 
   add(noticia: Noticia): void {
     NOTICIAS.push(noticia);
+    this.messageService.add("Notícia adicionada!");
   }
 
   generateEmptyNoticia(): Observable<Noticia> {
