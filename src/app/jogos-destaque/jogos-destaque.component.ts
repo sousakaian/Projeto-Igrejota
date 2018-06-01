@@ -36,4 +36,9 @@ export class JogosDestaqueComponent implements OnInit {
      this.router.navigate([this.auth.loggedIn() ? '/jogo/edit/'+jogo.id : '/jogo/'+jogo.id]);
      this.messageService.clear();
   }
+
+  goToAcervo() {
+    this.router.navigate(['jogos']);
+    this.messageService.clear();
+  }
 }

@@ -1,4 +1,6 @@
-<h2>Notícias</h2>
+<div class="section-header">
+	<h3>Notícias</h3>
+</div>
 <ul class="noticias">
 	<li *ngFor="let noticia of noticias" [class.selected]="noticia === noticiaSelecionada" (click)="onSelect(noticia)">
 		<a routerLink="{{ '/noticia/'+noticia.id }}" (click)="messageService.clear()">

@@ -1,4 +1,7 @@
-<h3>Jogos em Destaque</h3>
+<div class="section-header">
+	<h3>Jogos em Destaque</h3>
+	<button (click)="goToAcervo()">Pesquisar</button>
+</div>
 <div class="jogos-destaque">
 	<ul class="jogos">
 		<li *ngFor="let jogo of jogos" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">

@@ -17,12 +17,11 @@ export class JogoService {
   }
 
   private checarTempo(tempoDisponivel: number, margem: number, jogo: Jogo): Boolean {
-  	console.log(jogo.tempoJogo-margem,jogo.tempoJogo+margem);
 	  return tempoDisponivel >= (jogo.tempoJogo - margem) && tempoDisponivel <= (jogo.tempoJogo + margem);
   }
 
   private checarJogadores(nJogadores: number, jogo: Jogo): Boolean {
-	  return nJogadores >= jogo.minJogadores || nJogadores <= jogo.maxJogadores;
+	  return nJogadores >= jogo.minJogadores && nJogadores <= jogo.maxJogadores;
   }
 
   removeCategoriaFromAll(categoria: Categoria) {
@@ -46,13 +45,14 @@ export class JogoService {
   	return of(JOGOS.find(jogo => jogo.id === id));
   }
 
-  getBuscaJogos(termo: string): Observable<Jogo[]> {
+  getBuscaJogos(termoBusca: string): Observable<Jogo[]> {
     var jogosEncontrados: Jogo[] = [];
+    let termo = termoBusca.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
     
     for(let jogo of JOGOS) {
-      if (jogo.nome.includes(termo)) {
+      if (jogo.nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(termo)) {
         jogosEncontrados.unshift(jogo);
-      } else if (jogo.descricao.includes(termo) || jogo.categorias.find(categoria => categoria.nome.includes(termo))) {
+      } else if (jogo.descricao.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(termo) || jogo.categorias.find(categoria => categoria.nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(termo))) {
         jogosEncontrados.push(jogo);
       }
     }
@@ -94,13 +94,13 @@ export class JogoService {
     return of({id: -1, nome: "", minJogadores: 0, maxJogadores: 0, tempoJogo: 0, categorias: [], descricao: "", imagemJogo: "" ,linkDesenvolvedor: "", linkManual:"", emDestaque: false});
   }
 
-  getJogosSugeridos(nJogadores: number, tempoEscolhido: number, categorias: Categoria[]): Observable<Jogo[]> {
+  getJogosSugeridos(nJogadores: number, tempoEscolhido: number, categorias: Categoria[], jogos: Jogo[]): Observable<Jogo[]> {
     var jogosSugeridos: Jogo[] = [];
     if (nJogadores === -1 && tempoEscolhido === -1 && categorias.length <= 0) {
-      return this.getJogos();
+      return of(jogos);
     }
 
-    for (let jogo of JOGOS) {
+    for (let jogo of jogos) {
     	if (this.checarJogadores(nJogadores, jogo) || nJogadores === -1) {
   			jogosSugeridos.push(jogo);
   		}
@@ -133,17 +133,19 @@ export class JogoService {
   		}
   	}
 
-  	this.messageService.add("Temos "+jogosSugeridos.length+" sugestões!");
+    if (jogosSugeridos.length > 0) {
+  	  this.messageService.add("Temos "+jogosSugeridos.length+" sugestões!");
+    }
   	return of(jogosSugeridos);
   }
 
-  getJogosPossiveis(nJogadores: number, tempoEscolhido: number): Observable<Jogo[]> {
+  getJogosPossiveis(nJogadores: number, tempoEscolhido: number, jogos: Jogo[]): Observable<Jogo[]> {
 	  var jogosPossiveis: Jogo[] = [];
 	  if (nJogadores === -1 && tempoEscolhido === -1) {
-      return this.getJogos();
+      return of(jogos);
     }
 
-  	for (let jogo of JOGOS) {
+  	for (let jogo of jogos) {
   		if (this.checarJogadores(nJogadores, jogo) || nJogadores === -1) {
   			jogosPossiveis.push(jogo);
   		}
@@ -155,8 +157,9 @@ export class JogoService {
   			jogosPossiveis.splice(jogosPossiveis.indexOf(jogo), 1);
   		}
   	}
-
-  	this.messageService.add(jogosPossiveis.length+" jogos possíveis encontrados!");
+    if (jogosPossiveis.length > 0) {
+  	  this.messageService.add(jogosPossiveis.length+" jogos possíveis encontrados!");
+    }
   	return of(jogosPossiveis);
   }
 }

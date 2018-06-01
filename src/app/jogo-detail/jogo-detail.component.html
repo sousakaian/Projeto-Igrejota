@@ -6,11 +6,10 @@
 	<h4><img class="icone" src="" alt="">{{ jogo.tempoJogo }} minutos</h4>
 	<h4 *ngFor="let categoria of jogo.categorias">{{ categoria.nome }}</h4>
 	<p>{{ jogo.descricao }}</p>
-	<div *ngIf="jogo.linkManual">
-		<a href="{{ jogo.linkManual }}"><img src="" alt="">Manual</a>
-	</div>
-	<div *ngIf="jogo.linkDesenvolvedor">
-		<a href="{{ jogo.linkDesenvolvedor }}"><img src="" alt="">Site do desenvolvedor</a>
-	</div>
+	<a *ngIf="jogo.linkManual" href="{{ jogo.linkManual }}"><img src="" alt="">Manual</a>
+	<p *ngIf="!jogo.linkManual">Não possui manual cadastrado</p>
+	<br>
+	<a *ngIf="jogo.linkDesenvolvedor" href="{{ jogo.linkDesenvolvedor }}"><img src="" alt="">Link útil</a>
+	<p *ngIf="!jogo.linkDesenvolvedor">Não existem links úteis</p>
 </div>
 <app-page-not-found *ngIf="!jogo"></app-page-not-found>

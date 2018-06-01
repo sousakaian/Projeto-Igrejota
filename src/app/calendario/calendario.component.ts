@@ -18,6 +18,7 @@ import { CalendarEvent } from 'angular-calendar';
 import { DiasigrejotaService } from '../diasigrejota.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { DiaIgrejota, TipoDia } from '../diaigrejota';
 import * as moment from 'moment';
 
 export const DATE_TIME_PICKER_CONTROL_VALUE_ACCESSOR: any = {
@@ -44,6 +45,10 @@ export class CalendarioComponent implements ControlValueAccessor, OnInit {
 
   @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
 
+  tiposDia = {Normal: TipoDia.Normal, Evento: TipoDia.Evento};
+  eventosDiaIgrejota: DiaIgrejota[] = [];
+  isIgrejotaDay: boolean;
+
   date: moment.Moment;
 
   dateStruct: moment.Moment;
@@ -58,7 +63,9 @@ export class CalendarioComponent implements ControlValueAccessor, OnInit {
 
   events: CalendarEvent[] = [];
   
+  lastClickedDate: moment.Moment; 
   clickedDate: moment.Moment;
+  openEditMode: boolean = false;
 
   constructor(
   	private cdr: ChangeDetectorRef,
@@ -101,13 +108,37 @@ export class CalendarioComponent implements ControlValueAccessor, OnInit {
   	return moment().year(date.getFullYear()).month(date.getMonth()).format('MMMM [de] YYYY');
   }
 
-  onDaySelect() {
-  	this.router.navigate(['calendario/'+moment(this.clickedDate).format('DD-MM-YYYY')]);
+  onDaySelect(date: Date) {
+    this.lastClickedDate = this.clickedDate;
+    this.clickedDate = moment(date);
+    this.getEventosDia();
+    if (!this.lastClickedDate) {
+      return;
+    }
+    if (this.isIgrejotaDay && this.lastClickedDate.isSame(this.clickedDate.toDate(),'day')) {
+  	  this.router.navigate(['calendario/'+moment(this.clickedDate).format('DD-MM-YYYY')]);
+    }
   }
 
   getEventos() {
   	var calendarReceiver: Array<CalendarEvent>;
   	this.diaigrejotaService.getEventos(this.viewDate)
   		.subscribe(eventos => this.events = eventos);
+  }
+
+  getEventosDia() {
+    this.diaigrejotaService.getDia(this.clickedDate.toDate())
+      .subscribe(eventos => this.eventosDiaIgrejota = eventos);
+    this.isIgrejotaDay = this.eventosDiaIgrejota.filter(e => e.tipo == TipoDia.Normal).length > 0;
+  }
+
+  adicionarEvento() {
+    this.diaigrejotaService.add(this.clickedDate.toDate());
+    this.getEventosDia();
+  }
+
+  deletar(evento: DiaIgrejota) {
+    this.diaigrejotaService.remove(evento);
+    this.getEventosDia();
   }
 }

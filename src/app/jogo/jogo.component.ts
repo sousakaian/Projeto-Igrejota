@@ -21,10 +21,9 @@ export class JogoComponent implements OnInit {
   inverterOrdem: Boolean = false;
   mensagemInverter: string = "Normal";
   mostrarFiltros: Boolean = false;
-  mostrarBusca: Boolean = false;
-  numeroJogadores: number = 4;
+  numeroJogadores: number = -1;
   ignorarJogadores: Boolean = false;
-  tempoJogo: number = 60;
+  tempoJogo: number = -1;
   ignorarTempoJogo: Boolean = false;
 
   constructor(
@@ -51,13 +50,10 @@ export class JogoComponent implements OnInit {
 
   pesquisaAvancada(termo: string): void {
     this.messageService.clear();
-    if (termo === "" || !termo) {
-      return
-    }
     this.jogoService.getBuscaJogos(termo)
       .subscribe(jogos => this.jogos = jogos);
-    this.mostrarBusca = false;
     this.metodoOrganizacao = "";
+    this.filtrar();
   }
 
   organizar(): void {
@@ -123,25 +119,14 @@ export class JogoComponent implements OnInit {
     this.jogos.reverse()
   }
 
-  toggleBusca(): void {
-    this.mostrarBusca = !this.mostrarBusca;
-    this.limparFiltros();
-  }
-
   toggleFiltros(): void {
     this.mostrarFiltros = !this.mostrarFiltros;
-    this.limparBusca();
-  }
-
-  limparBusca(): void {
-    this.termoBusca = "";
-    this.mostrarBusca = false
   }
 
   limparFiltros(): void {
-    this.numeroJogadores = 4;
+    this.numeroJogadores = -1;
     this.ignorarJogadores = false;
-    this.tempoJogo = 40;
+    this.tempoJogo = -1;
     this.ignorarTempoJogo = false;
     CategoriaSelectComponent.categoriasEscolhidas = [];
     this.mostrarFiltros = false;
@@ -149,15 +134,15 @@ export class JogoComponent implements OnInit {
   }
 
   filtrar(): void {
-    this.messageService.clear()
+    this.messageService.clear();
     let nJogadores = this.ignorarJogadores ? -1 : this.numeroJogadores;
     let tJogo = this.ignorarTempoJogo ? -1 : this.tempoJogo;
-    this.jogoService.getJogosSugeridos(nJogadores,tJogo,CategoriaSelectComponent.categoriasEscolhidas)
+    this.jogoService.getJogosSugeridos(nJogadores,tJogo,CategoriaSelectComponent.categoriasEscolhidas,this.jogos)
       .subscribe(jogos => this.jogos = jogos);
     if (this.jogos.length <= 0) {
-      this.jogoService.getJogosPossiveis(nJogadores,tJogo)
+      this.jogoService.getJogosPossiveis(nJogadores,tJogo,this.jogos)
         .subscribe(jogos => this.jogos = jogos); 
     }
-    this.toggleFiltros();
+    this.mostrarFiltros = false;
   }
 }
