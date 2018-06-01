@@ -7,14 +7,14 @@
         mwlCalendarPreviousView
         [view]="view"
         [(viewDate)]="viewDate"
-        (viewDateChange)="viewDateChange.next(viewDate)">
+        (viewDateChange)="viewDateChange.next(viewDate); getEventos();">
         Anterior
       </button>
       <button
         class="btn btn-outline-secondary"
         mwlCalendarToday
         [(viewDate)]="viewDate"
-        (viewDateChange)="viewDateChange.next(viewDate)">
+        (viewDateChange)="viewDateChange.next(viewDate); getEventos();">
         Hoje
       </button>
       <button
@@ -22,7 +22,7 @@
         mwlCalendarNextView
         [view]="view"
         [(viewDate)]="viewDate"
-        (viewDateChange)="viewDateChange.next(viewDate)">
+        (viewDateChange)="viewDateChange.next(viewDate); getEventos();">
         Próximo
       </button>
     </div>
@@ -71,7 +71,7 @@
       </li>
     </ul>
   </div>
-  <button (click)="openEditMode = !openEditMode">{{ openEditMode ? "Salvar" : "Editar"}}</button>
+  <button *ngIf="auth.loggedIn()" (click)="openEditMode = !openEditMode">{{ openEditMode ? "Salvar" : "Editar"}}</button>
   <div class="editor" *ngIf="auth.loggedIn() && openEditMode">
     <h2>Lista de Eventos</h2>
     <div class="form-adicionar-dia" *ngFor="let evento of eventosDiaIgrejota">

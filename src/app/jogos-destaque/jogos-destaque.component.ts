@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 
 export class JogosDestaqueComponent implements OnInit {
   jogos: Jogo[];
+  showSearch: boolean = false;
+  termoPesquisa: string;
 
   constructor(
   	private jogoService: JogoService,
@@ -38,7 +40,11 @@ export class JogosDestaqueComponent implements OnInit {
   }
 
   goToAcervo() {
-    this.router.navigate(['jogos']);
+    if (!this.showSearch) {
+      this.showSearch = true;
+      return;
+    }
+    this.router.navigate(['jogos/termoBusca/'+this.termoPesquisa]);
     this.messageService.clear();
   }
 }

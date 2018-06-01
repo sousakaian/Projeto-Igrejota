@@ -10,7 +10,7 @@
 	  <option value="Max. Jogadores">Max. Jogadores</option>
 	  <option value="Tempo de Jogo">Tempo de Jogo</option>
 	</select>
-	<button (click)="toggleInverter()">{{mensagemInverter}}</button>
+	<button (click)="toggleInverter()">{{ inverterOrdem ? "Inversa" : "Normal" }}</button>
 	<button (click)="toggleFiltros()">Pesquisa Avançada</button><br>
 	<div class="filtros" *ngIf="mostrarFiltros">
 		<button (click)="limparFiltros()">Limpar</button>

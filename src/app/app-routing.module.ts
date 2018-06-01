@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'calendario/:data', component: DiaPresencaComponent},
   { path: 'calendario/add/:data', component: ListaAlunosComponent, canActivate: [AuthGuard]},
   { path: 'jogos', component: JogoComponent },
+  { path: 'jogos/termoBusca/:termo', component: JogoComponent },
   { path: 'jogo/:id', component: JogoDetailComponent },
   { path: 'jogo/edit/:id', component: JogoEditComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }

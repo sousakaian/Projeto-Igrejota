@@ -1,0 +1,18 @@
+.tab-menu-mobile ul {
+  display: inline-flex;
+  list-style-type: none;
+  justify-content: center;
+}
+.tab-menu-mobile button {
+  width: 100px;
+  height: 60px;
+  padding-bottom: 15px;
+  background-color: #004C60;
+  color: white;
+  border: none;
+  margin-right: 9px;
+  margin-left: 9px;
+}
+.tab-menu-mobile {
+ background-color: #00A8C8;
+}

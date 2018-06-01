@@ -6,6 +6,7 @@ import { Categoria } from '../categoria';
 import { CATEGORIAS } from '../mock-categorias';
 import { CategoriaSelectComponent } from '../categoria-select/categoria-select.component'
 import { MessageService } from '../message.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-jogo',
@@ -16,10 +17,9 @@ import { MessageService } from '../message.service';
 export class JogoComponent implements OnInit {
   jogos: Jogo[];
   jogoSelecionado: Jogo;
-  termoBusca: "";
+  termoBusca: string;
   metodoOrganizacao: string = "";
   inverterOrdem: Boolean = false;
-  mensagemInverter: string = "Normal";
   mostrarFiltros: Boolean = false;
   numeroJogadores: number = -1;
   ignorarJogadores: Boolean = false;
@@ -29,13 +29,20 @@ export class JogoComponent implements OnInit {
   constructor(
     private jogoService: JogoService,
     private messageService: MessageService,
-    public auth: AuthService
+    private route: ActivatedRoute,
+    public auth: AuthService,
     ) {
 
   }
 
   ngOnInit() {
   	this.getJogos();
+    this.termoBusca = this.route.snapshot.paramMap.get("termo");
+    if (this.termoBusca) {
+      this.pesquisaAvancada(this.termoBusca);
+    } else {
+      this.termoBusca = "";
+    }
   }
 
   getJogos(): void {
@@ -115,8 +122,7 @@ export class JogoComponent implements OnInit {
 
   toggleInverter(): void {
     this.inverterOrdem = !this.inverterOrdem;
-    this.mensagemInverter = this.inverterOrdem ? "Inversa" : "Normal"
-    this.jogos.reverse()
+    this.jogos.reverse();
   }
 
   toggleFiltros(): void {
