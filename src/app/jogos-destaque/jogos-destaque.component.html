@@ -1,14 +1,27 @@
 <div class="section-header">
-	<h3>Jogos em Destaque</h3>
-	<input type="text" [(ngModel)]="termoPesquisa" *ngIf="showSearch">
-	<button (click)="goToAcervo()">Pesquisar</button>
+	<img class="section-icon icon-dice" src="../assets/default-image.png" alt="">
+	<h1 *ngIf="!showSearch">EM DESTAQUE</h1>
+	<input class="input-search icon-search" type="text" [(ngModel)]="termoPesquisa" *ngIf="showSearch" placeholder="Buscar...">
+	<img (click)="goToAcervo()" class="section-icon icon-search" src="../assets/default-image.png" alt="">
 </div>
+<hr class="section-line">
 <div class="jogos-destaque">
 	<ul class="jogos">
 		<li *ngFor="let jogo of jogos" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
 			<a routerLink="{{ auth.loggedIn() ? '/jogo/edit/'+jogo.id : '/jogo/'+jogo.id }}" (click)="messageService.clear()">
+				<h3>{{ jogo.nome | uppercase }}</h3>
 				<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
-				<h4>{{ jogo.nome | uppercase }}</h4>
+				<div class="info-destaque">
+					<div class="jogo-info"><div class="highlight-line"></div><img class="jogo-info-icon" src="../assets/default-image.png" alt="">
+						{{ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+'-' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)}}
+					</div>
+					<div class="jogo-info"><div class="highlight-line"></div><img class="jogo-info-icon" src="../assets/default-image.png" alt="">
+						{{ jogo.tempoJogo }} min
+					</div>
+					<div class="jogo-info" *ngIf="jogo.categorias.length > 0"><div class="highlight-line"></div>
+						{{ jogo.categorias[0].nome }}
+					</div>
+				</div>
 			</a>
 		</li>
 	</ul>

@@ -1,6 +1,8 @@
 <div class="section-header">
-	<h3>Notícias</h3>
+	<img class="section-icon icon-news" src="../assets/default-image.png" alt="">
+	<h1>NOTÍCIAS</h1>
 </div>
+<hr class="section-line">
 <ul class="noticias">
 	<li *ngFor="let noticia of noticias" [class.selected]="noticia === noticiaSelecionada" (click)="onSelect(noticia)">
 		<a routerLink="{{ '/noticia/'+noticia.id }}" (click)="messageService.clear()">

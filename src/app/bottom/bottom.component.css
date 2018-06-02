@@ -1,6 +1,8 @@
 .tab-menu-mobile ul {
   width: 100vw;
-  margin-bottom: 0px;
+  bottom: 0;
+  padding-left: 0;
+  margin: 0;
   display: inline-flex;
   list-style-type: none;
   justify-content: center;
@@ -8,17 +10,26 @@
 
 footer {
 	width: 100vw;
+  height: 15.41vw;
+}
+
+.unselected {
+  background-color: #00A6C4;
+  color: #EEDFCF;
 }
 
 .tab-menu-mobile button {
 	width: 25vw;
-	height: 8vh;
+  height: 15.41vw;
 	padding-right: 2.36vw;
   padding-left: 2.36vw;
   text-align: center;
+  font-size: 2.2vw;
+  border: none;
+  font-weight: bolder;
 }
 
 .tab-icon {
-	max-width: 16px;
-	max-height: 16px;
+	max-width: 7vw;
+	max-height: 7vw;
 }

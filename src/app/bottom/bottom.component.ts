@@ -9,6 +9,8 @@ import { MessageService } from '../message.service';
 })
 export class BottomComponent implements OnInit {
   bolsista: Boolean = false;
+  selected: String = "";
+  static component: BottomComponent;
 
   constructor(
     private router: Router,
@@ -18,6 +20,9 @@ export class BottomComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!BottomComponent.component) {
+      BottomComponent.component = this;
+    }
   }
 
   goToInicio(): void {

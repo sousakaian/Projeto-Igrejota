@@ -1,10 +1,8 @@
 <footer class="tab-menu-mobile">
-	<nav>
-		<ul>
-			<li><button (click)="goToInicio()"><img class="tab-icon" src="" alt=""><br>Home</button></li>
-			<li><button (click)="goToAcervo()"><img class="tab-icon" src="" alt=""><br>Acervo</button></li>
-			<li><button (click)="goToCalendario()"><img class="tab-icon" src="" alt=""><br>Calendário</button></li>
-			<li><button (click)="goToNoticias()"><img class="tab-icon" src="" alt=""><br>Notícias</button></li>
-		</ul>
-	</nav>
+	<ul>
+		<li><button [disabled]="selected === 'inicio'" [class.unselected]="selected !== 'inicio'" [class.selected]="selected === 'inicio'" (click)="goToInicio()"><img class="tab-icon" src="../assets/default-image.png" alt=""><br>HOME</button></li>
+		<li><button [disabled]="selected === 'jogos'" [class.unselected]="selected !== 'jogos'" [class.selected]="selected === 'jogos'" (click)="goToAcervo()"><img class="tab-icon" src="../assets/default-image.png" alt=""><br>ACERVO</button></li>
+		<li><button [disabled]="selected === 'calendario'" [class.unselected]="selected !== 'calendario'" [class.selected]="selected === 'calendario'" (click)="goToCalendario()"><img class="tab-icon" src="../assets/default-image.png" alt=""><br>CALENDÁRIO</button></li>
+		<li><button [disabled]="selected === 'noticias'" [class.unselected]="selected !== 'noticias'" [class.selected]="selected === 'noticias'" (click)="goToNoticias()"><img class="tab-icon" src="../assets/default-image.png" alt=""><br>NOTÍCIAS</button></li>
+	</ul>
 </footer>

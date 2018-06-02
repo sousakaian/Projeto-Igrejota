@@ -1,0 +1,87 @@
+.icon-dice {
+	
+}
+
+.icon-search {
+	
+}
+
+input {
+	border: 0.5vw solid #BE6646;
+	border-radius: 2vw;
+	border-color: #BE6646;
+	height: 8vw;
+	margin-top: 2vw;
+	margin-left: 3.1vw;
+	margin-right: 3.1vw;
+	width: 65.9vw;
+	font-size: 6vw;
+	color: #BE6646;
+}
+
+.jogos-destaque {
+	height: 73vw;
+	overflow-y: hidden;
+}
+
+.jogos {
+	list-style-type: none;
+	display: inline-block;
+	padding-left: 0;
+}
+
+.jogos li {
+	float: left;
+	padding-bottom: 5.5vw;
+	padding-right: 2.8vw;
+	width: 42vw;
+	height: 18.4vw;
+}
+
+.jogos h3 {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-bottom: 0.5vw;
+	font-size: 5vw;
+	font-weight: bold;
+	color: #294D60
+}
+
+.iconeJogo {
+	float: left;
+	max-width: 15vw;
+	max-height: 15vw;
+}
+
+a {
+	text-decoration: none;
+}
+
+.info-destaque {
+	max-width: 27vw;
+	overflow-y: hidden;
+}
+
+.jogo-info {
+	padding-left: 2.2vw;
+	padding-top: 0;
+	padding-bottom: 0.5vw;
+	margin-top: 0;
+	margin-bottom: 0;
+	height: 5vw;
+	font-size: 3vw;
+	line-height: 5vw;
+	color: #000;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+  	overflow: hidden;
+  	font-weight: normal;
+  	display: inline-flex;
+  	justify-content: center;
+}
+
+.jogo-info-icon {
+	max-width: 5vw;
+	max-height: 5vw;
+	padding-right: 1vw;
+}
