@@ -1,0 +1,24 @@
+.tab-menu-mobile ul {
+  width: 100vw;
+  margin-bottom: 0px;
+  display: inline-flex;
+  list-style-type: none;
+  justify-content: center;
+}
+
+footer {
+	width: 100vw;
+}
+
+.tab-menu-mobile button {
+	width: 25vw;
+	height: 8vh;
+	padding-right: 2.36vw;
+  padding-left: 2.36vw;
+  text-align: center;
+}
+
+.tab-icon {
+	max-width: 16px;
+	max-height: 16px;
+}

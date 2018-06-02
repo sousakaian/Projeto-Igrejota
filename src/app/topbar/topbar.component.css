@@ -1,9 +1,41 @@
 .tab-menu-mobile ul {
-  display: inline-flex;
+  margin-top: 0;
+  display: block;
   list-style-type: none;
   justify-content: center;
 }
-.tab-menu-mobile button {
+
+.tab-menu-mobile header {
+  height: 60px;
+}
+
+.tab-menu-mobile h1 {
+	float: left;
+	width: 600px;
+	text-align: center;
+	color: white;
+  padding-bottom: 15px;
+	margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.menu-item-mobile {
+  width: 90.7vw;
+  margin-left: -5.5vw;
+  text-align: left;
+  background-color: #004C60;
+  color: white;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 9px;
+  margin-left: 9px;
+}
+
+.login-button {
   width: 100px;
   height: 60px;
   padding-bottom: 15px;
@@ -13,6 +45,9 @@
   margin-right: 9px;
   margin-left: 9px;
 }
+
 .tab-menu-mobile {
- background-color: #00A8C8;
+  background-color: #00A8C8;
+  width: 100vw;
+  margin-left: -4.72vw;
 }
