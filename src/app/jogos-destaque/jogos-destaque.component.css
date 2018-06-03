@@ -13,7 +13,7 @@ input {
 	height: 8vw;
 	margin-top: 2vw;
 	margin-left: 3.1vw;
-	margin-right: 3.1vw;
+	margin-right: 1.9vw;
 	width: 65.9vw;
 	font-size: 6vw;
 	color: #BE6646;
@@ -72,12 +72,8 @@ a {
 	font-size: 3vw;
 	line-height: 5vw;
 	color: #000;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-  	overflow: hidden;
   	font-weight: normal;
   	display: inline-flex;
-  	justify-content: center;
 }
 
 .jogo-info-icon {

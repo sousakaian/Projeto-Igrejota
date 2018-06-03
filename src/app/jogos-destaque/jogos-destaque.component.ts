@@ -44,6 +44,10 @@ export class JogosDestaqueComponent implements OnInit {
       this.showSearch = true;
       return;
     }
+    if (!this.termoPesquisa) {
+      this.showSearch = false;
+      return;
+    }
     this.router.navigate(['jogos/termoBusca/'+this.termoPesquisa]);
     this.messageService.clear();
   }

@@ -3,8 +3,6 @@
 
 body{	
 	margin: 0px;
-    padding-right: 4.72vw;
-    padding-left: 4.72vw;
     background-color: #fff;
 }
 
@@ -21,9 +19,22 @@ body{
 	color: #BE6646;
 }
 
+.no-wrap {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+  	overflow: hidden;
+  	justify-content: center;
+}
+
 .selected {
   background-color: #00A6C4 !important;
   color: #294D60;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
 }
 
 .section-header {
@@ -37,7 +48,7 @@ body{
 
 .section-header h1 {
 	padding-left: 3.1vw;
-	width: 69vw;
+	width: 68.8vw;
 }
 
 .section-line {
@@ -63,4 +74,9 @@ body{
 	height: 5vw;
 	background-color: #BE6646;
 	margin-right: 1vw;
+}
+
+.edit-item img {
+	max-width: 8vw;
+	max-height: 8vw;
 }

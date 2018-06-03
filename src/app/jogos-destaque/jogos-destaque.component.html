@@ -12,13 +12,13 @@
 				<h3>{{ jogo.nome | uppercase }}</h3>
 				<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
 				<div class="info-destaque">
-					<div class="jogo-info"><div class="highlight-line"></div><img class="jogo-info-icon" src="../assets/default-image.png" alt="">
+					<div class="jogo-info no-wrap"><div class="highlight-line"></div><img class="jogo-info-icon" src="../assets/default-image.png" alt="">
 						{{ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+'-' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)}}
 					</div>
-					<div class="jogo-info"><div class="highlight-line"></div><img class="jogo-info-icon" src="../assets/default-image.png" alt="">
+					<div class="jogo-info no-wrap"><div class="highlight-line"></div><img class="jogo-info-icon" src="../assets/default-image.png" alt="">
 						{{ jogo.tempoJogo }} min
 					</div>
-					<div class="jogo-info" *ngIf="jogo.categorias.length > 0"><div class="highlight-line"></div>
+					<div class="jogo-info no-wrap" *ngIf="jogo.categorias.length > 0"><div class="highlight-line"></div>
 						{{ jogo.categorias[0].nome }}
 					</div>
 				</div>

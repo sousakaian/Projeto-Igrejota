@@ -1,3 +1,44 @@
 .icon-news {
-	
+
+}
+
+.icon-list-item {
+	float: left;
+	padding-top: 0;
+	padding-right: 2vw;
+}
+
+.noticias {
+	padding-left: 0;
+	list-style-type: none;
+}
+
+.noticias li {
+	height: 10vw;
+	padding-top: 3vw;
+}
+
+a {
+	text-decoration: none;
+}
+
+.redux {
+	width: 71vw;
+	float: left;
+}
+
+.noticia-info h3 {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 4vw;
+	font-weight: bold;
+	color: #294D60;
+}
+
+.noticia-info h5 {
+	margin-top: 1vw;
+	font-size: 2.9vw;
+	font-weight: normal;
+	color: #727176;
+	margin-bottom: 0;
 }

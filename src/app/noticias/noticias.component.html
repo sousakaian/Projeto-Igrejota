@@ -6,10 +6,13 @@
 <ul class="noticias">
 	<li *ngFor="let noticia of noticias" [class.selected]="noticia === noticiaSelecionada" (click)="onSelect(noticia)">
 		<a routerLink="{{ '/noticia/'+noticia.id }}" (click)="messageService.clear()">
-			<h3>{{ noticia.titulo }}</h3>
-			<h5>{{ noticia.dataEdicao.fromNow() }}</h5>
+			<img class="section-icon icon-list-item" src="../assets/default-image.png" alt="">
+			<div class="noticia-info" [class.redux]="auth.loggedIn()">
+				<h3>{{ noticia.titulo }}</h3>
+				<h5>{{ noticia.dataEdicao.fromNow() }}</h5>
+			</div>
+			<a class="edit-item" *ngIf="auth.loggedIn()" routerLink="{{'/noticia/edit/'+noticia.id}}" (click)="messageService.clear()"><img src="../assets/default-image.png" alt=""></a>
 		</a>
-		<a *ngIf="auth.loggedIn()" routerLink="{{'/noticia/edit/'+noticia.id}}" (click)="messageService.clear()">Edit</a>
 	</li>
 </ul>
 <a *ngIf="auth.loggedIn()" routerLink="/noticia/edit/-1" (click)="messageService.clear()">Adicionar Notícia</a>

@@ -3,6 +3,7 @@ import { Noticia } from '../noticia';
 import { NoticiaService } from '../noticia.service';
 import { MessageService } from '../message.service';
 import { Router } from '@angular/router';
+import { AuthService } from "../auth.service";
 
 @Component({
   selector: 'app-noticia-highlight',
@@ -12,11 +13,14 @@ import { Router } from '@angular/router';
 
 export class NoticiaHighlightComponent implements OnInit {
   noticiaDestacada: Noticia;
+  noticiaSelecionada: Noticia;
+  noticias: Noticia[];
 
   constructor(
     private noticiaService: NoticiaService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    public auth: AuthService
     ) {
   	
   }
@@ -26,12 +30,19 @@ export class NoticiaHighlightComponent implements OnInit {
   }
 
   getNoticia(): void {
-    this.noticiaService.getUltimaNoticia().subscribe(noticia => this.noticiaDestacada = noticia);
+    this.noticiaService.getNoticias().subscribe(noticias => {
+      this.noticiaDestacada = noticias[0];
+      this.noticias = noticias.slice(1);
+    });
   }
 
   goToNoticia() {
     this.router.navigate(['noticia/'+this.noticiaDestacada.id]);
     this.messageService.clear();
+  }
+
+  onSelect(noticia: Noticia) {
+    this.noticiaSelecionada = noticia;
   }
 
 }

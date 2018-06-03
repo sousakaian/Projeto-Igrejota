@@ -16,25 +16,31 @@
 	text-align: center;
 	color: white;
   font-size: 4.1vw;
+  height: 14.72vw;
+  line-height: 14.72vw;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .menu-item-mobile {
-  width: 90.7vw;
-  margin-left: -5.5vw;
+  width: 99.9vw;
   text-align: left;
   background-color: #004C60;
   color: white;
   border: none;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  padding-top: 1.4vw;
+  padding-bottom: 1.4vw;
+  padding-left: 4.72vw;
+  padding-right: 4.72vw;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: -5.42vw;
 }
 
 .login-button {
   width: 17vw;
   height: 14.72vw;
+  padding: 0;
   background-color: #004C60;
   font-size: 3.2vw;
   color: white;
@@ -44,10 +50,18 @@
 .tab-menu-mobile {
   background-color: #00A8C8;
   width: 100vw;
-  margin-left: -4.72vw;
 }
 
 .login-icon {
   max-width: 6vw;
   max-height: 6vw;
+}
+
+.dropdown-icon {
+  max-width: 6vw;
+  max-height: 6vw;
+}
+
+.dropdown-menu {
+  
 }

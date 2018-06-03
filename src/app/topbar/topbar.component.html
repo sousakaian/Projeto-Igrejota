@@ -1,12 +1,12 @@
 <div class="tab-menu-mobile">
 	<header>
 		<h1>Igrejota</h1>
-		<button class="login-button" (click)="toggleMenu()"><img *ngIf="auth.loggedIn()" src="" alt="Menu"><img class="login-icon" src="../assets/default-image.png" alt=""><br>{{ !auth.loggedIn() ? "Entrar" : "" }}</button>
+		<button class="login-button" (click)="toggleMenu()"><img class="dropdown-icon" *ngIf="auth.loggedIn()" src="../assets/default-image.png" alt=""><img class="login-icon" *ngIf="!auth.loggedIn()" src="../assets/default-image.png" alt=""><br>{{ !auth.loggedIn() ? "Entrar" : "" }}</button>
 	</header>
 	<div class="dropdown-menu" *ngIf="mostrarMenu">
 		<ul *ngIf="auth.loggedIn()">
 			<li>
-				<h3 class="menu-item-mobile">{{ auth.getLoggedUser() | uppercase }}</h3>
+				<button [disabled]="true" class="menu-item-mobile">{{ auth.getLoggedUser() | uppercase }}</button>
 			</li>
 			<li>
 				<button class="menu-item-mobile" (click)="goToGerenciarPerfil()">Gerenciar Perfil</button>

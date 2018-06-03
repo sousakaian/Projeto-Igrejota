@@ -13,6 +13,8 @@ app-topbar {
 	position: fixed;
 	top: 14.72vw;
 	bottom: 15.41vw;
+	padding-right: 4.72vw;
+    padding-left: 4.72vw;
 	width: 90.56vw;
 	overflow-y: scroll;
 }

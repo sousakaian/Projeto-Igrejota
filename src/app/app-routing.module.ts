@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router'
-import { NoticiasComponent } from './noticias/noticias.component';
+import { NoticiaHighlightComponent } from './noticia-highlight/noticia-highlight.component';
 import { NoticiaDetailComponent } from './noticia-detail/noticia-detail.component';
 import { NoticiaEditComponent } from './noticia-edit/noticia-edit.component';
 import { JogoComponent } from './jogo/jogo.component';
@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: '', component: MainPageComponent },
   { path: 'inicio', component: MainPageComponent },
-  { path: 'noticias', component: NoticiasComponent },
+  { path: 'noticias', component: NoticiaHighlightComponent },
   { path: 'noticia/:id', component: NoticiaDetailComponent },
   { path: 'noticia/edit/:id', component: NoticiaEditComponent, canActivate: [AuthGuard] },
   { path: 'categorias/edit', component: CategoriaEditComponent, canActivate: [AuthGuard] },
