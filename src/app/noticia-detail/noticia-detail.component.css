@@ -1,0 +1,45 @@
+.noticia {
+	padding-top: 7.5vw;
+}
+
+.noticia .edit-item img {
+	float: left;
+}
+
+.redux {
+	padding-left: 10vw;
+}
+
+.noticia h1 {
+	margin-top: 0;
+	font-size: 5vw;
+	font-weight: bold;
+	color: #294D60;
+}
+
+.noticia img {
+	max-height: 47.2vw;
+}
+
+.noticia h4 {
+	margin-top: 0;
+	color: #727176;
+	font-size: 3.5vw;
+	font-weight: normal;
+}
+
+.noticia h5 {
+	color: #727176;
+	font-size: 3vw;
+	font-weight: normal;
+}
+
+.noticia p {
+	color: #000;
+	font-size: 3vw;
+	font-weight: normal;
+}
+
+a {
+	text-decoration: none;
+}
