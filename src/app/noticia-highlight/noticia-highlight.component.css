@@ -10,8 +10,8 @@
 }
 
 .highlight h3 {
-	position: absolute;
-	top: 42.7vw;
+	position: relative;
+	top: -18vw;
 	width: 88.56vw;
 	height: 12.5vw;
 	line-height: 12.5vw;

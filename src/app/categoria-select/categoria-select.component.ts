@@ -38,7 +38,6 @@ export class CategoriaSelectComponent implements OnInit {
 
   toggleCategoria(categoria: Categoria): void {
   	CategoriaSelectComponent.categoriasEscolhidas.includes(categoria) ? this.removeCategoriaToSearch(categoria) : this.addCategoriaToSearch(categoria);
-    console.log(CategoriaSelectComponent.categoriasEscolhidas);
   }
 
 }

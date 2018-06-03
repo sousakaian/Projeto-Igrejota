@@ -14,8 +14,8 @@
 	float: left;
 	width: 83vw;
 	text-align: center;
-	color: white;
-  font-size: 4.1vw;
+	color: #F0F1F6;
+  font-size: 7vw;
   height: 14.72vw;
   line-height: 14.72vw;
   margin-top: 0;
@@ -26,24 +26,25 @@
   width: 99.9vw;
   text-align: left;
   background-color: #004C60;
-  color: white;
+  color: #F0F1F6;
   border: none;
-  padding-top: 1.4vw;
-  padding-bottom: 1.4vw;
+  padding-top: 2.4vw;
+  padding-bottom: 2.4vw;
   padding-left: 4.72vw;
   padding-right: 4.72vw;
   margin-top: 0;
   margin-bottom: 0;
   margin-left: -5.42vw;
+  font-size: 4vw;
 }
 
 .login-button {
   width: 17vw;
   height: 14.72vw;
   padding: 0;
-  background-color: #004C60;
+  background-color: transparent;
   font-size: 3.2vw;
-  color: white;
+  color: #EEDFCF;
   border: none;
 }
 

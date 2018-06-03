@@ -63,9 +63,9 @@ export class NoticiaEditComponent implements OnInit {
   onSave() {
     this.enviado = true
     if (this.noticiaValida()) {
+      this.messageService.clear();
   	  this.noticia.id === -1 ? this.noticiaService.add(this.noticia) : this.noticiaService.update(this.noticia);
       this.router.navigate(["/noticia/"+this.noticia.id]);
-      this.messageService.clear();
     }
   }
 
@@ -78,4 +78,7 @@ export class NoticiaEditComponent implements OnInit {
     sender.messageService.clear();
   }
 
+  update(imagePath: string, event) {
+    imagePath = event.target.files[0];
+  }
 }

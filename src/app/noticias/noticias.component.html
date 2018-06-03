@@ -15,4 +15,5 @@
 		</a>
 	</li>
 </ul>
-<a *ngIf="auth.loggedIn()" routerLink="/noticia/edit/-1" (click)="messageService.clear()">Adicionar Notícia</a>
+<div class="add-item"></div>
+<a class="add-item no-wrap" *ngIf="auth.loggedIn()" routerLink="/noticia/edit/-1" (click)="messageService.clear()"><img src="../assets/default-image.png" alt=""></a>

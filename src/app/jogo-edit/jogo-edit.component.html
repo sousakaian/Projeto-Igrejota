@@ -41,14 +41,14 @@
 	</div>
 	<br>
 	<label>
-		<h2>Capa do Jogo:</h2> <input [(ngModel)]="jogo.imagemJogo" type="file">
+		<h2>Capa do Jogo:</h2> <input (change)="update(jogo.imagemJogo, $event)" type="file">
 		<img *ngIf="jogo.imagemJogo !== ''" src="{{ jogo.imagemJogo }}" alt="Capa do Jogo">
 	</label>
 	<label>
-		<h2>Link do Manual:</h2> <input [(ngModel)]="jogo.linkManual" maxlength="200" placeholder="Link do Manual" value="{{jogo.linkManual}}">
+		<h2>Link do Manual:</h2> <input [(ngModel)]="jogo.linkManual" maxlength="200" placeholder="Link do Manual" value="{{jogo.linkManual ? jogo.linkManual : ''}}">
 	</label>
 	<label>
-		<h2>Link útil:</h2> <input [(ngModel)]="jogo.linkDesenvolvedor" maxlength="200" placeholder="Link útil" value="{{jogo.linkDesenvolvedor}}">
+		<h2>Link útil:</h2> <input [(ngModel)]="jogo.linkDesenvolvedor" maxlength="200" placeholder="Link útil" value="{{jogo.linkDesenvolvedor ? jogo.linkDesenvolvedor : ''}}">
 	</label>
 </div>
 <app-page-not-found></app-page-not-found>

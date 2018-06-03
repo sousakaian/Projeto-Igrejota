@@ -1,6 +1,6 @@
 <div class="tab-menu-mobile">
 	<header>
-		<h1>Igrejota</h1>
+		<h1>igrejota</h1>
 		<button class="login-button" (click)="toggleMenu()"><img class="dropdown-icon" *ngIf="auth.loggedIn()" src="../assets/default-image.png" alt=""><img class="login-icon" *ngIf="!auth.loggedIn()" src="../assets/default-image.png" alt=""><br>{{ !auth.loggedIn() ? "Entrar" : "" }}</button>
 	</header>
 	<div class="dropdown-menu" *ngIf="mostrarMenu">
@@ -21,4 +21,3 @@
 		<app-login *ngIf="!auth.loggedIn()"></app-login>
 	</div>
 </div>
-<app-messages></app-messages>

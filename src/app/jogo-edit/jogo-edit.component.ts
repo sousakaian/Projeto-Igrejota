@@ -52,16 +52,17 @@ export class JogoEditComponent implements OnInit {
   }
 
   validarJogo(): Boolean {
+    console.log(this.jogo);
     if (this.jogo.id <= 0) {
       this.messageService.add("Id do jogo inválido!");
     } else if (this.jogo.nome === "") {
-      this.messageService.add("Nome do jogo inválido!");
-    } else if (this.jogo.minJogadores >= 0 && this.jogo.maxJogadores >= this.jogo.minJogadores && this.jogo.maxJogadores <= 31) {
+      
+    } else if (this.jogo.minJogadores <= 0 || this.jogo.maxJogadores < this.jogo.minJogadores || this.jogo.maxJogadores > 31) {
       this.messageService.add("Número de jogadores inválido!");
-    } else if (this.jogo.tempoJogo >= 0 && this.jogo.tempoJogo <= 610) {
+    } else if (this.jogo.tempoJogo < 0 || this.jogo.tempoJogo > 610) {
       this.messageService.add("Tempo do jogo inválido!");
     } else if (this.jogo.descricao === "") {
-      this.messageService.add("Descrição inválida");
+      
     } else {
       return true
     }
@@ -96,5 +97,9 @@ export class JogoEditComponent implements OnInit {
   static confirmCancel(sender: JogoEditComponent) {
     sender.router.navigate(['/jogos']);
     sender.messageService.clear();
+  }
+
+  update(imagePath: string, event) {
+    imagePath = event.target.files[0];
   }
 }

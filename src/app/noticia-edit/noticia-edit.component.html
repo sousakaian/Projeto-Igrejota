@@ -17,7 +17,7 @@
 		</div>
 	</label><br>
 	<label>
-		Imagem Escolhida: <input [(ngModel)]="noticia.imagemDestaque" type="file">
+		Imagem Escolhida: <input (change)="update(noticia.imagemDestaque, $event)" type="file">
 		<img *ngIf="noticia.imagemDestaque !== ''" src="{{ noticia.imagemDestaque }}" alt="{{noticia.titulo}}"><br>
 	</label>
 </div>

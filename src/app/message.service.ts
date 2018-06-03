@@ -11,6 +11,10 @@ export class MessageService {
 
   clear() {
     this.messages = [];
+    this.clearAlert();
+  }
+
+  clearAlert() {
     this.alert = undefined;
   }
 
@@ -20,12 +24,12 @@ export class MessageService {
 
   yes() {
   	this.alert.yes(this.alert.sender);
-  	this.alert = undefined;
+  	this.clearAlert();
   }
 
   no() {
   	this.alert.no(this.alert.sender);
-  	this.alert = undefined;
+  	this.clearAlert();
   }
 
   hasAlert() {
