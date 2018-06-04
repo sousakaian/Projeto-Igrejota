@@ -83,7 +83,7 @@ export class ListaAlunosComponent implements OnInit {
   }
 
   search() {
-  	this.listaMostrados = this.listaAlunos.filter(a => a.nome.includes(this.termoBusca));
+  	this.listaMostrados = this.listaAlunos.filter(a => a.nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(this.termoBusca.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")));
   }
 
   cadastrar() {

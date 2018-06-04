@@ -31,7 +31,6 @@ export class DiaPresencaComponent implements OnInit {
   	let date = this.route.snapshot.paramMap.get("data");
   	this.selectedDay = moment(date, "DD-MM-YYYY");
   	this.getAlunos();
-    console.log(this.alunosDiaIgrejota);
   }
 
   getAlunos() {

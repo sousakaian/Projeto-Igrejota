@@ -1,15 +1,17 @@
-<div class="date">
-	<img class="icon" src="" alt="">
-	<h1>{{ this.selectedDay.format("DD/MM/YYYY") }}</h1>
+<div class="section-header">
+	<img class="section-icon icon-calendar" src="../assets/default-image.png" alt="">
+	<h1 *ngIf="!showSearch">{{ this.selectedDay.format("DD/MM/YYYY") }}</h1>
 </div>
-<h3 *ngIf="alunosDiaIgrejota.length <= 0">Nenhum aluno presente</h3>
-<h3 *ngIf="alunosDiaIgrejota.length > 0">Alunos Presentes</h3>
+<hr class="section-line">
+<h2 *ngIf="alunosDiaIgrejota.length <= 0">Nenhum aluno presente</h2>
+<h2 *ngIf="alunosDiaIgrejota.length > 0">Alunos Presentes</h2>
 <ul>
 	<li *ngFor="let presenca of alunosDiaIgrejota">
-		<p>{{ presenca.aluno.nome }}</p>
-		<button *ngIf="auth.loggedIn()" (click)="remover(presenca)">Remove</button>
+		<div class="square"></div>
+		<p class="no-wrap" [class.redux]="auth.loggedIn()">{{ presenca.aluno.nome }}</p>
+		<button class="remove" *ngIf="auth.loggedIn()" (click)="remover(presenca)"><img src="../assets/default-image.png" alt=""></button>
 	</li>
 </ul>
 <div *ngIf="auth.loggedIn()">
-	<button (click)="adicionarPresenca()">Marcar Nova Presença</button><br>
+	<button class="add-presenca center" (click)="adicionarPresenca()">Marcar Nova Presença</button><br>
 </div>

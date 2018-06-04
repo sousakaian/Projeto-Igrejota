@@ -1,0 +1,55 @@
+.add-item {
+	background-color: transparent;
+	border: none;
+}
+
+.search {
+	margin-top: 4vw;
+}
+
+.edit-item {
+	float: left;
+	border: none;
+	background-color: transparent;
+}
+
+.edit-item img {
+	width: 5vw;
+	height: 5vw;
+}
+
+ul {
+	list-style-type: none;
+	margin-top: 0vw;
+	padding-left: 0;
+	padding-top: 1vw;
+}
+
+.aluno {
+	padding-bottom: 1vw;
+}
+
+.confirm-presenca {
+	width: 80vw;
+	height: 8vw;
+	border: none;
+	background-color: #00A6C4;
+	font-size: 4vw;
+	color: #F0F1F6;
+}
+
+p {
+	float: left;
+	width: 73.8vw;
+	font-size: 3vw;
+	color: #000;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 3vw;
+	line-height: 5vw;
+}
+
+.checkbox-right {
+	margin-left: 84vw;
+	margin-top: 1vw;
+}

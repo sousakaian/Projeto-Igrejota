@@ -1,0 +1,58 @@
+.icon-calendar {
+
+}
+
+h2 {
+	color: #294D60;
+	font-size: 6vw;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 2vw;
+	margin-top: 3vw;
+}
+
+li {
+	padding-bottom: 2vw;
+}
+
+.remove {
+	border: none;
+	background-color: transparent;
+}
+
+.remove img {
+	width: 5vw;
+	height: 5vw;
+}
+
+.square {
+	float: left;
+	width: 5vw;
+	height: 5vw;
+	background-color: #F6A971;
+}
+
+.redux {
+	float: left;
+	width: 73.8vw;
+}
+
+p {
+	font-size: 3vw;
+	color: #000;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 3vw;
+	line-height: 5vw;
+}
+
+.add-presenca {
+	width: 80vw;
+	height: 8vw;
+	border: none;
+	background-color: #00A6C4;
+	font-size: 4vw;
+	color: #F0F1F6;
+}
