@@ -32,6 +32,7 @@
 	left: 0;
 	bottom: 15.41vw;
 	right: 0;
+	z-index: 20;
 	background-color: #F0F0F177;
 }
 

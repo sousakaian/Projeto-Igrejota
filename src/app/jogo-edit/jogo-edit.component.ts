@@ -52,10 +52,7 @@ export class JogoEditComponent implements OnInit {
   }
 
   validarJogo(): Boolean {
-    console.log(this.jogo);
-    if (this.jogo.id <= 0) {
-      this.messageService.add("Id do jogo inválido!");
-    } else if (this.jogo.nome === "") {
+    if (this.jogo.nome === "") {
       
     } else if (this.jogo.minJogadores <= 0 || this.jogo.maxJogadores < this.jogo.minJogadores || this.jogo.maxJogadores > 31) {
       this.messageService.add("Número de jogadores inválido!");

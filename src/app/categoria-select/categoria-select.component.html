@@ -1,5 +1,8 @@
 <ul class="categorias">
 	<li *ngFor="let categoria of categorias">
-		<input type="checkbox" [checked]="categoriaChecada(categoria)" (click)="toggleCategoria(categoria)"> {{ categoria.nome }}
+		<label class="checkboxcontainer"> {{ categoria.nome }}
+			<input type="checkbox" [checked]="categoriaChecada(categoria)" (click)="toggleCategoria(categoria)">
+			<span class="checkmark"></span>
+		</label>
 	</li>
 </ul>

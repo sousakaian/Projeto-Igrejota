@@ -1,0 +1,16 @@
+.categorias {
+	list-style-type: none;
+	display: inline-block;
+	padding-left: 0;
+}
+
+.categorias li {
+	float: left;
+}
+
+.categorias label {
+	margin-top: 0;
+	padding-bottom: 1vw;
+	padding-right: 1vw;
+	width: 23vw;
+}

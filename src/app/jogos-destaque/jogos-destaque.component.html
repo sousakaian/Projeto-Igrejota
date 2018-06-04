@@ -8,10 +8,10 @@
 <div class="jogos-destaque">
 	<ul class="jogos">
 		<li *ngFor="let jogo of jogos" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
-			<a routerLink="{{ auth.loggedIn() ? '/jogo/edit/'+jogo.id : '/jogo/'+jogo.id }}" (click)="messageService.clear()">
-				<h3>{{ jogo.nome | uppercase }}</h3>
+			<a routerLink="{{ '/jogo/'+jogo.id }}" (click)="messageService.clear()">
 				<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
-				<div class="info-destaque">
+				<div class="info-destaque" [class.redux]="auth.loggedIn()">
+					<h3>{{ jogo.nome | uppercase }}</h3>
 					<div class="jogo-info no-wrap"><div class="highlight-line"></div><img class="jogo-info-icon" src="../assets/default-image.png" alt="">
 						{{ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+'-' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)}}
 					</div>
@@ -22,6 +22,7 @@
 						{{ jogo.categorias[0].nome }}
 					</div>
 				</div>
+				<a class="edit-item" *ngIf="auth.loggedIn()" routerLink="{{'/jogo/edit/'+jogo.id}}" (click)="messageService.clear()"><img src="../assets/default-image.png" alt=""></a>
 			</a>
 		</li>
 	</ul>

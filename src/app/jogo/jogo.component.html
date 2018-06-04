@@ -1,17 +1,19 @@
 <h2>Jogos</h2>
 <ul class="jogos">
 	<div class="busca">
-		<input type="text" [(ngModel)]="termoBusca" placeholder="Pesquisar..."><button (click)="limparBusca()">Limpar</button><button (click)="pesquisaAvancada(termoBusca)">Pesquisar</button>
+		<button (click)="pesquisaAvancada(termoBusca)" class="searchbtn">🔍</button><input type="text" [(ngModel)]="termoBusca" placeholder="Pesquisar..."><button (click)="limparBusca()">Limpar</button>
 	</div>
-	<img src="" alt="Organização: ">
-	<select (change)="organizar()" [(ngModel)]="metodoOrganizacao">
-	  <option selected="selected" value="A-Z">A-Z</option>
-	  <option value="Min. Jogadores">Min. Jogadores</option>
-	  <option value="Max. Jogadores">Max. Jogadores</option>
-	  <option value="Tempo de Jogo">Tempo de Jogo</option>
-	</select>
-	<button (click)="toggleInverter()">{{ inverterOrdem ? "Inversa" : "Normal" }}</button>
-	<button (click)="toggleFiltros()">Pesquisa Avançada</button><br>
+	<div class= "Settings">
+		<img src="" alt="Organização: ">
+		<select (change)="organizar()" [(ngModel)]="metodoOrganizacao">
+		  <option selected="selected" value="A-Z">A-Z</option>
+		  <option value="Min. Jogadores">Min. Jogadores</option>
+		  <option value="Max. Jogadores">Max. Jogadores</option>
+		  <option value="Tempo de Jogo">Tempo de Jogo</option>
+		</select>
+		<button (click)="toggleInverter()"  class="Invbtn">{{ inverterOrdem ? "Inversa" : "Normal" }}</button>
+		<button (click)="toggleFiltros()" class="PAbtn"><p class="picon">🔍</p><p class="ptext">Pesquisa<br/>Avançada</p></button><br>
+	</div>
 	<div class="filtros" *ngIf="mostrarFiltros">
 		<button (click)="limparFiltros()">Limpar</button>
 		<h3>Número de Jogadores: {{ ignorarJogadores || numeroJogadores === -1 ? 'Qualquer um' : (numeroJogadores > 30 ? '30+' : numeroJogadores) }}</h3>
@@ -34,8 +36,11 @@
 	<li *ngFor="let jogo of jogos" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
 		<a routerLink="{{ '/jogo/'+jogo.id }}" (click)="messageService.clear()">
 			<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
-			<h3>{{ jogo.nome | uppercase }} <img *ngIf="jogo.emDestaque" src="" alt="Em Destaque"></h3>
-			<h4>{{ jogo.tempoJogo+'min - '+ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' | lowercase }}</h4>
+			<div class="jogoinfo">
+				<h3>{{ jogo.nome | uppercase }} <img *ngIf="jogo.emDestaque" src="" alt="Em Destaque"></h3>
+				<h4>{{ jogo.tempoJogo+'min'}}</h4><h4>{{(jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' | lowercase }}</h4>
+				<h3></h3>
+			</div>
 		</a>
 		<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()">Edit</a>
 	</li>

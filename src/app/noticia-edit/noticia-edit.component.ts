@@ -61,7 +61,7 @@ export class NoticiaEditComponent implements OnInit {
   }
 
   onSave() {
-    this.enviado = true
+    this.enviado = true;
     if (this.noticiaValida()) {
       this.messageService.clear();
   	  this.noticia.id === -1 ? this.noticiaService.add(this.noticia) : this.noticiaService.update(this.noticia);

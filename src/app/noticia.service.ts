@@ -39,6 +39,7 @@ export class NoticiaService {
   }
 
   add(noticia: Noticia): void {
+    noticia.id = Date.now() + Math.random();
     NOTICIAS.push(noticia);
     this.messageService.add("Notícia adicionada!");
   }

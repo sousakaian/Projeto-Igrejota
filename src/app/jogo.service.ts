@@ -86,6 +86,7 @@ export class JogoService {
   }
 
   add(jogo: Jogo): void {
+    jogo.id = Date.now() + Math.random();
     JOGOS.push(jogo);
     this.messageService.add("Jogo adicionado!");
   }

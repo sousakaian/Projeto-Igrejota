@@ -1,7 +1,9 @@
 <div class="tab-menu-mobile">
 	<header>
 		<h1>igrejota</h1>
-		<button class="login-button" (click)="toggleMenu()"><img class="dropdown-icon" *ngIf="auth.loggedIn()" src="../assets/default-image.png" alt=""><img class="login-icon" *ngIf="!auth.loggedIn()" src="../assets/default-image.png" alt=""><br>{{ !auth.loggedIn() ? "Entrar" : "" }}</button>
+		<button class="login-button" (click)="toggleMenu()">
+			<img class="dropdown-icon" src="../assets/default-image.png" alt="">
+		</button>
 	</header>
 	<div class="dropdown-menu" *ngIf="mostrarMenu">
 		<ul *ngIf="auth.loggedIn()">
