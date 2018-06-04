@@ -3,6 +3,33 @@
 	border: none;
 }
 
+.form-aluno {
+	margin-top: -4.72vw;
+	padding-top: 4.72vw;
+	margin-left: -4.72vw;
+	padding-left: 4.72vw;
+	margin-right: -4.72vw;
+	padding-right: 4.72vw;
+	padding-bottom: 4.72vw;
+	background-color: #294D60;
+	color: #F0F1F6;
+	font-size: 4vw;
+}
+
+.form-aluno button {
+	background-color: #BE6646;
+	color: #F0F1F6;
+}
+
+h1 {
+	color: #294D60;
+	font-size: 6vw;
+}
+
+.text-input {
+	margin-bottom: 2vw;
+}
+
 .search {
 	margin-top: 4vw;
 }
@@ -30,6 +57,7 @@ ul {
 }
 
 .confirm-presenca {
+	border-radius: 2vw;
 	width: 80vw;
 	height: 8vw;
 	border: none;
