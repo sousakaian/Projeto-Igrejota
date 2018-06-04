@@ -4,7 +4,7 @@
 		<button (click)="pesquisaAvancada(termoBusca)" class="searchbtn">🔍</button><input type="text" [(ngModel)]="termoBusca" placeholder="Pesquisar..."><button (click)="limparBusca()">Limpar</button>
 	</div>
 	<div class= "Settings">
-		<img src="" alt="Organização: ">
+		<img src="../../assets/organização.png" alt="Organização: ">
 		<select (change)="organizar()" [(ngModel)]="metodoOrganizacao">
 		  <option selected="selected" value="A-Z">A-Z</option>
 		  <option value="Min. Jogadores">Min. Jogadores</option>
@@ -37,9 +37,10 @@
 		<a routerLink="{{ '/jogo/'+jogo.id }}" (click)="messageService.clear()">
 			<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
 			<div class="jogoinfo">
-				<h3>{{ jogo.nome | uppercase }} <img *ngIf="jogo.emDestaque" src="" alt="Em Destaque"></h3>
-				<h4>{{ jogo.tempoJogo+'min'}}</h4><h4>{{(jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' | lowercase }}</h4>
-				<h3></h3>
+				<h3>{{ jogo.nome | uppercase }} <img *ngIf="jogo.emDestaque" src="../../assets/game.png" alt="Em Destaque" class="dico" ></h3><br/>
+				<h4><img class="tico" src="../../assets/time.png" alt="Organização: ">{{ jogo.tempoJogo+'min'}}</h4>
+				<h4><img class="pico" src="../../assets/players.png" alt="Organização: ">{{(jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' | lowercase }}</h4>
+				<h4 *ngFor="let categoria of jogo.categorias" class="cat">{{ categoria.nome }}</h4>
 			</div>
 		</a>
 		<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()">Edit</a>

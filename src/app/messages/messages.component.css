@@ -1,15 +1,29 @@
+@font-face{
+  font-family: BalooRegular;
+  src: url("../../fonts/Baloo-Regular.ttf");
+}
+@font-face{
+  font-family: Pridi;
+  src: url("../../fonts/Pridi-Regular.ttf");
+  font-weight: bold;
+}
+@font-face{
+  font-family: PridiBold;
+  src: url("../../fonts/Pridi-SemiBold.ttf");
+}
+@font-face{
+  font-family: Lateef;
+  src: url("../../fonts/LateefRegOT.ttf");
+}
 .message {
 	margin-left: -4.72vw;
 	width: 100vw;
 	height: 7vw;
-	background-color: #004C60;
-	border: 0.5vw solid #00A6C4;
 }
 
 .clear {
 	position: absolute;
 	left: 83vw;
-	margin-top: -0.4vw;
 	width: 17vw;
 	height: 7.8vw;
 	font-size: 4vw;
@@ -19,11 +33,15 @@
 }
 
 .message-text {
+  	font-family: Pridi;
 	color: #F0F1F6;
-	padding-left: 4.72vw;
-	font-size: 3vw;
-	height: 7vw;
-	line-height: 7vw;
+	padding-left: 4vw;
+	padding-top: 1.5vw;
+	font-size: 4vw;
+	height: 5.5vw;
+	line-height: 4vw;
+	background-color: #004C60;
+	border: 0.5vw solid #00A6C4;
 }
 
 .overlay {

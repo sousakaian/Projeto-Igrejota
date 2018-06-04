@@ -15,33 +15,30 @@
   font-family: Lateef;
   src: url("../../fonts/LateefRegOT.ttf");
 }
-
 .icon-news {
-
+	
 }
-
-.icon-list-item {
-	float: left;
-	padding-top: 0;
-	padding-right: 2vw;
+h1{
+  font-family: BalooRegular;
 }
 
 .noticias {
-	padding-left: 0;
 	list-style-type: none;
+	padding-left:0px;
+	margin-top: 1vw;
 }
 
-.noticias li {
-	height: 10vw;
-	padding-top: 3vw;
+.noticias li{
+	display:inline-block;
+	width: 88vw;
+	padding-bottom:2vw; 
+	padding-top:2vw; 
+	padding-left:1vw; 
+	padding-right:1vw; 
 }
 
 .noticias li:hover{
 	background-color: #EFE0D0;
-}
-
-a {
-	text-decoration: none;
 }
 
 .listico{
@@ -51,32 +48,15 @@ a {
 	float:left;
 }
 
-.redux {
-	width: 71vw;
-	float: left;
+a.not{
+	width: 88vw;
+	margin: 0px;
+	font-size: 3vw;
+  	display:block;
 }
-
-
-h1{
-  font-family: BalooRegular;
+.noticias a{
+ 	text-decoration: none;
 }
-
-.noticia-info h3 {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 4vw;
-	font-weight: bold;
-	color: #294D60;
-}
-
-.noticia-info h5 {
-	margin-top: 1vw;
-	font-size: 2.9vw;
-	font-weight: normal;
-	color: #727176;
-	margin-bottom: 0;
-}
-
 a.not .notnome{
 	font-family: PridiBold;
 	height: 10vw;
@@ -99,7 +79,7 @@ a.not .nottime{
 	margin: 0px;
 	padding: 0px;
 	width: 15vw;
-	font-size: 4vw;
+	font-size: 4.5vw;
   	line-height: 4.5vw;
   	display: block;
 }

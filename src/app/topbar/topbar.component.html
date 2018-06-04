@@ -1,14 +1,12 @@
 <div class="tab-menu-mobile">
 	<header>
-		<h1>igrejota</h1>
-		<button class="login-button" (click)="toggleMenu()">
-			<img class="dropdown-icon" src="../assets/default-image.png" alt="">
-		</button>
+		<h1>Igrejota</h1>
+		<button class="login-button" (click)="toggleMenu()"><img *ngIf="auth.loggedIn()" src="" alt="Menu"><img *ngIf="!mostrarMenu" class="login-icon" src="../assets/header.png" alt=""><img *ngIf="mostrarMenu" class="login-icon" src="../assets/header2.png" alt=""></button>
 	</header>
 	<div class="dropdown-menu" *ngIf="mostrarMenu">
 		<ul *ngIf="auth.loggedIn()">
 			<li>
-				<button [disabled]="true" class="menu-item-mobile">{{ auth.getLoggedUser() | uppercase }}</button>
+				<h3 class="menu-item-mobile">{{ auth.getLoggedUser() | uppercase }}</h3>
 			</li>
 			<li>
 				<button class="menu-item-mobile" (click)="goToGerenciarPerfil()">Gerenciar Perfil</button>
@@ -23,3 +21,4 @@
 		<app-login *ngIf="!auth.loggedIn()"></app-login>
 	</div>
 </div>
+<app-messages></app-messages>

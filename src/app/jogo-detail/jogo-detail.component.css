@@ -1,0 +1,134 @@
+@font-face{
+  font-family: BalooRegular;
+  src: url("../../fonts/Baloo-Regular.ttf");
+}
+@font-face{
+  font-family: Pridi;
+  src: url("../../fonts/Pridi-Regular.ttf");
+  font-weight: bold;
+}
+@font-face{
+  font-family: PridiBold;
+  src: url("../../fonts/Pridi-SemiBold.ttf");
+}
+@font-face{
+  font-family: Lateef;
+  src: url("../../fonts/LateefRegOT.ttf");
+}
+h1{ 
+	font-size: 10vw;
+	font-family: BalooRegular;
+	color:	#294D60;
+	margin: 0vw;
+	margin-top: 2vw;
+}
+.jogoimg{
+	padding: 0vw;
+	margin: 0vw;
+	margin-left:10.28vw;
+	width:70vw;
+	height:35vw;
+}
+.jogodet {
+	display: inline-block;
+	text-align: center;
+	margin-left:10.28vw;	
+}
+
+.jogodet h4{
+	border-left: solid 3px #BF6646;	
+	float:left;
+	margin: 0px;
+	padding-right: 2.36vw;
+	padding-left: 1vw;
+	font-size: 4.5vw;
+	font-family: Pridi;
+  	font-weight: bold;
+	color: black;
+}
+.jogo h3{
+	font-size: 6.5	vw;
+	font-family: Pridi;
+	color: #BF6646;
+	margin: 0px;
+	margin-top: 2vw;
+}
+.jogo p{
+	font-family: Lateef;
+	color: black;
+	font-size: 4.5vw;
+	margin: 0px;
+}
+.jogo a{
+	font-family: Lateef;
+	border-left: solid 3px #BF6646;	
+	font-size: 4.5vw;
+	margin: 0px;
+}
+
+.icon{
+	display: block;
+	float: left;
+    background-repeat: no-repeat;
+    background-size: 6vw 6vw;
+    width:6vw;
+    height:6vw;
+    margin-top: 1vw;
+    margin-right: 1vw;
+    border: solid 0;
+    opacity: 1;
+}
+.jogicone{
+	background-image: url("../../assets/players.png");
+}
+.timicone{
+	background-image: url("../../assets/time.png");
+}
+
+/*@media screen and (min-width: 550px){
+	h1{ 
+		font-size: 50px;
+		margin: 0px;
+		margin-top: 10px;
+	}
+	.jogoimg{
+		padding: 0px;
+		margin: 0px;
+		margin-left:50.44px;
+		width:400px;
+		height:250px;
+	}
+	.jogodet {
+		margin-left:50.44px;	
+	}
+
+	.jogodet h4{
+		padding-right: 10.18px;
+		padding-left: 5px;
+		font-size: 15px;	
+	}
+	.jogo h3{
+		font-size: 30px;
+		margin-top: 10px;
+	}
+	.jogo p{
+		font-size: 22.5px;
+	}
+	.jogo a{
+		font-size: 22.5px;
+		margin: 0px;
+	}
+	.icon{
+	    background-size: 30px 30px;
+	    width:30px;
+	    height:30px;
+	    margin-top: 5px;
+	    margin-right: 5px;
+	}
+	.jogicone{
+		background-image: url("../../assets/players.png");
+	}
+	.timicone{
+		background-image: url("../../assets/time.png");
+	}
+}*/

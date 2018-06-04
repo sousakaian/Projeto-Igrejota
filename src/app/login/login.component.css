@@ -1,50 +1,65 @@
-.login {
-	background-color: #004C60;
-	color: #EEDFCF;
-	margin-top: -3.82vw;
-  	height: 50vw;
+@font-face{
+  font-family: BalooRegular;
+  src: url("../../fonts/Baloo-Regular.ttf");
 }
-
-.login h1 {
-	width: 63vw;
-	font-weight: bolder;
-	font-size: 5.6vw;
-	padding-top: 7.6vw;
+@font-face{
+  font-family: Pridi;
+  src: url("../../fonts/Pridi-Regular.ttf");
+  font-weight: bold;
+}
+@font-face{
+  font-family: PridiBold;
+  src: url("../../fonts/Pridi-SemiBold.ttf");
+}
+@font-face{
+  font-family: Lateef;
+  src: url("../../fonts/LateefRegOT.ttf");
+}
+.login{
+	background-color: #294D60;
 	text-align: center;
-}
-
-.login div {
-	width: 63vw;
+	display:block;
+	justify-content: center;
+	width: 100vw;
+	font-family: Pridi;
 	font-size: 4vw;
-	font-weight: normal;
-	display: block;
+	color: #EFE0D0;
 }
 
-.login input {
-	border: 0.5vw solid #BE6646;
-	border-radius: 2vw;
-	border-color: #BE6646;
-	height: 4.4vw;
-	margin-top: 2vw;
-	margin-left: 2vw;
-	padding-left: 2vw;
-	width: 41vw;
-	font-size: 3vw;
-	color: #BE6646;
+.login input{
+	margin-bottom:4vw;
+  border: 0.5vw solid #BE6646;
+  border-radius: 2vw;
+  border-color: #BE6646;
 }
 
-.login button {
-	margin-top: 5.5vw;
-	width: 56.25vw;
-	height: 7.5vw;
-	font-size: 6vw;
-	font-weight: bold;
-	background-color: #BE6646;
-	color: #EEDFCF;
-	border-radius: 2vw;
-	border: none;
+
+input [type=text]{
 }
 
-.bolsista-info {
+.login button{
+    color:#EFE0D0;
+    background-color:#D06636;
+    border:none;
+	font-size: 7vw;
+	font-family: BalooRegular;
+    border-radius: 4.5px;
+    display: inline-flex;
+    padding:1vw;	
+    padding-right:2vw;
+    padding-left:2vw;	
+    transition: color 0.2s, background-color 0.2s;
+	margin-bottom:4vw;
+}
+.login button:hover{
+    color:#D06636;
+    background-color:#EFE0D0;
+}
 
+.login h1{
+	font-family: PridiBold;
+	font-size: 8vw;
+  margin:0px;
+  padding-top: 2vw;
+  padding-bottom: 2vw;
 }

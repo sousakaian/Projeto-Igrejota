@@ -1,0 +1,281 @@
+@font-face{
+  font-family: BalooRegular;
+  src: url("../../fonts/Baloo-Regular.ttf");
+}
+@font-face{
+  font-family: Pridi;
+  src: url("../../fonts/Pridi-Regular.ttf");
+  font-weight: bold;
+}
+@font-face{
+  font-family: PridiBold;
+  src: url("../../fonts/Pridi-SemiBold.ttf");
+}
+@font-face{
+  font-family: Lateef;
+  src: url("../../fonts/LateefRegOT.ttf");
+}
+.jogos{
+	padding: 0px;
+	list-style: none;
+}
+.busca{
+	border: 0.5vw solid #DF704A;
+    border-radius: 2vw;
+    border-color: #DF704A;
+    width: 88vw;
+    font-size: 4vw;
+    color: #DF704A;
+    display: inline-block;
+    margin-bottom: 2vw;
+}
+
+h2{
+	display: none;
+}
+
+input[type=text]{
+	float: left;
+	border: solid 0px;
+	border-left: solid 2px #F7AA71;
+	border-right: solid 2px #F7AA71;
+	padding-left: 1vw;
+    color: #F7AA71;
+    margin-top: 1px;
+    font-size: 4vw;
+	width: 60vw;
+	height: 7.5vw;
+}
+
+.busca button.searchbtn{
+  font-family: Segoe UI Symbol;
+  font-size: 5.5vw;
+  margin: 0px;
+}
+
+.busca button{
+	font-family: Pridi;
+    font-size: 3.5vw;
+	margin-top:px;
+	margin:0px;
+	height: 8.5vw;
+	float: left;
+	background-color: transparent;
+	border: solid 0;
+	transition: background-color 0.2s, color 0.2s;
+    color:#DF704A;
+}
+.busca button:hover{
+	background-color: #F7AA71;
+	color:#000;
+}
+
+.Settings{
+	display: block;
+	height: 10vw;
+    margin-bottom: 2vw;
+	width: 90vw;
+}
+.Settings img{
+	height: 10vw;
+	width: 10vw;
+	margin-right: 1vw;
+    float: left;
+}
+.Settings select{
+	font-family: BalooRegular;
+	width: 35vw;
+	height: 10vw;
+    color: #F7AA71;
+	border: solid 0;
+    margin-top: 0px;
+    font-size: 4vw;
+    float: left;
+	transition: background-color 0.2s, color 0.2s;
+}
+.Settings select:hover{
+	background-color: #F7AA71;
+	color:#000;
+}
+.Settings button{
+	font-family: Pridi;
+    font-size: 3vw;
+	height: 10vw;
+	margin:0px;
+	background-color: transparent;
+	border: solid 0;
+	transition: background-color 0.2s, color 0.2s;
+    color:#DF704A;
+    float: left;
+}
+.Settings button:hover{
+	background-color: #F7AA71;
+	color:#000;
+}
+
+.Settings button.PAbtn{
+	font-family: BalooRegular;
+	line-height: 3.1vw;
+    font-size: 4vw;
+	height: 10vw;
+	margin:0px;
+	background-color: #DF704A;
+	border: solid 0;
+	border-radius: 2vw;
+	transition: background-color 0.2s, color 0.2s;
+    color:#FFEADD;
+    float: right;
+    margin-right: 1vw; 
+}
+.Settings button.PAbtn:hover{
+	background-color: #F7AA71;
+	color:#000;
+}
+
+.picon{
+	font-family: Segoe UI Symbol;
+	float: left;
+	font-size: 6vw;
+	margin: 0px;
+	margin-top: 1.2vw;
+}
+
+.ptext{
+	margin: 0px;
+	margin-left: 1vw; 
+	float: left;
+}
+
+.jogos h3{
+	text-align: left;
+  	font-family: PridiBold;
+	color: #294D60;
+	font-size: 4vw;
+}
+
+input[type=range]{
+	border: solid 0px;
+	border-left: solid 2px #F7AA71;
+	border-right: solid 2px #F7AA71;
+	padding-left: 1vw;
+    color: #294D60;
+    margin-top: 1px;
+    font-size: 4vw;
+	width: 80vw;
+	height: 7.5vw;
+}
+
+input[type=checkbox]{
+	background-color: #fff;
+	border: solid 1px #294D60;
+	padding-left: 1vw;
+    color: #294D60;
+    margin-top: 1px;
+}
+
+.filtros{
+	padding-bottom: 10vw;
+	border-bottom: solid 3px #294D60;
+}
+.filtros button{
+	font-family: BalooRegular;
+	line-height: 3.1vw;
+    font-size: 4vw;
+	height: 8vw;
+	margin:0px;
+	background-color: #DF704A;
+	border: solid 0;
+	border-radius: 2vw;
+	transition: background-color 0.2s, color 0.2s;
+    color:#FFEADD;
+    margin-right: 1vw;
+    float:right;
+}
+.filtros button:hover{
+	background-color: #F7AA71;
+	color:#000;
+}
+
+
+.jogos li {
+	display: inline-block;
+	width: 83vw;
+	padding: 2vw;
+	margin-bottom: 1vw;	
+}
+
+.jogos li:hover{
+	background-color: #FFEADD;
+}
+
+.iconeJogo{
+	height: 15vw;
+	width: 25vw;
+	float: left;
+}
+
+.searchbtn{
+    font-family: "Segoe UI Symbol";
+    font-size: 6vw;
+	margin:0px;
+	height: 10vw;
+	background-color: transparent;
+	border: solid 0;
+	transition: background-color 0.2s, color 0.2s;
+    color:#DF704A;
+}
+
+.searchbtn:hover{
+	background-color: #F7AA71;
+	color:#000;
+}
+
+a {
+	text-decoration: none;
+}
+
+.jogoinfo {
+	height: auto;
+	float:left;
+	width: 55vw;
+	display: block;
+}
+
+.jogos .jogoinfo h3,h4 {
+	padding-top: 0px;
+	margin: 0px;
+	margin-left: 3vw;
+	height: 5vw;
+	float:left;
+	color: #294D60;
+  	font-weight: normal;
+  	display: inline-flex;
+}
+
+.jogos .jogoinfo h3{
+	text-align: left;
+  	font-family: PridiBold;
+	font-size: 4vw;
+	width: 50vw;
+}
+.jogos .jogoinfo h4{
+  	font-family: Pridi;
+	border-left: solid 2px #DF704A;
+	font-size: 3vw;
+	padding-left: 1vw;
+	margin-top: 1vw; 
+}
+.tico, .pico{
+	height: auto;
+	float:left;
+	width: 4vw;
+	height: 4vw;
+	display: block;
+}
+.dico{
+	height: auto;
+	float:left;
+	width: 6vw;
+	height: 4vw;
+	display: block;
+}

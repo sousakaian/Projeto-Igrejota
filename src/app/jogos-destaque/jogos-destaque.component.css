@@ -1,61 +1,111 @@
+@font-face{
+  font-family: BalooRegular;
+  src: url("../../fonts/Baloo-Regular.ttf");
+}
+@font-face{
+  font-family: Pridi;
+  src: url("../../fonts/Pridi-Regular.ttf");
+  font-weight: bold;
+}
+@font-face{
+  font-family: PridiBold;
+  src: url("../../fonts/Pridi-SemiBold.ttf");
+}
+@font-face{
+  font-family: Lateef;
+  src: url("../../fonts/LateefRegOT.ttf");
+}
 .icon-dice {
-	
+	height:6.5vw;
+	width:9vw;
 }
 
 .icon-search {
 	
 }
+.section-header {
+	height:6vw;
+}
+.section-header h1{
+	margin: 0px;
+	margin-top: 1vw;
+	height:6vw;
+	width: 65vw;
+	font-family: BalooRegular;
+}
+
 
 input {
 	border: 0.5vw solid #BE6646;
 	border-radius: 2vw;
 	border-color: #BE6646;
-	height: 8vw;
+	height: 6vw;
 	margin-top: 2vw;
-	margin-left: 3.1vw;
+	padding-left: 3.1vw;
+	padding-right: 3.1vw;
+	margin-left: 1.9vw;
 	margin-right: 1.9vw;
-	width: 65.9vw;
-	font-size: 6vw;
+	width: 58vw;
+	font-size: 4vw;
 	color: #BE6646;
 }
 
 .jogos-destaque {
-	height: 73vw;
-	overflow-y: scroll;
+	height: 60vw;
+	overflow-x: hidden;
+	display: inline-block;
 }
 
 .jogos {
+	margin-top: 1vw;
 	list-style-type: none;
+	display: inline-block;
 	padding-left: 0;
 }
 
 .jogos li {
 	float: left;
+	display: block;
+	height: 22vw;
+	width: 83vw;
 	padding-bottom: 2vw;
-	height: 15vw;
-	width: 90.56vw;
+	margin-bottom: 1vw;	
 }
 
-.redux {
-	width: 67vw;
-	float: left;
+.jogos li:hover{
+	background-color: #EFE0D0;
 }
 
 .jogos h3 {
+	margin-left: 1vw;
 	margin-top: 0;
 	margin-bottom: 0;
-	padding-top: 2vw;
 	padding-bottom: 0.5vw;
-	padding-left: 2vw;
 	font-size: 5vw;
 	font-weight: bold;
-	color: #294D60
+	color: #294D60;
 }
 
+.searchbtn{
+    font-family: "Segoe UI Symbol";
+    font-size: 6vw;
+	margin:0px;
+	height: 10vw;
+	background-color: transparent;
+	border: solid 0;
+	transition: background-color 0.2s, color 0.2s;
+    color:#BF6646;
+}
+
+.searchbtn:hover{
+	background-color: #F7AA71;
+	color:#000;
+}
 .iconeJogo {
 	float: left;
-	max-width: 15vw;
-	max-height: 15vw;
+	margin-left: 1vw;
+	width: 21vw;
+	height: 14vw;
 }
 
 a {
@@ -63,7 +113,10 @@ a {
 }
 
 .info-destaque {
-	overflow-y: hidden;
+	height: auto;
+	float:left;
+	width: 55vw;
+	display: block;
 }
 
 .jogo-info {
@@ -73,19 +126,21 @@ a {
 	margin-top: 0;
 	margin-bottom: 0;
 	height: 5vw;
+	float:left;
 	font-size: 3vw;
 	line-height: 5vw;
 	color: #000;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+  	overflow: hidden;
   	font-weight: normal;
   	display: inline-flex;
+  	justify-content: center;
+  	font-family: Pridi;
 }
 
 .jogo-info-icon {
 	max-width: 5vw;
 	max-height: 5vw;
 	padding-right: 1vw;
-}
-
-.edit-item img {
-	padding-top: 3vw;
 }

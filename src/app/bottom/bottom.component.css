@@ -1,4 +1,8 @@
-.tab-menu-mobile ul {
+@font-face{
+  font-family: BalooRegular;
+  src: url("../../fonts/Baloo-Regular.ttf");
+}
+.tab-menu-mobile   ul {
   width: 100vw;
   bottom: 0;
   padding-left: 0;
@@ -9,27 +13,67 @@
 }
 
 footer {
-	width: 100vw;
+  width: 100vw;
   height: 15.41vw;
 }
 
 .unselected {
-  background-color: #00A6C4;
-  color: #EEDFCF;
+  color: #FFEADD;
+  font-weight: lighter;
 }
 
-.tab-menu-mobile button {
-	width: 25vw;
+.selected {
+  color: #A0B6C4;
+}
+
+.tab-menu-mobile   button {
+  width: 25vw;
   height: 15.41vw;
-	padding-right: 2.36vw;
+  padding-right: 2.36vw;
   padding-left: 2.36vw;
+  padding-top: 2.18vw;
   text-align: center;
-  font-size: 2.2vw;
+  font-size: 3.5vw;
+  font-family: BalooRegular;
+  line-height: 1em;
   border: none;
-  font-weight: bolder;
+  background-color: #00A6C4;
+  transition: background-color 0.2s;
+}
+.tab-menu-mobile   button:hover {
+  background-color: #294D60;
+}
+br{
+  letter-spacing: 0px;
+  word-spacing: 0px;
 }
 
 .tab-icon {
-	max-width: 7vw;
-	max-height: 7vw;
+  max-width: 8vw;
+  max-height: 8vw;
+  margin-bottom:0px;
+  padding:0px;
 }
+
+/*@media screen and (min-width: 550px){
+  .tab-menu-mobile   button {
+    height: 60px;
+    width: 139px;
+    padding-right: 9px;
+    padding-left: 9px;
+    padding-top: 9px;
+    font-size: 1em;
+  }
+  .tab-icon {
+    max-width: 30px;
+    max-height: 30px;
+  }
+  footer{
+    height: 60px;
+    width: 500px;
+  }
+  .tab-menu-mobile   ul {
+  justify-content: flex-start;
+}
+
+}*/
