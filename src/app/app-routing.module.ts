@@ -18,7 +18,7 @@ import { AuthGuardService as AuthGuard } from './auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
-  { path: '', component: MainPageComponent },
+  { path: '/', component: MainPageComponent },
   { path: 'inicio', component: MainPageComponent },
   { path: 'noticias', component: NoticiaHighlightComponent },
   { path: 'noticia/:id', component: NoticiaDetailComponent },
