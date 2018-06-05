@@ -26,6 +26,7 @@
     "angular-calendar": "^0.25.2",
     "core-js": "^2.5.6",
     "express": "^4.16.3",
+    "jasmine": "^3.1.0",
     "moment": "^2.22.1",
     "ng2-ion-range-slider": "^2.0.0",
     "npm-install-missing": "^0.1.4",
