@@ -18,7 +18,7 @@ export class NoticiasComponent implements OnInit {
   constructor(
     private noticiaService: NoticiaService,
     private messageService: MessageService,
-    private auth: AuthService
+    public auth: AuthService
     ) {
     
   }

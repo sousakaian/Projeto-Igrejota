@@ -120,6 +120,13 @@ export class JogoComponent implements OnInit {
 
   }
 
+  limparBusca() {
+    if (this.termoBusca !== "") {
+      this.termoBusca = "";
+      this.getJogos();
+    }
+  }
+
   toggleInverter(): void {
     this.inverterOrdem = !this.inverterOrdem;
     this.jogos.reverse();
