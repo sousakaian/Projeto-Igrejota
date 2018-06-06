@@ -31,7 +31,11 @@
 }
 
 h2{
-	display: none;
+    font-family: Pridi;
+    color: #f7aa71;
+    margin: 0vw;
+    margin-top: 2vw;
+    font-size: 4vw;
 }
 
 input[type=text]{
@@ -278,4 +282,17 @@ a {
 	width: 6vw;
 	height: 4vw;
 	display: block;
+}
+
+a.edit-item igm{
+	width: 9vw;
+    position: absolute;
+    right: 0.5vw;
+}
+a.add-item img {
+	width: 20vw;
+	position: fixed;
+	border-radius: 20vw;
+	bottom: 18vw;
+	right: 6vw;
 }
