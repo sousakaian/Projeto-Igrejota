@@ -83,3 +83,16 @@ a {
 	font-weight: normal;
 	font-size: 2.5vw;
 }
+
+a.edit-item igm{
+	width: 9vw;
+    position: absolute;
+    right: 0.5vw;
+}
+a.add-item img {
+	width: 20vw;
+	position: fixed;
+	border-radius: 20vw;
+	bottom: 18vw;
+	right: 6vw;
+}
