@@ -1,4 +1,5 @@
 <h1>Calendário</h1>
+<div class="calendário">
 <div class="row text-center">
   <div class="col-md-4">
     <div class="btn-group">
@@ -54,7 +55,8 @@
     [viewDate]="viewDate"
     [events]="events">
   </mwl-calendar-day-view>
-</div> 
+</div>
+</div>
 <div class="eventos" *ngIf="clickedDate">
   <div *ngIf="eventosDiaIgrejota.length <= 0">
     <h2>Sem eventos</h2>
