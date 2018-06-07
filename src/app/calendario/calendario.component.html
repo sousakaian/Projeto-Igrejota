@@ -34,8 +34,8 @@
 </div>
 <br>
 <div class="alert alert-info">
-  <strong *ngIf="clickedDate">Dia selecionado: {{ displayDate(clickedDate) }}</strong>
-  <button *ngIf="isIgrejotaDay" (click)="onDaySelect(clickedDate)">Ver Presenças</button>
+  <strong *ngIf="clickedDate | async">Dia selecionado: {{ displayDate(clickedDate) }}</strong>
+  <button *ngIf="isIgrejotaDay | async" (click)="onDaySelect(clickedDate)">Ver Presenças</button>
 </div>
 <div [ngSwitch]="view">
   <mwl-calendar-month-view
@@ -57,26 +57,26 @@
   </mwl-calendar-day-view>
 </div>
 </div>
-<div class="eventos" *ngIf="clickedDate">
+<div class="eventos" *ngIf="clickedDate | async">
   <div *ngIf="eventosDiaIgrejota.length <= 0">
     <h2>Sem eventos</h2>
-    <div *ngIf="auth.loggedIn()">
+    <div *ngIf="auth.loggedIn() | async">
       <h3>Deseja adicionar um novo?</h3>
     </div>
   </div>
-  <div *ngIf="!auth.loggedIn() || !openEditMode">
+  <div *ngIf="!auth.loggedIn() || !openEditMode | async">
     <h2 *ngIf="eventosDiaIgrejota.length > 0">Lista de Eventos</h2>
     <ul>
-      <li *ngFor="let evento of eventosDiaIgrejota">
+      <li *ngFor="let evento of eventosDiaIgrejota | async">
         <h3>{{ evento.descricao }}</h3>
         <h4>{{ evento.tipo === tiposDia.Normal ? "Encontro" : "Evento" }}</h4>
       </li>
     </ul>
   </div>
-  <button *ngIf="auth.loggedIn()" (click)="openEditMode = !openEditMode">{{ openEditMode ? "Salvar" : "Editar"}}</button>
-  <div class="editor" *ngIf="auth.loggedIn() && openEditMode">
+  <button *ngIf="auth.loggedIn() | async" (click)="openEditMode = !openEditMode">{{ openEditMode ? "Salvar" : "Editar"}}</button>
+  <div class="editor" *ngIf="auth.loggedIn() && openEditMode | async">
     <h2>Lista de Eventos</h2>
-    <div class="form-adicionar-dia" *ngFor="let evento of eventosDiaIgrejota">
+    <div class="form-adicionar-dia" *ngFor="let evento of eventosDiaIgrejota | async">
       <h4>Descrição do Evento:<input type="text" [(ngModel)]="evento.descricao"></h4>
       <h4>Tipo de Evento: 
         <select [(ngModel)]="evento.tipo">
