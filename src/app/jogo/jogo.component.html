@@ -14,16 +14,16 @@
 		<button (click)="toggleInverter()"  class="Invbtn">{{ inverterOrdem ? "Inversa" : "Normal" }}</button>
 		<button (click)="toggleFiltros()" class="PAbtn"><p class="picon">🔍</p><p class="ptext">Pesquisa<br/>Avançada</p></button><br>
 	</div>
-	<div class="filtros" *ngIf="mostrarFiltros">
+	<div class="filtros" *ngIf="mostrarFiltros | async">
 		<button (click)="limparFiltros()">Limpar</button>
 		<h3>Número de Jogadores: {{ ignorarJogadores || numeroJogadores === -1 ? 'Qualquer um' : (numeroJogadores > 30 ? '30+' : numeroJogadores) }}</h3>
-		<div *ngIf="!ignorarJogadores">
+		<div *ngIf="!ignorarJogadores | async">
 			<input [(ngModel)]="numeroJogadores" type="range" min="1" max="31" step="1" value="{{numeroJogadores}}"><br>
 		</div>
 		<input type="checkbox" [(ngModel)]="ignorarJogadores"> Ignorar número de jogadores<br>
 
 		<h3>Tempo de Jogo: {{ ignorarTempoJogo || tempoJogo === -1 ? 'Qualquer um' : (tempoJogo < 10 ? "< 10 minutos" : (tempoJogo > 600) ? "> 10 horas" : tempoJogo+' minutos') }}</h3>
-		<div *ngIf="!ignorarTempoJogo">
+		<div *ngIf="!ignorarTempoJogo | async">
 			<input [(ngModel)]="tempoJogo" type="range" min="0" max="610" step="10" value="{{tempoJogo}}"><br>
 		</div>
 		<input type="checkbox" [(ngModel)]="ignorarTempoJogo"> Ignorar tempo de jogo<br>
@@ -32,8 +32,8 @@
 		<app-categoria-select></app-categoria-select>
 		<button (click)="pesquisaAvancada(termoBusca)">Aplicar</button>
 	</div>
-	<h3 *ngIf="jogos.length <= 0">Jogos não encontrados!<br>Tente escolher outros termos ou filtros</h3>
-	<li *ngFor="let jogo of jogos" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
+	<h3 *ngIf="jogos.length <= 0 | async">Jogos não encontrados!<br>Tente escolher outros termos ou filtros</h3>
+	<li *ngFor="let jogo of jogos | async" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
 		<a routerLink="{{ '/jogo/'+jogo.id }}" (click)="messageService.clear()">
 			<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
 			<div class="jogoinfo">
