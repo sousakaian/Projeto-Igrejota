@@ -107,3 +107,53 @@ span.cal-day-number {
     color: #00a6c4;
     opacity: 1;
 }
+app-calendario button.btn:hover {
+    background-color: #ffeadd;
+}
+app-calendario button.btn {
+    width: 25vw;
+    text-align: center;
+    align-content: center;
+    margin: 0vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    background-color: #f6a971;
+}
+app-calendario button {
+    width: 80vw;
+    border: none;
+    background-color: #00a6c4;
+    font-size: 5vw;
+    padding: 2vw;
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: 2vw;
+    color: #f0f1f6;
+    margin-bottom: 3vw;
+}
+app-calendario button:hover {
+    background-color: #f6a971;
+    color: #000;
+}
+.form-adicionar-dia select {
+    font-family: BalooRegular;
+    background-color: #f7aa71;
+    border: 0 solid;
+    border-radius: 2vw;
+    margin-top: 0;
+    font-size: 4vw;
+    transition: background-color .2s,color .2s;
+}
+.form-adicionar-dia select:hover {
+    background-color: #000;
+    color: #ffeadd;
+}
+h3 {
+    font-family: Pridi;
+    font-size: 6vw;
+    margin: 1vw;
+    color: #294d60;
+}
+h4 {
+    font-family: Pridi;
+    font-size: 3.5vw;
+}
