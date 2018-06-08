@@ -23,20 +23,28 @@ li {
 }
 
 .remove img {
-	width: 5vw;
-	height: 5vw;
+    width: 4vw;
+    height: 4vw;
+    margin-bottom: 2.5vw;
+    margin-top: -1.5vw;
+}
+.remove {
+    float: right;
 }
 
 .square {
-	float: left;
-	width: 5vw;
-	height: 5vw;
-	background-color: #F6A971;
+    float: left;
+    width: 4vw;
+    height: 4vw; 
+    background-color: #f6a971;
+    margin-right: 5vw;
 }
 
 .redux {
-	float: left;
-	width: 73.8vw;
+    float: left;
+    width: 65vw;
+    margin-bottom: 2vw;
+    display: inline-block;
 }
 
 p {
@@ -49,10 +57,29 @@ p {
 }
 
 .add-presenca {
-	width: 80vw;
-	height: 8vw;
-	border: none;
-	background-color: #00A6C4;
-	font-size: 4vw;
-	color: #F0F1F6;
+    width: 80vw;
+    border: none;
+    background-color: #00a6c4;
+    font-size: 5vw;
+    padding: 2vw;
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: 2vw;
+    color: #f0f1f6;
 }
+
+
+p {
+    font-size: 4vw; 
+    font-family: Pridi; 
+    color: #000;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 3vw;
+    line-height: 5vw;
+}
+
+button.add-presenca:hover {
+    background-color: #f6a971;
+    color: #000;
+}
+
