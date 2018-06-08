@@ -57,14 +57,14 @@
   </mwl-calendar-day-view>
 </div>
 </div>
-<div class="eventos" *ngIf="clickedDate | async">
+<div class="eventos" *ngIf="clickedDate">
   <div *ngIf="eventosDiaIgrejota.length <= 0">
     <h2>Sem eventos</h2>
-    <div *ngIf="auth.loggedIn() | async">
+    <div *ngIf="auth.loggedIn()">
       <h3>Deseja adicionar um novo?</h3>
     </div>
   </div>
-  <div *ngIf="!auth.loggedIn() || !openEditMode | async">
+  <div *ngIf="!auth.loggedIn() || !openEditMode">
     <h2 *ngIf="eventosDiaIgrejota.length > 0">Lista de Eventos</h2>
     <ul>
       <li *ngFor="let evento of eventosDiaIgrejota | async">
@@ -73,8 +73,8 @@
       </li>
     </ul>
   </div>
-  <button *ngIf="auth.loggedIn() | async" (click)="openEditMode = !openEditMode">{{ openEditMode ? "Salvar" : "Editar"}}</button>
-  <div class="editor" *ngIf="auth.loggedIn() && openEditMode | async">
+  <button *ngIf="auth.loggedIn()" (click)="openEditMode = !openEditMode">{{ openEditMode ? "Salvar" : "Editar"}}</button>
+  <div class="editor" *ngIf="auth.loggedIn() && openEditMode">
     <h2>Lista de Eventos</h2>
     <div class="form-adicionar-dia" *ngFor="let evento of eventosDiaIgrejota | async">
       <h4>Descrição do Evento:<input type="text" [(ngModel)]="evento.descricao"></h4>
