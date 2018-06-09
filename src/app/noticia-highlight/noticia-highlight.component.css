@@ -20,6 +20,7 @@
 	font-size: 3vw;
 	padding-left: 2vw;
 	font-weight: normal;
+  font-family: Pridi;
 }
 
 .noticias {
@@ -32,9 +33,10 @@ a {
 }
 
 .noticias li {
-	width: 90.56vw;
-	height: 13.2vw;
-	padding-top: 4vw;
+    width: 90.56vw;
+    display: inline-block;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
 }
 
 .news-container {
@@ -60,7 +62,11 @@ a {
 	max-width: 63vw;
 }
 
+a a img {
+    width: 8vw;
+}
 .noticia-info h3 {
+  font-family: Pridi;
 	margin-top: 0;
 	margin-bottom: 0;
 	color: #294d60;
@@ -69,7 +75,8 @@ a {
 }
 
 .noticia-info h5 {
-	margin-top: 1vw;
+  font-family: Pridi;
+  margin-top: 0vw;
 	margin-bottom: 0;
 	color: #727176;
 	font-weight: normal;
