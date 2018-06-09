@@ -167,8 +167,8 @@ button.delete {
     float: right;
 }
 
-button.delete:hover {
-    background-color: 	
+button.delete:hover, button.save:hover {
+    background-color: #f7aa71;
     color: black;
 }
 
