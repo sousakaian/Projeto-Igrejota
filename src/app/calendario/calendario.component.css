@@ -183,3 +183,8 @@ h4 {
     font-family: Pridi;
     font-size: 3.5vw;
 }
+app-calendario h1 {
+    font-family: BalooRegular;
+    margin: 2vw;
+    color: #df704a;
+}
