@@ -82,7 +82,7 @@ span.cal-day-number {
 .cal-cell-row.cal-header:hover {
     background-color: transparent;
 }
-.cal-cell-row.cal-header .cal-cell.cal-past {
+.cal-cell-row.cal-header .cal-cell {
     font-size: 4vw;
     background-color: #df704a;
     border-radius: 2vw;
@@ -105,14 +105,21 @@ span.cal-day-number {
 .cal-month-view .cal-day-cell.cal-weekend .cal-day-number {
     color: #df704a;
 }
-.cal-cell-row.cal-header .cal-cell.cal-past {
+.cal-month-view .cal-day-cell.cal-today .cal-day-number {
+    font-size: 4.1vw;
+    font-family: BalooRegular;
+}
+.cal-month-view .cal-day-cell .cal-day-number {
+    font-size: 4vw;
+}
+.cal-cell-row.cal-header .cal-cell {
     font-size: 4vw;
     background-color: #df704a;
 }
 .cal-cell.cal-past.cal-day-cell {
     border: none;
 }
-.cal-cell.cal-past {
+.cal-cell {
     border-radius: 2vw;
     margin: 0.5vw;
     border: none;
@@ -128,6 +135,9 @@ span.cal-day-number {
 .cal-month-view .cal-day-cell.cal-out-month .cal-day-number {
     color: #00a6c4;
     opacity: 1;
+}
+.cal-month-view .cal-day-cell.cal-today{
+  background-color:#ffeadd;
 }
 .cal-month-view .cal-cell-row .cal-cell:hover{
       background-color: #e5e5e5;
