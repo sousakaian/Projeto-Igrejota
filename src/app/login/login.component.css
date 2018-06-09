@@ -26,13 +26,13 @@
 	color: #EFE0D0;
 }
 
-.login input{
-	margin-bottom:4vw;
-  border: 0.5vw solid #BE6646;
-  border-radius: 2vw;
-  border-color: #BE6646;
+.login input {
+    margin-bottom: 4vw;
+    border: .5vw solid #be6646;
+    border-radius: 2vw;
+    width: 50vw;
+    height: 4vw;
 }
-
 
 input [type=text]{
 }
