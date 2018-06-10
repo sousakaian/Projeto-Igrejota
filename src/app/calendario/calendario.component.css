@@ -27,6 +27,9 @@
     display: inline-grid;
     border-radius: 2vw;
 }
+.cal-month-view .cal-days .cal-cell-row {
+    border: none;
+}
 .alert.alert-info button {
     font-family: BalooRegular;
     line-height: 3.1vw;
@@ -39,6 +42,9 @@
     transition: background-color .2s,color .2s;
     color: #ffeadd;
     float: right;
+}
+.cal-month-view .cal-day-badge {
+    display: none;
 }
 .alert.alert-info button:hover {
     background-color: #df704a;
@@ -54,7 +60,7 @@
     background-color: transparent;
 }
 .cal-month-view .cal-day-cell {
-    height: 12vw;
+    min-height: 12vw;
 }
 span.cal-day-number {
     font-size: 3vw;
@@ -63,12 +69,20 @@ span.cal-day-number {
     font-size: 5.5vw;
 }
 .cal-month-view .cal-day-number {
-    opacity:1
+    opacity:1;
+    font-family: Pridi;
+}
+.cal-cell-row.cal-header {
+    height: 7vw;
+    margin-bottom: 1.5vw;
+}
+.cal-days .cal-cell-row:hover {
+    background-color: transparent;
 }
 .cal-cell-row.cal-header:hover {
     background-color: transparent;
 }
-.cal-cell-row.cal-header .cal-cell.cal-past {
+.cal-cell-row.cal-header .cal-cell {
     font-size: 4vw;
     background-color: #df704a;
     border-radius: 2vw;
@@ -78,26 +92,41 @@ span.cal-day-number {
     margin-left: .5vw;
     padding: 0vw;
     padding-bottom: 1.5vw;
+    padding-left: 1vw;
     font-family: BalooRegular;
 }
 .cal-month-view .cal-day-cell .cal-day-number {
     color: #df704a;
     float: left;
     padding-left: 2vw;
+    margin: 0vw;
+    padding-top: 1vw;
 }
 .cal-month-view .cal-day-cell.cal-weekend .cal-day-number {
     color: #df704a;
 }
-.cal-cell-row.cal-header .cal-cell.cal-past {
+.cal-month-view .cal-day-cell.cal-today .cal-day-number {
+    font-size: 4.1vw;
+    font-family: BalooRegular;
+}
+.cal-month-view .cal-day-cell .cal-day-number {
+    font-size: 4vw;
+}
+.cal-cell-row.cal-header .cal-cell {
     font-size: 4vw;
     background-color: #df704a;
 }
 .cal-cell.cal-past.cal-day-cell {
+    border: none;
+}
+.cal-cell {
     border-radius: 2vw;
     margin: 0.5vw;
+    border: none;
 } 
 .cal-in-month.cal-cell {
     background-color: #fff;
+    color: #df704a;
 }
 .cal-out-month.cal-cell {
     background-color: #294D60;
@@ -106,6 +135,12 @@ span.cal-day-number {
 .cal-month-view .cal-day-cell.cal-out-month .cal-day-number {
     color: #00a6c4;
     opacity: 1;
+}
+.cal-month-view .cal-day-cell.cal-today{
+  background-color:#ffeadd;
+}
+.cal-month-view .cal-cell-row .cal-cell:hover{
+      background-color: #e5e5e5;
 }
 app-calendario button.btn:hover {
     background-color: #ffeadd;
@@ -117,6 +152,7 @@ app-calendario button.btn {
     margin: 0vw;
     margin-left: 1vw;
     margin-right: 1vw;
+    color: #000;
     background-color: #f6a971;
 }
 app-calendario button {
@@ -156,4 +192,9 @@ h3 {
 h4 {
     font-family: Pridi;
     font-size: 3.5vw;
+}
+app-calendario h1 {
+    font-family: BalooRegular;
+    margin: 2vw;
+    color: #df704a;
 }
