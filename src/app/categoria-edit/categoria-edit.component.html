@@ -1,4 +1,5 @@
 <ul class="categorias">
+	<h1 *ngIf="!loaded">Carregando...</h1>
 	<button class="save" (click)="saveAll()">Salvar Categorias</button><br>
 	<li *ngFor="let categoria of categorias">
 		{{ categoria.id }} <input type="text" maxlength="100" [(ngModel)]="categoria.nome" value="{{ categoria.nome }}" placeholder="Categoria">

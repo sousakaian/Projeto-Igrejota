@@ -1,5 +1,5 @@
 <div *ngIf="noticia">
-	<h1>Editar Notícia</h1>
+	<h1>{{id === -1 ? "Nova " : "Editar "}} Notícia</h1>
 	<div class="actions">
 		<button *ngIf="noticia.id === -1" class="cancel" (click)="onCancel()">Cancelar</button>
 		<button *ngIf="noticia.id !== -1" class="delete" (click)="onDelete()">Deletar</button>
@@ -19,9 +19,10 @@
 		</div>
 	</label><br>
 	<label>
-		<h2>Imagem Escolhida: {{ noticia.imagemDestaque }}</h2> 
+		<h2>Imagem Escolhida</h2> 
 		<div class="file-input">Escolher Imagem</div>
-		<input (change)="update(noticia.imagemDestaque, $event)" type="file">
+		<input (change)="update(noticia, $event)" type="file" accept="image/gif, image/jpeg, image/png">
 	</label>
 </div>
-<app-page-not-found *ngIf="!noticia"></app-page-not-found>
+<h1 *ngIf="!loaded">Verificando...</h1>
+<app-page-not-found *ngIf="loaded && !noticia"></app-page-not-found>

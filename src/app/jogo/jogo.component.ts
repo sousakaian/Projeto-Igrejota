@@ -7,6 +7,7 @@ import { CATEGORIAS } from '../mock-categorias';
 import { CategoriaSelectComponent } from '../categoria-select/categoria-select.component'
 import { MessageService } from '../message.service';
 import { ActivatedRoute } from '@angular/router';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @Component({
   selector: 'app-jogo',
@@ -25,10 +26,12 @@ export class JogoComponent implements OnInit {
   ignorarJogadores: Boolean = false;
   tempoJogo: number = -1;
   ignorarTempoJogo: Boolean = false;
+  loaded: boolean = false;
 
   constructor(
     private jogoService: JogoService,
     private messageService: MessageService,
+    private storage: AngularFireStorage,
     private route: ActivatedRoute,
     public auth: AuthService,
     ) {
@@ -36,12 +39,21 @@ export class JogoComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.getJogos();
-    this.termoBusca = this.route.snapshot.paramMap.get("termo");
-    if (this.termoBusca) {
-      this.pesquisaAvancada(this.termoBusca);
+    this.watch(this);
+  }
+
+  watch(self: JogoComponent) {
+    if (self.jogoService.isReady()) {
+      self.getJogos();
+      self.termoBusca = self.route.snapshot.paramMap.get("termo");
+      if (self.termoBusca) {
+        self.pesquisaAvancada(self.termoBusca);
+      } else {
+        self.termoBusca = "";
+      }
+      self.loaded = true
     } else {
-      this.termoBusca = "";
+      let timer = setTimeout(self.watch, 1000, self);
     }
   }
 

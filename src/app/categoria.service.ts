@@ -5,15 +5,29 @@ import { JogoService } from './jogo.service';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { MessageService } from './message.service';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Injectable()
 export class CategoriaService {
 
+  categorias: AngularFireList<Categoria>
+  static loaded: boolean = false;
   constructor(
     private messageService: MessageService,
-    private jogoService: JogoService
+    private jogoService: JogoService,
+    private db: AngularFireDatabase
     ) {
+    this.categorias = db.list("/categorias")
+    this.categorias.valueChanges()
+      .subscribe(c => {
+        CATEGORIAS.length = 0
+        CATEGORIAS.push(...c)
+        CategoriaService.loaded = true;
+      })
+  }
 
+  isReady(): boolean {
+    return CategoriaService.loaded
   }
 
   getCategorias(): Observable<Categoria[]> {
@@ -26,16 +40,23 @@ export class CategoriaService {
 
   update(categoria: Categoria): void {
   	let index = CATEGORIAS.indexOf(CATEGORIAS.find(item => item.id === categoria.id));
-  	CATEGORIAS[index].nome = categoria.nome;
+    this.categorias.update(String(categoria.id),categoria).then(_ => {
+      CATEGORIAS[index].nome = categoria.nome;
+    })
   }
 
   remove(id: number): void {
   	let index = CATEGORIAS.indexOf(CATEGORIAS.find(item => item.id === id));
-  	this.jogoService.removeCategoriaFromAll(CATEGORIAS.splice(index,1)[0]);
+    this.categorias.remove(String(id)).then(_ => {
+      this.jogoService.removeCategoriaFromAll(CATEGORIAS.splice(index,1)[0]);
+    })
   }
 
   add(categoria: Categoria): void {
-    CATEGORIAS.push(categoria);
+    categoria.id = Math.floor(Date.now() + Math.random()*100);
+    this.categorias.set(String(categoria.id),categoria).then(_ => {
+      CATEGORIAS.push(categoria);
+    })
   }
 
   generateEmptyCategoria(): Observable<Categoria> {

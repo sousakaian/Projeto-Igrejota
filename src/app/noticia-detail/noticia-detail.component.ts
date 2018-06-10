@@ -15,6 +15,7 @@ import * as moment from 'moment';
 
 export class NoticiaDetailComponent implements OnInit {
   @Input() noticia: Noticia
+  loaded: boolean = false;
 
   constructor(
     public auth: AuthService,
@@ -27,7 +28,27 @@ export class NoticiaDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.getNoticia();
+  	const id = +this.route.snapshot.paramMap.get('id');
+    if (id < -1) {
+      this.loaded = true
+    } else if (id === -1) {
+      this.noticiaService.generateEmptyNoticia()
+        .subscribe(noticia => {
+          this.noticia = noticia
+          this.loaded = true
+        });
+    } else {
+      this.watch(this,id)
+    }
+  }
+
+  watch(self: NoticiaDetailComponent, id: number) {
+    if (self.noticiaService.isReady()) {
+      self.getNoticia()
+      self.loaded = true
+    } else {
+      let timer = setTimeout(self.watch, 1000, self, id);
+    }
   }
 
   getNoticia(): void {

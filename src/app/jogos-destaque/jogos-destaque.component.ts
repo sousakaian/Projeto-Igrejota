@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Jogo } from '../jogo';
 import { JogoService } from '../jogo.service';
 import { AuthService } from '../auth.service';
 import { MessageService } from '../message.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-jogos-destaque',
@@ -11,27 +12,41 @@ import { Router } from '@angular/router';
   styleUrls: ['./jogos-destaque.component.css']
 })
 
-export class JogosDestaqueComponent implements OnInit {
+export class JogosDestaqueComponent implements OnInit
+ {
   jogos: Jogo[];
   showSearch: boolean = false;
   termoPesquisa: string;
+  loaded: boolean = false;
 
   constructor(
   	private jogoService: JogoService,
     private router: Router,
     private messageService: MessageService,
-  	private auth: AuthService
+  	private auth: AuthService,
+    private cdr: ChangeDetectorRef
   	) {
   	
   }
 
   ngOnInit() {
-  	this.getJogos();
+    this.watch(this);
   }
 
-  getJogos(): void {
-  	this.jogoService.getJogosEmDestaque()
-  		.subscribe(jogos => this.jogos = jogos);
+  watch(self: JogosDestaqueComponent) {
+    if (self.jogoService.isReady()) {
+      self.getJogos(self)
+      self.loaded = true
+    } else {
+      let timer = setTimeout(self.watch, 1000, self);
+    }
+  }
+
+  getJogos(self: JogosDestaqueComponent): void {
+    self.jogoService.getJogosEmDestaque().subscribe(jogos => {
+      self.jogos = jogos;
+      self.cdr.detectChanges();
+    });
   }
 
   goToJogoEmDestaque(jogo: Jogo) {
