@@ -3,18 +3,19 @@ label {
 }
 
 h1 {
-    color: #294d60;
-    font-family: Baloo Regular;
-    font-size: 8vw;
-    margin: 0vw;
-    margin-top: 2vw;
-    line-height: 9vw;
+    line-height: 5vw;
     width: 25vw;
+    font-family: Pridi;
+    color: #f7aa71;
+    margin: 6vw 0 7vw;
+    font-size: 5vw;
 }
 h2 {
-    color: #df704a;
-    font-size: 6vw;
-    font-family: PridiBold;
+    color: #294d60;
+    font-family: Baloo Regular;
+    font-size: 5vw;
+    margin: 2vw 0 0;
+    line-height: 5vw;
 }
 .file-input {
     font-family: Pridi;
@@ -28,6 +29,8 @@ input[type="file"] {
 input.text-input {
     padding-left: 2vw;
     margin: 0vw;
+    font-family: Lateef;
+    font-size: 5vw;
     border: .5vw solid #be6646;
     border-radius: 2vw;
     width: 80vw;
@@ -36,6 +39,8 @@ input.text-input {
 textarea.text-input {
     padding-left: 2vw;
     margin: 0vw;
+    font-family: Lateef;
+    font-size: 5vw;
     border: .5vw solid #be6646;
     border-radius: 2vw;
     width: 80vw;
