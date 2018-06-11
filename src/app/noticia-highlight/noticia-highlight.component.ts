@@ -15,6 +15,7 @@ export class NoticiaHighlightComponent implements OnInit {
   noticiaDestacada: Noticia;
   noticiaSelecionada: Noticia;
   noticias: Noticia[];
+  loaded: boolean = false;
 
   constructor(
     private noticiaService: NoticiaService,
@@ -26,14 +27,21 @@ export class NoticiaHighlightComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getNoticia();
+    this.watch(this);
   }
 
-  getNoticia(): void {
-    this.noticiaService.getNoticias().subscribe(noticias => {
-      this.noticiaDestacada = noticias[0];
-      this.noticias = noticias.slice(1);
-    });
+  watch(self: NoticiaHighlightComponent) {
+    if (self.noticiaService.isReady()) {
+      self.noticiaService.getNoticias().subscribe(noticias => {
+        self.noticiaDestacada = noticias[0];
+        if (noticias.length > 1) {
+          self.noticias = noticias.slice(1);
+        }
+      });
+      self.loaded = true;
+    } else {
+      let timer = setTimeout(self.watch, 1000, self);
+    }
   }
 
   goToNoticia() {

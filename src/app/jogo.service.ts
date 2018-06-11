@@ -5,15 +5,75 @@ import { Categoria } from './categoria';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { MessageService } from './message.service';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireStorage } from 'angularfire2/storage';
+import { Router } from '@angular/router';
+
+class JogoEncapsulator {
+  
+  encapsule(jogo: Jogo): any {
+    var categorias = {}
+    for (let c in jogo.categorias) {
+      categorias[c] = { id: jogo.categorias[c].id, nome: jogo.categorias[c].nome}
+    }
+    return { id: jogo.id, nome: jogo.nome, minJogadores: jogo.minJogadores, maxJogadores: jogo.maxJogadores,
+      tempoJogo: jogo.tempoJogo, categorias: categorias, imagemJogo: jogo.imagemJogo, descricao: jogo.descricao,
+      linkManual: jogo.linkManual, linkDesenvolvedor: jogo.linkDesenvolvedor, emDestaque: jogo.emDestaque
+    }
+  }
+
+  decapsule(data: any): Jogo {
+    var categorias: Categoria[] = [];
+    for (let cat of data.categorias) {
+      categorias.push(cat)
+    }
+    return { id: data.id, nome: data.nome, minJogadores: data.minJogadores, maxJogadores: data.maxJogadores,
+      tempoJogo: data.tempoJogo, categorias: categorias, imagemJogo: data.imagemJogo, descricao: data.descricao,
+      linkManual: data.linkManual, linkDesenvolvedor: data.linkDesenvolvedor, emDestaque: data.emDestaque
+    }
+  }
+}
 
 @Injectable()
 export class JogoService {
 
-  constructor(private messageService: MessageService) { }
+  jogos: AngularFireList<Jogo>
+  static loaded: boolean = false;
+  constructor(
+    private messageService: MessageService,
+    private db: AngularFireDatabase,
+    private storage: AngularFireStorage,
+    private router: Router
+    ) {
+    this.jogos = db.list<Jogo>("/jogos")
+    if (JogoService.loaded) {
+      return
+    } else {
+    this.jogos.valueChanges()
+      .subscribe(j => {
+        for (let jogo of j) {
+          if (jogo.imagemJogo != "") {
+            try {
+              let fileRef = this.storage.ref(jogo.imagemJogo)
+              if (!fileRef) {
+                 jogo.imagemJogo = "capa/default.png"
+              }
+              this.storage.ref(jogo.imagemJogo).getDownloadURL()
+                  .subscribe(imagem => jogo.imagemJogo = imagem);
+            } catch {
+              jogo.imagemJogo = "../assets/default-image.png"
+            }
+          }
+        }
+        JOGOS.length = 0
+        JOGOS.push(...j)
+        JogoService.loaded = true;
+      });
+    }
+  }
 
-  private isUniqueJogo(jogo: Jogo): Boolean {
-    this.messageService.add("Jogo já existente");
-    return JOGOS.findIndex(j => j.id === jogo.id) === -1;
+  isReady(): boolean {
+    return JogoService.loaded
   }
 
   private checarTempo(tempoDisponivel: number, margem: number, jogo: Jogo): Boolean {
@@ -37,7 +97,7 @@ export class JogoService {
   	return of(JOGOS);
   }
 
-  getJogosEmDestaque(): Observable<Jogo[]> {
+  getJogosEmDestaque(): Observable<Jogo[]> | null {
   	return of(JOGOS.filter(jogo => jogo.emDestaque));
   }
 
@@ -67,28 +127,36 @@ export class JogoService {
 
   edit(jogo: Jogo): void {
   	let index = JOGOS.indexOf(JOGOS.find(item => item.id === jogo.id));
-  	JOGOS[index].nome = jogo.nome;
-  	JOGOS[index].tempoJogo = jogo.tempoJogo;
-  	JOGOS[index].minJogadores = jogo.minJogadores;
-  	JOGOS[index].maxJogadores = jogo.maxJogadores;
-  	JOGOS[index].categorias = jogo.categorias;
-  	JOGOS[index].imagemJogo = jogo.imagemJogo;
-  	JOGOS[index].descricao = jogo.descricao;
-  	JOGOS[index].linkManual = jogo.linkManual;
-  	JOGOS[index].linkDesenvolvedor = jogo.linkDesenvolvedor;
-    this.messageService.add("Jogo editado!");
+    this.jogos.update(String(jogo.id),jogo).then(_ => {
+      JOGOS[index].nome = jogo.nome;
+      JOGOS[index].tempoJogo = jogo.tempoJogo;
+      JOGOS[index].minJogadores = jogo.minJogadores;
+      JOGOS[index].maxJogadores = jogo.maxJogadores;
+      JOGOS[index].categorias = jogo.categorias;
+      JOGOS[index].imagemJogo = jogo.imagemJogo;
+      JOGOS[index].descricao = jogo.descricao;
+      JOGOS[index].linkManual = jogo.linkManual;
+      JOGOS[index].linkDesenvolvedor = jogo.linkDesenvolvedor;
+      this.router.navigate(['/jogo/'+jogo.id]);
+      this.messageService.add("Jogo editado!");
+    });
   }
 
   remove(id: number): void {
   	let index = JOGOS.indexOf(JOGOS.find(jogo => jogo.id === id));
-  	JOGOS.splice(index, 1);
-    this.messageService.add("Jogo deletado!");
+    this.jogos.remove(String(JOGOS[index].id)).then(_ => {
+      JOGOS.splice(index, 1);
+      this.router.navigate(["/jogos"]);
+      this.messageService.add("Jogo deletado!");
+    })
   }
 
   add(jogo: Jogo): void {
-    jogo.id = Date.now() + Math.random();
-    JOGOS.push(jogo);
-    this.messageService.add("Jogo adicionado!");
+    this.jogos.set(String(jogo.id),jogo).then(_ => {
+      JOGOS.push(jogo);
+      this.router.navigate(['/jogo/'+jogo.id])
+      this.messageService.add("Jogo adicionado!");
+    })
   }
 
   generateEmptyJogo(): Observable<Jogo> {

@@ -12,8 +12,9 @@ import * as moment from 'moment';
 })
 
 export class NoticiasComponent implements OnInit {
-  noticias: Noticia[] = [];
+  noticias: Noticia[];
   noticiaSelecionada: Noticia;
+  loaded: boolean = false;
 
   constructor(
     private noticiaService: NoticiaService,
@@ -24,12 +25,18 @@ export class NoticiasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getNoticias();
+    this.watch(this);
   }
 
-  getNoticias(): void {
-    this.noticiaService.getNoticias()
-      .subscribe(noticias => this.noticias = noticias);
+  watch(self: NoticiasComponent) {
+    if (self.noticiaService.isReady()) {
+      self.noticiaService.getNoticias().subscribe(noticias => {
+        self.noticias = noticias;
+      });
+      self.loaded = true;
+    } else {
+      let timer = setTimeout(self.watch, 1000, self);
+    }
   }
 
   onSelect(noticia: Noticia) {

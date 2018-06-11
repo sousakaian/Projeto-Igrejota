@@ -1,5 +1,5 @@
 <div *ngIf="jogo">
-	<h1>Editar Jogo</h1>
+	<h1>{{id === -1 ? "Novo " : "Editar "}} Jogo</h1>
 	<div class="actions">
 		<button *ngIf="id === -1" class="cancel" (click)="onCancel()">Cancelar</button>
 		<button *ngIf="id !== -1" class="delete" (click)="onDelete()">Deletar</button>
@@ -51,9 +51,9 @@
 	</div>
 	<br>
 	<label>
-		<h2>Capa do Jogo: {{jogo.imagemJogo}}</h2>
+		<h2>{{ (jogo.imagemJogo ? "Substituir" : "Adicionar") + " Capa do Jogo:" }}</h2>
 		<div class="file-input">Escolher Imagem</div>
-		<input (change)="update(jogo.imagemJogo, $event)" type="file">
+		<input (change)="update(jogo, $event)" type="file" accept="image/gif, image/jpeg, image/png">
 	</label>
 	<label>
 		<h2>Link do Manual:</h2> <input class="text-input" [(ngModel)]="jogo.linkManual" maxlength="200" placeholder="Link do Manual" value="{{jogo.linkManual ? jogo.linkManual : ''}}">
@@ -62,4 +62,5 @@
 		<h2>Link útil:</h2> <input class="text-input" [(ngModel)]="jogo.linkDesenvolvedor" maxlength="200" placeholder="Link útil" value="{{jogo.linkDesenvolvedor ? jogo.linkDesenvolvedor : ''}}">
 	</label>
 </div>
-<app-page-not-found *ngIf="!jogo"></app-page-not-found>
+<h1 *ngIf="!loaded">Verificando...</h1>
+<app-page-not-found *ngIf="loaded && !jogo"></app-page-not-found>

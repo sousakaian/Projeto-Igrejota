@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   title = 'Igrejota';
 
   constructor(private router: Router) {
-
+    
   }
 
   ngOnInit() {

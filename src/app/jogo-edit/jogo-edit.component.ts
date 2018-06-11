@@ -5,6 +5,8 @@ import { JogoService } from '../jogo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonRangeSliderComponent } from "ng2-ion-range-slider";
 import { MessageService } from "../message.service";
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-jogo-edit',
@@ -15,11 +17,15 @@ import { MessageService } from "../message.service";
 export class JogoEditComponent implements OnInit {
   @Input() jogo: Jogo;
   @ViewChild('sliderJogadores') sliderJogadores: IonRangeSliderComponent;
-  maisDe30: Boolean;
+  maisDe30: Boolean = false;
   enviado: Boolean;
+  task: AngularFireUploadTask
+  loaded: boolean = false;
+  swapImage: boolean = false;
 
   constructor(
 	  private jogoService: JogoService,
+    private storage: AngularFireStorage,
 	  private route: ActivatedRoute,
 	  private router: Router,
     private messageService: MessageService
@@ -28,23 +34,35 @@ export class JogoEditComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.getJogo();
-    this.maisDe30 = this.jogo.maxJogadores > 30;
-    CategoriaSelectComponent.categoriasEscolhidas = this.jogo.categorias;
-  }
-
-  getJogo(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+  	const id = +this.route.snapshot.paramMap.get('id');
     if (id < -1) {
-      return
+      this.loaded = true
     } else if (id === -1) {
       this.jogoService.generateEmptyJogo()
-        .subscribe(jogo => this.jogo = jogo);
+        .subscribe(jogo => {
+          this.jogo = jogo
+          this.loaded = true
+        });
     } else {
-  	  this.jogoService.get(id)
-  		  .subscribe(jogo => this.jogo = jogo);
+      this.watch(this, id)
     }
   }
+
+  watch(self: JogoEditComponent, id: number) {
+    if (self.jogoService.isReady()) {
+      self.jogoService.get(id)
+        .subscribe(jogo => {
+          self.jogo = jogo
+          self.maisDe30 = jogo.maxJogadores > 30;
+          CategoriaSelectComponent.categoriasEscolhidas = jogo.categorias;
+        });
+      self.loaded = true
+    } else {
+      let timer = setTimeout(self.watch, 1000, self, id);
+    }
+  }
+
+  
 
   adjustNumeroJogadores(minJogadores: number, maxJogadores: number): void {
     this.jogo.minJogadores = minJogadores;
@@ -68,9 +86,40 @@ export class JogoEditComponent implements OnInit {
 
   onSave(): void {
     this.enviado = true;
+    this.jogo.categorias = CategoriaSelectComponent.categoriasEscolhidas
     if (this.validarJogo()) {
-      this.jogo.id === -1 ? this.jogoService.add(this.jogo) : this.jogoService.edit(this.jogo);
-      this.router.navigate(['/jogo/'+this.jogo.id]);
+      let file = this.jogo.imagemJogo
+      if (!this.swapImage || !file) {
+        if (this.jogo.id === -1) {
+          this.jogo.id = Math.floor(Date.now() + Math.random()*100)
+          this.jogoService.add(this.jogo);
+        } else {
+          this.jogoService.edit(this.jogo);
+        }
+      } else {
+        var newJogo = this.jogo.id === -1
+        if (this.jogo.id !== -1) {
+          this.storage.ref("capa/"+this.jogo.id).delete()
+        } else {
+          this.jogo.id = Math.floor(Date.now() + Math.random()*100)
+        }
+        var filePath = "capa/"+this.jogo.id;
+        this.jogo.imagemJogo = filePath
+
+        if (file) {
+          this.task = this.storage.upload(filePath, file)
+          this.task.snapshotChanges().pipe(finalize(() => {
+              if (newJogo) {
+                this.jogoService.add(this.jogo);
+              } else {
+                this.jogoService.edit(this.jogo);
+              }
+            })).subscribe()
+        } else {
+          this.task.cancel()
+          this.router.navigate(['/jogo/'+this.jogo.id]);
+        }
+      }
     }
   }
 
@@ -83,8 +132,10 @@ export class JogoEditComponent implements OnInit {
   }
 
   static confirmDelete(sender: JogoEditComponent) {
+    let filePath = "capa/"+sender.jogo.id
     sender.jogoService.remove(sender.jogo.id);
-    sender.router.navigate(['/jogos']);
+    sender.storage.ref(filePath).delete()
+      .subscribe(_ => sender.router.navigate(['/jogos']));
   }
 
   onCancel(): void {
@@ -96,7 +147,8 @@ export class JogoEditComponent implements OnInit {
     sender.messageService.clear();
   }
 
-  update(imagePath: string, event) {
-    imagePath = event.target.files[0];
+  update(jogo: Jogo, event) {
+    jogo.imagemJogo = event.target.files[0];
+    this.swapImage = true;
   }
 }

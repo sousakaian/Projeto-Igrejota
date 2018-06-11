@@ -32,7 +32,7 @@ export class TopbarComponent implements OnInit {
   }
 
   goToGerenciarApp(): void {
-    this.messageService.clear();
+    this.router.navigate(['/categorias/edit']);
   }
 
   sair(): void {

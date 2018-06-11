@@ -1,5 +1,5 @@
 <div class="jogo" *ngIf="jogo">
-	<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()">Edit</a>
+	<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()"><img _ngcontent-c15="" alt="" src="../assets/edititem.png">Editar</a>
 	<h1>{{ jogo.nome }}</h1><img *ngIf="jogo.emDestaque" src="../../assets/game.png" alt="Em destaque">
 	<img src="{{ jogo.imagemJogo }}" alt="Capa do Jogo" class="jogoimg"><br>
 	<div class="jogodet">
@@ -17,4 +17,5 @@
 	<a *ngIf="jogo.linkDesenvolvedor" href="{{ jogo.linkDesenvolvedor }}"><img src="" alt="">Link útil</a>
 	<p *ngIf="!jogo.linkDesenvolvedor">Não existem links úteis</p>
 </div>
-<app-page-not-found *ngIf="!jogo"></app-page-not-found>
+<h1 *ngIf="!loaded">Carregando jogo...</h1>
+<app-page-not-found *ngIf="!jogo && loaded"></app-page-not-found>

@@ -4,6 +4,8 @@ import { NoticiaService } from '../noticia.service';
 import { MessageService } from '../message.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { finalize } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
@@ -15,10 +17,14 @@ import * as moment from 'moment';
 export class NoticiaEditComponent implements OnInit {
   @Input() noticia: Noticia;
   enviado: Boolean;
+  task: AngularFireUploadTask;
+  loaded: boolean = false;
+  swapImage: boolean = false;
 
   constructor(
 	  private noticiaService: NoticiaService,
     private messageService: MessageService,
+    private storage: AngularFireStorage,
 	  private route: ActivatedRoute,
 	  private router: Router,
 	  private location: Location
@@ -27,19 +33,27 @@ export class NoticiaEditComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.getNoticia();
-  }
-
-  getNoticia(): void {
   	const id = +this.route.snapshot.paramMap.get('id');
     if (id < -1) {
-      return
+      this.loaded = true
     } else if (id === -1) {
-  	  this.noticiaService.generateEmptyNoticia()
-        .subscribe(noticia => this.noticia = noticia);
+      this.noticiaService.generateEmptyNoticia()
+        .subscribe(noticia => {
+          this.noticia = noticia
+          this.loaded = true
+        });
     } else {
-      this.noticiaService.get(id)
-        .subscribe(noticia => this.noticia = noticia);
+      this.watch(this,id)
+    }
+  }
+
+  watch(self: NoticiaEditComponent, id: number) {
+    if (self.noticiaService.isReady()) {
+      self.noticiaService.get(id)
+        .subscribe(noticia => self.noticia = noticia);
+      self.loaded = true
+    } else {
+      let timer = setTimeout(self.watch, 1000, self, id);
     }
   }
 
@@ -52,8 +66,10 @@ export class NoticiaEditComponent implements OnInit {
   }
 
   static confirmDelete(sender: NoticiaEditComponent) {
+    let filePath = "noticia/"+sender.noticia.id;
     sender.noticiaService.remove(sender.noticia.id);
-    sender.router.navigate(["/noticias"]);
+    sender.storage.ref(filePath).delete()
+      .subscribe(_ => sender.router.navigate(['/noticias']));
   }
 
   noticiaValida(): Boolean {
@@ -63,9 +79,38 @@ export class NoticiaEditComponent implements OnInit {
   onSave() {
     this.enviado = true;
     if (this.noticiaValida()) {
-      this.messageService.clear();
-  	  this.noticia.id === -1 ? this.noticiaService.add(this.noticia) : this.noticiaService.update(this.noticia);
-      this.router.navigate(["/noticia/"+this.noticia.id]);
+      let file = this.noticia.imagemDestaque
+      if (!this.swapImage || !file) {
+        if (this.noticia.id === -1) {
+          this.noticia.id = Math.floor(Date.now() + Math.random()*100)
+          this.noticiaService.add(this.noticia);
+        } else {
+          this.noticiaService.update(this.noticia);
+        }
+      } else {
+        var newnoticia = this.noticia.id === -1
+        if (this.noticia.id !== -1) {
+          this.storage.ref("capa/"+this.noticia.id).delete()
+        } else {
+          this.noticia.id = Math.floor(Date.now() + Math.random()*100)
+        }
+        var filePath = "capa/"+this.noticia.id;
+        this.noticia.imagemDestaque = filePath
+
+        if (file) {
+          this.task = this.storage.upload(filePath, file)
+          this.task.snapshotChanges().pipe(finalize(() => {
+              if (newnoticia) {
+                this.noticiaService.add(this.noticia);
+              } else {
+                this.noticiaService.update(this.noticia);
+              }
+            })).subscribe()
+        } else {
+          this.task.cancel()
+          this.router.navigate(['/noticia/'+this.noticia.id]);
+        }
+      }
     }
   }
 
@@ -78,7 +123,8 @@ export class NoticiaEditComponent implements OnInit {
     sender.messageService.clear();
   }
 
-  update(imagePath: string, event) {
-    imagePath = event.target.files[0];
+  update(noticia: Noticia, event) {
+    noticia.imagemDestaque = event.target.files[0];
+    this.swapImage = true
   }
 }

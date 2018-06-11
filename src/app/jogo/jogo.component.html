@@ -32,15 +32,15 @@
 		<app-categoria-select></app-categoria-select>
 		<button (click)="pesquisaAvancada(termoBusca)">Aplicar</button>
 	</div>
-	<h3 *ngIf="jogos.length <= 0">Jogos não encontrados!<br>Tente escolher outros termos ou filtros</h3>
-	<li *ngFor="let jogo of jogos | async" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
+	<h3 *ngIf="!jogos || jogos.length <= 0">{{loaded ? "Jogos não encontrados!" : "Carregando jogos..."}}<br>{{loaded ? "Tente escolher outros termos ou filtros" : ""}}</h3>
+	<li *ngFor="let jogo of jogos" [class.selected]="jogo === jogoSelecionado" (click)="onSelect(jogo)">
 		<a routerLink="{{ '/jogo/'+jogo.id }}" (click)="messageService.clear()">
 			<img class="iconeJogo" src="{{ jogo.imagemJogo }}" alt="">
 			<div class="jogoinfo">
 				<h3>{{ jogo.nome | uppercase }} <img *ngIf="jogo.emDestaque" src="../../assets/game.png" alt="Em Destaque" class="dico" ></h3><br/>
 				<h4><img class="tico" src="../../assets/time.png" alt="Organização: ">{{ jogo.tempoJogo+'min'}}</h4>
 				<h4><img class="pico" src="../../assets/players.png" alt="Organização: ">{{(jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' | lowercase }}</h4>
-				<h4 *ngFor="let categoria of jogo.categorias | async" class="cat">{{ categoria.nome }}</h4>
+				<h4 *ngFor="let categoria of jogo.categorias" class="cat">{{ categoria.nome }}</h4>
 			</div>
 		</a>
 		<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()" class="edit-item"><img _ngcontent-c15="" alt="" src="../assets/edititem.png"></a>

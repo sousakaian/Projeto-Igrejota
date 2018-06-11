@@ -11,6 +11,7 @@ import { Categoria } from '../categoria';
 export class CategoriaEditComponent implements OnInit {
   @Input() categorias: Categoria[];
   enviado: Boolean;
+  loaded: boolean = false;
 
   constructor(
   	private categoriaService: CategoriaService,
@@ -20,12 +21,21 @@ export class CategoriaEditComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.getCategorias();
+  	this.watch(this);
   }
 
-  getCategorias(): void {
-  	this.categoriaService.getCategorias()
-  		.subscribe(categorias => this.categorias = categorias);
+  watch(self: CategoriaEditComponent) {
+    if (self.categoriaService.isReady()) {
+      self.getCategorias()
+      self.loaded = true;
+    } else {
+      let timer = setTimeout(self.watch, 1000, self);
+    }
+  }
+
+  getCategorias() {
+    this.categoriaService.getCategorias()
+      .subscribe(categorias => this.categorias = categorias);
   }
 
   categoriasValidas(): Boolean {
@@ -53,7 +63,7 @@ export class CategoriaEditComponent implements OnInit {
 
   onDelete(categoria: Categoria): void {
   	this.categoriaService.remove(categoria.id);
-  	this.getCategorias();
+    this.getCategorias();
   }
 
   addCategoria(): void {

@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonRangeSliderModule } from 'ng2-ion-range-slider';
 import { CalendarModule } from 'angular-calendar';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 import { AppComponent } from './app.component';
 import { NoticiasComponent } from './noticias/noticias.component';
@@ -36,6 +39,7 @@ import { DiaPresencaComponent } from './dia-presenca/dia-presenca.component';
 import { ListaAlunosComponent } from './lista-alunos/lista-alunos.component';
 import { DiasigrejotaService } from './diasigrejota.service';
 
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -66,7 +70,10 @@ import { DiasigrejotaService } from './diasigrejota.service';
     AppRoutingModule,
     IonRangeSliderModule,
     BrowserAnimationsModule,
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase, 'igrejotaapp'),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [
     AuthService,

@@ -9,13 +9,28 @@ import { CATEGORIAS } from '../mock-categorias';
   styleUrls: ['./categoria-select.component.css']
 })
 export class CategoriaSelectComponent implements OnInit {
-  static categoriasEscolhidas: Categoria[] = [];
+  static categoriasEscolhidas: Categoria[];
   categorias: Categoria[] = [];
+  loaded: boolean = false;
 
   constructor(private categoriaService: CategoriaService) { }
 
   ngOnInit() {
-  	this.getCategorias();
+    if (!CategoriaSelectComponent.categoriasEscolhidas) {
+      CategoriaSelectComponent.categoriasEscolhidas = [];
+    } else {
+      CategoriaSelectComponent.categoriasEscolhidas.length = 0;
+    }
+  	this.watch(this);
+  }
+
+  watch(self: CategoriaSelectComponent) {
+    if (self.categoriaService.isReady()) {
+      self.getCategorias()
+      self.loaded = true;
+    }  else {
+      let timer = setTimeout(self.watch, 1000, self);
+    }
   }
 
   categoriaChecada(categoria: Categoria): Boolean {
