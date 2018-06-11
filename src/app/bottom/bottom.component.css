@@ -15,6 +15,7 @@
 footer {
   width: 100vw;
   height: 15.41vw;
+  display: flex;
 }
 
 .unselected {
@@ -54,26 +55,3 @@ br{
   margin-bottom:0px;
   padding:0px;
 }
-
-/*@media screen and (min-width: 550px){
-  .tab-menu-mobile   button {
-    height: 60px;
-    width: 139px;
-    padding-right: 9px;
-    padding-left: 9px;
-    padding-top: 9px;
-    font-size: 1em;
-  }
-  .tab-icon {
-    max-width: 30px;
-    max-height: 30px;
-  }
-  footer{
-    height: 60px;
-    width: 500px;
-  }
-  .tab-menu-mobile   ul {
-  justify-content: flex-start;
-}
-
-}*/

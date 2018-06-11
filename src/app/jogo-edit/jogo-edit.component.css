@@ -44,7 +44,8 @@ label input.text-input {
 label textarea.text-input {
     border: .5vw solid #df704a;
     border-radius: 2vw;
-    font-size: 3vw;
+    font-size: 4.5vw;
+    font-family: Lateef;
     display: inline-block;
     color: #df704a;
     padding-left: 1vw;
@@ -53,10 +54,11 @@ label textarea.text-input {
     width: 85vw;
 }
 
-.categorias[_ngcontent-c9] {
+.categorias {
     list-style-type: none;
     display: inline-block;
     padding-left: 0;
+    margin: 0;
 }
 
 .categorias label.checkboxcontainer {
@@ -69,10 +71,24 @@ label textarea.text-input {
     margin-top: 1vw;
 }
 
+input.slider {
+    width: 82vw;
+}
+
+.slidecontainer {
+    background-color: #f7aa71;
+    padding: 1vw 0vw 0vw;
+    text-align: center;
+    border-radius: 2vw;
+}
+
 label.checkboxcontainer {
     display: flex;
+    font-family: Pridi;
+    font-size: 5vw;
+    margin-top: 2vw;
 }
-<style>…</style>
+
 .categorias label {
     margin-top: 0;
     padding-bottom: 1vw;
@@ -81,16 +97,17 @@ label.checkboxcontainer {
     width: 23vw;
 }
 
-input[type="checkbox" i].ng-valid {
-    background: white;
-    border: solid 3px #294d60;
+input[type=checkbox i] {
+    background: #fff;
+    border: 3px solid #294d60;
     border-radius: 1vw;
     width: 6vw;
     height: 6vw;
     margin-left: 3vw;
+    transition: background-color 0.5s, color 0.5s, border-radius 0.5s;
     -webkit-appearance: inherit;
 }
-input[type="checkbox" i].ng-valid:checked {
+input[type=checkbox i]:checked {
     background: #df704a;
     border-radius: 5vw;
 }
@@ -111,6 +128,18 @@ input[type="checkbox" i].ng-valid:checked {
     background: #df704a;
 }
 
+.categorias li {
+    float: left;
+    font-family: Pridi;
+    border-left: 2px solid #df704a;
+    font-size: 3.5vw;
+    text-align: center;
+    padding-left: 1vw;
+    margin-top: 1vw;
+}
+.categorias li:hover {
+    background-color: #ffeadd;
+}
 .irs-slider {
     width: 16px;
     height: 18px;

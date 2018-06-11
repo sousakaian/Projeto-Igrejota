@@ -91,7 +91,7 @@ a.not .notnome{
   	line-height: 4.5vw;
 }
 a.not .nottime{
-  	font-family: Lateef;
+  	font-family: Pridi;
 	height: 10vw;
   	color:	#555;
 	float: right;
@@ -99,7 +99,21 @@ a.not .nottime{
 	margin: 0px;
 	padding: 0px;
 	width: 15vw;
-	font-size: 4vw;
+	font-size: 2.5vw;
   	line-height: 4.5vw;
   	display: block;
+}
+li a img {
+    width: 6vw;
+}
+
+a img {
+    width: 25vw;
+}
+.add-item img{
+    width: 20vw;
+    position: fixed;
+    border-radius: 20vw;
+    bottom: 18vw;
+    right: 6vw;
 }
