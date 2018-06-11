@@ -238,6 +238,11 @@ a {
 	text-decoration: none;
 }
 
+a img {
+    width: 25vw;
+    float: right;
+}
+
 .jogoinfo {
 	height: auto;
     float: left;
