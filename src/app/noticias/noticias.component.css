@@ -110,3 +110,10 @@ li a img {
 a img {
     width: 25vw;
 }
+.add-item img{
+    width: 20vw;
+    position: fixed;
+    border-radius: 20vw;
+    bottom: 18vw;
+    right: 6vw;
+}
