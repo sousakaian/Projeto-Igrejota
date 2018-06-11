@@ -1,6 +1,6 @@
 <div class="jogo" *ngIf="jogo">
 	<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()">Edit</a>
-	<h1>{{ jogo.nome }}</h1><img *ngIf="jogo.emDestaque" src="" alt="Em destaque">
+	<h1>{{ jogo.nome }}</h1><img *ngIf="jogo.emDestaque" src="../../assets/game.png" alt="Em destaque">
 	<img src="{{ jogo.imagemJogo }}" alt="Capa do Jogo" class="jogoimg"><br>
 	<div class="jogodet">
 		<h4><img class="jogicone icon" src="" alt="">{{ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)}}</h4>

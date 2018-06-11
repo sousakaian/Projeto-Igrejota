@@ -128,6 +128,10 @@ span.cal-day-number {
     background-color: #fff;
     color: #df704a;
 }
+.cal-month-view .cal-day-cell {
+    min-height: 12vw;
+}
+
 .cal-out-month.cal-cell {
     background-color: #294D60;
     opacity: .7;
@@ -142,10 +146,10 @@ span.cal-day-number {
 .cal-month-view .cal-cell-row .cal-cell:hover{
       background-color: #e5e5e5;
 }
-app-calendario button.btn:hover {
+button.btn:hover {
     background-color: #ffeadd;
 }
-app-calendario button.btn {
+button.btn {
     width: 25vw;
     text-align: center;
     align-content: center;
@@ -155,7 +159,7 @@ app-calendario button.btn {
     color: #000;
     background-color: #f6a971;
 }
-app-calendario button {
+button {
     width: 80vw;
     border: none;
     background-color: #00a6c4;
@@ -166,7 +170,7 @@ app-calendario button {
     color: #f0f1f6;
     margin-bottom: 3vw;
 }
-app-calendario button:hover {
+button:hover {
     background-color: #f6a971;
     color: #000;
 }
@@ -193,7 +197,7 @@ h4 {
     font-family: Pridi;
     font-size: 3.5vw;
 }
-app-calendario h1 {
+h1 {
     font-family: BalooRegular;
     margin: 2vw;
     color: #df704a;

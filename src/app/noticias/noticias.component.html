@@ -13,4 +13,4 @@
 		<a  *ngIf="auth.loggedIn()" routerLink="{{'/noticia/edit/'+noticia.id}}" (click)="messageService.clear()">Edit</a>
 	</li>
 </ul>
-<a *ngIf="auth.loggedIn()" routerLink="/noticia/edit/-1" (click)="messageService.clear()">Adicionar Notícia</a>
+<a *ngIf="auth.loggedIn()" routerLink="/noticia/edit/-1" (click)="messageService.clear()" class="add-item">Adicionar Notícia</a>

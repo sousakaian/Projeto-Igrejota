@@ -43,7 +43,7 @@
 				<h4 *ngFor="let categoria of jogo.categorias | async" class="cat">{{ categoria.nome }}</h4>
 			</div>
 		</a>
-		<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()"><img _ngcontent-c15="" alt="" src="../assets/edititem.png"></a>
+		<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()" class="edit-item"><img _ngcontent-c15="" alt="" src="../assets/edititem.png"></a>
 	</li>
 </ul>
-<a routerLink="/jogo/edit/-1" *ngIf="auth.loggedIn()" (click)="messageService.clear()"><img src="../assets/addjogo.png" alt=""></a>
+<a routerLink="/jogo/edit/-1" *ngIf="auth.loggedIn()" (click)="messageService.clear()" class="add-item"><img src="../assets/addjogo.png" alt=""></a>

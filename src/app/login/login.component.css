@@ -28,6 +28,7 @@
 
 .login input {
     margin-bottom: 4vw;
+    padding-left: 2vw;
     border: .5vw solid #be6646;
     border-radius: 2vw;
     width: 50vw;

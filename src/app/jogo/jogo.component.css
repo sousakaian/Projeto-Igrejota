@@ -18,6 +18,8 @@
 .jogos{
 	padding: 0px;
 	list-style: none;
+  display: inline-table;
+  margin-bottom: 24vw;
 }
 .busca{
 	border: 0.5vw solid #DF704A;
@@ -157,43 +159,44 @@ input[type=text]{
 	font-size: 4vw;
 }
 
+.filtros div {
+    background-color: #f7aa71;
+    padding: 1vw 0vw 0vw;
+    text-align: center;
+    border-radius: 2vw;
+}
+
 input[type=range]{
-	border: solid 0px;
-	border-left: solid 2px #F7AA71;
-	border-right: solid 2px #F7AA71;
-	padding-left: 1vw;
-    color: #294D60;
-    margin-top: 1px;
-    font-size: 4vw;
 	width: 80vw;
-	height: 7.5vw;
 }
 
 input[type=checkbox]{
-	background-color: #fff;
-	border: solid 1px #294D60;
-	padding-left: 1vw;
-    color: #294D60;
-    margin-top: 1px;
+    background: #fff;
+    border: 3px solid #294d60;
+    border-radius: 1vw;
+    width: 6vw;
+    height: 6vw;
+    margin-left: 3vw;
+    transition: background-color 0.5s, color 0.5s, border-radius 0.5s;
+    -webkit-appearance: inherit;
 }
 
 .filtros{
-	padding-bottom: 10vw;
-	border-bottom: solid 3px #294D60;
+	  padding: 2vw;
+    border-bottom: 3px solid #294d60;
+    background-color: #00a6c466;
+    border-radius: 2vw;
 }
 .filtros button{
-	font-family: BalooRegular;
-	line-height: 3.1vw;
+    font-family: BalooRegular;
     font-size: 4vw;
-	height: 8vw;
-	margin:0px;
-	background-color: #DF704A;
-	border: solid 0;
-	border-radius: 2vw;
-	transition: background-color 0.2s, color 0.2s;
-    color:#FFEADD;
-    margin-right: 1vw;
-    float:right;
+    margin: 0 1vw 0 0;
+    background-color: #df704a;
+    border: 0 solid;
+    border-radius: 2vw;
+    transition: background-color .2s,color .2s;
+    color: #ffeadd;
+    margin-left: 65vw;
 }
 .filtros button:hover{
 	background-color: #F7AA71;
@@ -244,8 +247,9 @@ a img {
 }
 
 .jogoinfo {
-	height: auto;
+    height: auto;
     float: left;
+    width: 50vw;
     display: block;
 }
 
@@ -261,7 +265,7 @@ a img {
 }
 
 li a img {
-    width: 4vw;
+    width: 6vw;
     margin: 0vw;
     float: right;
 }
