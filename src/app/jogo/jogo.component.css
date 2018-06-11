@@ -1,4 +1,4 @@
-@font-face{
+	@font-face{
   font-family: BalooRegular;
   src: url("../../fonts/Baloo-Regular.ttf");
 }
@@ -240,9 +240,8 @@ a {
 
 .jogoinfo {
 	height: auto;
-	float:left;
-	width: 55vw;
-	display: block;
+    float: left;
+    display: block;
 }
 
 .jogos .jogoinfo h3,h4 {
@@ -256,11 +255,16 @@ a {
   	display: inline-flex;
 }
 
+li a img {
+    width: 4vw;
+    margin: 0vw;
+    float: right;
+}
+
 .jogos .jogoinfo h3{
-	text-align: left;
-  	font-family: PridiBold;
-	font-size: 4vw;
-	width: 50vw;
+    text-align: left;
+    font-family: PridiBold;
+    font-size: 4vw;
 }
 .jogos .jogoinfo h4{
   	font-family: Pridi;
