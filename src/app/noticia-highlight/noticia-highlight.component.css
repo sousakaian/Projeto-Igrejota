@@ -1,7 +1,8 @@
 .highlight {
-	margin-top: 5vw;
-	height: 53.2vw;
-	background-color: #F0F0F1;
+    margin-top: 5vw;
+    text-align: center;
+    height: 53.2vw;
+    background-color: #000;
 }
 
 .highlight img {
@@ -10,17 +11,18 @@
 }
 
 .highlight h3 {
-	position: relative;
-	top: -18vw;
-	width: 88.56vw;
-	height: 12.5vw;
-	line-height: 12.5vw;
-	background-color: #605A5777;
-	color: #F0F0F1;
-	font-size: 3vw;
-	padding-left: 2vw;
-	font-weight: normal;
-  font-family: Pridi;
+    position: relative;
+    text-align: left;
+    top: -14vw;
+    height: 12.5vw;
+    line-height: 12.5vw;
+    background-color: #00000099;
+    color: #f0f0f1;
+    font-size: 3vw;
+    margin: 0vw;
+    padding-left: 2vw;
+    font-weight: 400;
+    font-family: Pridi;
 }
 
 .noticias {
