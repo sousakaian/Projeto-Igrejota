@@ -18,6 +18,8 @@
 .jogos{
 	padding: 0px;
 	list-style: none;
+  display: inline-table;
+  margin-bottom: 24vw;
 }
 .busca{
 	border: 0.5vw solid #DF704A;
