@@ -153,7 +153,6 @@ export class JogoService {
 
   add(jogo: Jogo): void {
     this.jogos.set(String(jogo.id),jogo).then(_ => {
-      JOGOS.push(jogo);
       this.router.navigate(['/jogo/'+jogo.id])
       this.messageService.add("Jogo adicionado!");
     })

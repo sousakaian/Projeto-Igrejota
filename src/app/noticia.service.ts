@@ -93,7 +93,6 @@ export class NoticiaService {
 
   add(noticia: Noticia): void {
     this.noticias.set(String(noticia.id),NoticiaEncapsulator.encapsule(noticia)).then(_ => {
-      NOTICIAS.push(noticia);
       this.router.navigate(['/noticia/'+noticia.id])
       this.messageService.add("Notícia adicionada!");
     })

@@ -263,7 +263,6 @@ a {
 }
 
 a img {
-    width: 25vw;
     float: right;
 }
 
@@ -283,12 +282,6 @@ a img {
 	color: #294D60;
   	font-weight: normal;
   	display: inline-flex;
-}
-
-li a img {
-    width: 6vw;
-    margin: 0vw;
-    float: right;
 }
 
 .jogos .jogoinfo h3{

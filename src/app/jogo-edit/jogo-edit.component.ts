@@ -22,6 +22,7 @@ export class JogoEditComponent implements OnInit {
   task: AngularFireUploadTask
   loaded: boolean = false;
   swapImage: boolean = false;
+  sentRequest: boolean = false;
 
   constructor(
 	  private jogoService: JogoService,
@@ -85,11 +86,15 @@ export class JogoEditComponent implements OnInit {
   }
 
   onSave(): void {
+    if (this.sentRequest === true) {
+      return
+    }
     this.enviado = true;
     this.jogo.categorias = CategoriaSelectComponent.categoriasEscolhidas
     if (this.validarJogo()) {
       let file = this.jogo.imagemJogo
       if (!this.swapImage || !file) {
+        this.sentRequest = true
         if (this.jogo.id === -1) {
           this.jogo.id = Math.floor(Date.now() + Math.random()*100)
           this.jogoService.add(this.jogo);
@@ -107,6 +112,8 @@ export class JogoEditComponent implements OnInit {
         this.jogo.imagemJogo = filePath
 
         if (file) {
+          this.sentRequest = true
+          this.messageService.saveMessage();
           this.task = this.storage.upload(filePath, file)
           this.task.snapshotChanges().pipe(finalize(() => {
               if (newJogo) {
@@ -128,12 +135,18 @@ export class JogoEditComponent implements OnInit {
   }
 
   onDelete(): void {
+    if (this.sentRequest) {
+      return
+    }
   	this.messageService.displayAlert("Você têm certeza que deseja deletar esse jogo?", JogoEditComponent.confirmDelete, JogoEditComponent.alertCancel, this);
   }
 
   static confirmDelete(sender: JogoEditComponent) {
     let filePath = "capa/"+sender.jogo.id
     sender.jogoService.remove(sender.jogo.id);
+    sender.sentRequest = true
+    sender.messageService.clear()
+    sender.messageService.add("Deletando...");
     sender.storage.ref(filePath).delete()
       .subscribe(_ => sender.router.navigate(['/jogos']));
   }

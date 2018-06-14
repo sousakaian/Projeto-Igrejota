@@ -1,7 +1,7 @@
 <div *ngIf="noticia">
 	<h1>{{id === -1 ? "Nova " : "Editar "}} Notícia</h1>
-	<div class="actions">
-		<button *ngIf="noticia.id === -1" class="cancel" (click)="onCancel()">Cancelar</button>
+	<div *ngIf="sentRequest === false" class="actions">
+		<button *ngIf="noticia.id === -1" class="delete" (click)="onCancel()">Cancelar</button>
 		<button *ngIf="noticia.id !== -1" class="delete" (click)="onDelete()">Deletar</button>
 		<button class="save" (click)="onSave()">Salvar</button>
 	</div>
