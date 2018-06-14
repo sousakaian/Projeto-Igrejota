@@ -1,8 +1,8 @@
 .highlight {
     margin-top: 5vw;
+    height: 55vw;
+    background-color: #f0f0f1;
     text-align: center;
-    height: 53.2vw;
-    background-color: #000;
 }
 
 .highlight img {
@@ -12,14 +12,13 @@
 
 .highlight h3 {
     position: relative;
-    text-align: left;
-    top: -14vw;
+    width: auto;
+    bottom: -36vw;
     height: 12.5vw;
     line-height: 12.5vw;
-    background-color: #00000099;
+    background-color: ##00000077;
     color: #f0f0f1;
     font-size: 3vw;
-    margin: 0vw;
     padding-left: 2vw;
     font-weight: 400;
     font-family: Pridi;
@@ -40,7 +39,9 @@ a {
     padding-top: 2vw;
     padding-bottom: 2vw;
 }
-
+.noticias li:hover {
+    background-color: #ffeadd;
+}
 .news-container {
 	float: left;
 	width: 25.3vw;
