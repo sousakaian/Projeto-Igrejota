@@ -64,8 +64,9 @@ export class CalendarioComponent implements ControlValueAccessor, OnInit {
   events: CalendarEvent[] = [];
   
   lastClickedDate: moment.Moment; 
-  clickedDate: moment.Moment;
+  clickedDate: moment.Moment = moment();
   openEditMode: boolean = false;
+  loaded: boolean = false;
 
   constructor(
   	private cdr: ChangeDetectorRef,
@@ -77,7 +78,15 @@ export class CalendarioComponent implements ControlValueAccessor, OnInit {
   }
 
   ngOnInit() {
-  	this.getEventos();
+  	this.watch(this);
+  }
+
+  watch(self: CalendarioComponent) {
+    if (self.diaigrejotaService.isReady()) {
+      self.getEventos();
+    } else {
+      let timer = setTimeout(self.watch, 1000, self);
+    }
   }
 
   writeValue(date: Date): void {
@@ -121,24 +130,34 @@ export class CalendarioComponent implements ControlValueAccessor, OnInit {
   }
 
   getEventos() {
-  	var calendarReceiver: Array<CalendarEvent>;
   	this.diaigrejotaService.getEventos(this.viewDate)
-  		.subscribe(eventos => this.events = eventos);
+  		.subscribe(eventos => {
+        this.events.length = 0;
+        this.events = eventos;
+        this.loaded = true;
+        this.cdr.detectChanges();
+      });
   }
 
   getEventosDia() {
     this.diaigrejotaService.getDia(this.clickedDate.toDate())
-      .subscribe(eventos => this.eventosDiaIgrejota = eventos);
-    this.isIgrejotaDay = this.eventosDiaIgrejota.filter(e => e.tipo == TipoDia.Normal).length > 0;
+      .subscribe(eventos => {
+        this.eventosDiaIgrejota.length = 0
+        this.eventosDiaIgrejota = eventos
+        this.isIgrejotaDay = this.eventosDiaIgrejota.filter(e => e.tipo == TipoDia.Normal).length > 0;
+      });
+  }
+
+  editar(evento: DiaIgrejota) {
+    this.diaigrejotaService.edit(evento);
   }
 
   adicionarEvento() {
     this.diaigrejotaService.add(this.clickedDate.toDate());
-    this.getEventosDia();
   }
 
   deletar(evento: DiaIgrejota) {
     this.diaigrejotaService.remove(evento);
-    this.getEventosDia();
+    this.openEditMode = false;
   }
 }

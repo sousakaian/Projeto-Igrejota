@@ -63,7 +63,8 @@ h1{
 	font-family: Lateef;
 	border-left: solid 3px #BF6646;	
 	font-size: 4.5vw;
-	margin: 0px;
+	margin: 0;
+	padding-left: 2vw;
 }
 
 .icon{
@@ -78,11 +79,10 @@ h1{
     border: solid 0;
     opacity: 1;
 }
-.jogicone{
-	background-image: url("../../assets/players.png");
-}
-.timicone{
-	background-image: url("../../assets/time.png");
+
+.highlight {
+	width: 9vw;
+    height: 6vw;
 }
 
 /*@media screen and (min-width: 550px){

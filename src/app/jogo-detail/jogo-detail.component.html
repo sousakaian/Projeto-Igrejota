@@ -1,20 +1,21 @@
 <div class="jogo" *ngIf="jogo">
-	<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()"><img _ngcontent-c15="" alt="" src="../assets/edititem.png">Editar</a>
-	<h1>{{ jogo.nome }}</h1><img *ngIf="jogo.emDestaque" src="../../assets/game.png" alt="Em destaque">
+	<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()"><img class="icon" alt="" src="../assets/edititem.png">Editar</a>
+	<h1>{{ jogo.nome }}</h1>
 	<img src="{{ jogo.imagemJogo }}" alt="Capa do Jogo" class="jogoimg"><br>
 	<div class="jogodet">
-		<h4><img class="jogicone icon" src="" alt="">{{ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)}}</h4>
-		<h4><img class="timicone icon" src="" alt="">{{ jogo.tempoJogo }} min</h4>
+		<h4><img class="icon" src="../../assets/players.png" alt="Jogadores: ">{{ (jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)}}</h4>
+		<h4><img class="icon" src="../../assets/time.png" alt="Tempo: ">{{ jogo.tempoJogo }} min</h4>
+		<h4><img *ngIf="jogo.emDestaque" class="highlight" src="../../assets/game.png" alt="">Em destaque</h4>
 		<h4 *ngFor="let categoria of jogo.categorias" class="cat">{{ categoria.nome }}</h4>
 	</div>
 	<h3>DESCRIÇÃO</h3>
 	<p>{{ jogo.descricao }}</p>
 	<h3 *ngIf="jogo.linkManual">LINK MANUAL</h3>
-	<a *ngIf="jogo.linkManual" href="{{ jogo.linkManual }}"><img src="" alt="">Manual</a>
+	<a *ngIf="jogo.linkManual" href="//{{ jogo.linkManual }}"><img class="icon" src="../../assets/manual.png" alt="">Manual</a>
 	<p *ngIf="!jogo.linkManual">Não possui manual cadastrado</p>
 	<br>
 	<h3 *ngIf="jogo.linkDesenvolvedor">LINK DESENVOLVEDOR</h3>
-	<a *ngIf="jogo.linkDesenvolvedor" href="{{ jogo.linkDesenvolvedor }}"><img src="" alt="">Link útil</a>
+	<a *ngIf="jogo.linkDesenvolvedor" href="//{{ jogo.linkDesenvolvedor }}"><img class="icon" src="../../assets/link.png" alt="">Link útil</a>
 	<p *ngIf="!jogo.linkDesenvolvedor">Não existem links úteis</p>
 </div>
 <h1 *ngIf="!loaded">Carregando jogo...</h1>

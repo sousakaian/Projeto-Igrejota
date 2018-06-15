@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'jogos/termoBusca/:termo', component: JogoComponent },
   { path: 'jogo/:id', component: JogoDetailComponent },
   { path: 'jogo/edit/:id', component: JogoEditComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

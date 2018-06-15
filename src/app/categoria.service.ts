@@ -42,20 +42,22 @@ export class CategoriaService {
   	let index = CATEGORIAS.indexOf(CATEGORIAS.find(item => item.id === categoria.id));
     this.categorias.update(String(categoria.id),categoria).then(_ => {
       CATEGORIAS[index].nome = categoria.nome;
+      this.messageService.add("Categorias salvas!");
     })
   }
 
   remove(id: number): void {
   	let index = CATEGORIAS.indexOf(CATEGORIAS.find(item => item.id === id));
     this.categorias.remove(String(id)).then(_ => {
-      this.jogoService.removeCategoriaFromAll(CATEGORIAS.splice(index,1)[0]);
+      this.jogoService.removeCategoriaFromAll(CATEGORIAS.splice(index,1)[0])
+        .subscribe(resultado => this.messageService.add("Categoria removida!"))
     })
   }
 
   add(categoria: Categoria): void {
     categoria.id = Math.floor(Date.now() + Math.random()*100);
     this.categorias.set(String(categoria.id),categoria).then(_ => {
-      CATEGORIAS.push(categoria);
+      
     })
   }
 

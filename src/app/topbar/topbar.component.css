@@ -22,8 +22,8 @@
 
 .tab-menu-mobile h1 {
 	float: left;
-	width: 80vw;
-	margin-left: 3vw;
+	width: 66vw;
+  margin-left: 17vw;
 	text-align: center;
 	color: #FFEADD;
 	font-family: RoundRegular;
@@ -57,6 +57,22 @@
     position: fixed;
     top: 0vw;
 }
+
+.back-button {
+    float: left;
+    width: 17vw;
+    height: 14.72vw;
+    background-color: #00a6c4;
+    font-size: 4.5vw;
+    border: none;
+    font-family: BalooRegular;
+    padding: 1vw 6vw;
+    color: #ffeadd;
+    line-height: 1em;
+    position: fixed;
+    top: 0vw;
+}
+
 .login-button:hover {
   background-color: #294D60;
 }

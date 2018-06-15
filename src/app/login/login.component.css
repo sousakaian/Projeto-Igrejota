@@ -15,15 +15,20 @@
   font-family: Lateef;
   src: url("../../fonts/LateefRegOT.ttf");
 }
+
 .login{
 	background-color: #294D60;
 	text-align: center;
 	display:block;
 	justify-content: center;
-	width: 100vw;
+  left: 0;
+  right: 0;
+  padding-top: 27.8vh;
+  padding-bottom: 27.8vh;
 	font-family: Pridi;
 	font-size: 4vw;
 	color: #EFE0D0;
+  position: absolute;
 }
 
 .login input {
@@ -31,8 +36,10 @@
     padding-left: 2vw;
     border: .5vw solid #be6646;
     border-radius: 2vw;
+    font-size: 3.5vw;
     width: 50vw;
     height: 4vw;
+    color: #f7aa71;
 }
 
 input [type=text]{
@@ -42,8 +49,8 @@ input [type=text]{
     color:#EFE0D0;
     background-color:#D06636;
     border:none;
-	font-size: 7vw;
-	font-family: BalooRegular;
+	  font-size: 7vw;
+	  font-family: BalooRegular;
     border-radius: 4.5px;
     display: inline-flex;
     padding:1vw;	
@@ -57,10 +64,14 @@ input [type=text]{
     background-color:#EFE0D0;
 }
 
-.login h1{
+.login h1, h2 {
 	font-family: PridiBold;
 	font-size: 8vw;
-  margin:0px;
+  margin: 0;
   padding-top: 2vw;
   padding-bottom: 2vw;
+}
+
+h2 {
+  margin-bottom: 2vw;
 }

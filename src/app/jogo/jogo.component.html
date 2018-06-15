@@ -1,4 +1,7 @@
-<h2>Jogos</h2>
+<div class="section-header">
+	<h1>JOGOS</h1>
+</div>
+<hr class="section-line">
 <ul class="jogos">
 	<div class="busca">
 		<button (click)="pesquisaAvancada(termoBusca)" class="searchbtn">🔍</button><input type="text" [(ngModel)]="termoBusca" placeholder="Pesquisar..."><button (click)="limparBusca()">Limpar</button>
@@ -11,7 +14,7 @@
 		  <option value="Max. Jogadores">Max. Jogadores</option>
 		  <option value="Tempo de Jogo">Tempo de Jogo</option>
 		</select>
-		<button (click)="toggleInverter()"  class="Invbtn">{{ inverterOrdem ? "Inversa" : "Normal" }}</button>
+		<button (click)="toggleInverter()"  class="Invbtn"><img *ngIf="!inverterOrdem" class="order" src="../assets/header.png" alt="Crescente"><img *ngIf="inverterOrdem" class="order" src="../assets/header2.png" alt="Decrescente"></button>
 		<button (click)="toggleFiltros()" class="PAbtn"><p class="picon">🔍</p><p class="ptext">Pesquisa<br/>Avançada</p></button><br>
 	</div>
 	<div class="filtros" *ngIf="mostrarFiltros">
@@ -38,12 +41,12 @@
 			<img class="iconeJogo" src="{{ jogo.imagemJogo ? jogo.imagemJogo : 'capa/default.png' }}" alt="">
 			<div class="jogoinfo">
 				<h3>{{ jogo.nome | uppercase }} <img *ngIf="jogo.emDestaque" src="../../assets/game.png" alt="Em Destaque" class="dico" ></h3><br/>
-				<h4><img class="tico" src="../../assets/time.png" alt="Organização: ">{{ jogo.tempoJogo+'min'}}</h4>
-				<h4><img class="pico" src="../../assets/players.png" alt="Organização: ">{{(jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' | lowercase }}</h4>
+				<h4><img class="tico" src="../../assets/time.png" alt="Tempo: ">{{ jogo.tempoJogo+'min'}}</h4>
+				<h4><img class="pico" src="../../assets/players.png" alt="Jogadores: ">{{(jogo.minJogadores !== jogo.maxJogadores ? jogo.minJogadores+' a ' : '') + (jogo.maxJogadores > 30 ? "30+" : jogo.maxJogadores)+' jogadores' | lowercase }}</h4>
 				<h4 *ngFor="let categoria of jogo.categorias" class="cat">{{ categoria.nome }}</h4>
 			</div>
 		</a>
-		<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()"><img _ngcontent-c15="" alt="" src="../assets/edititem.png"></a>
+		<a routerLink="{{ '/jogo/edit/'+jogo.id }}" *ngIf="auth.loggedIn()" (click)="messageService.clear()"><img class="edit-pencil" alt="Editar" src="../assets/edititem.png"></a>
 	</li>
 </ul>
-<a routerLink="/jogo/edit/-1" *ngIf="auth.loggedIn()" (click)="messageService.clear()"><img src="../assets/addjogo.png" alt=""></a>
+<a class="add-item" routerLink="/jogo/edit/-1" *ngIf="auth.loggedIn()" (click)="messageService.clear()"><img src="../assets/addjogo.png" alt="Adicionar"></a>

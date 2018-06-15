@@ -1,9 +1,13 @@
-<div class="login" *ngIf="!auth.loggedIn()">
-	<h1>Login Bolsista</h1>
-	Login: <input type="text" [(ngModel)]="login" maxlength="20"><br/>
-	Senha: <input type="password" [(ngModel)]="senha" maxlength="20"><br/>
-	<button (click)="entrar()">CONFIRMAR</button>
-</div>
-<div class="bolsista-info" *ngIf="auth.loggedIn()">
-	<h2>{{ login }}</h2>
+<div class="login">
+	<div *ngIf="!auth.loggedIn()">
+		<h1>Login Bolsista</h1>
+		Login: <input type="text" [(ngModel)]="login" maxlength="20"><br/>
+		Senha: <input type="password" [(ngModel)]="senha" maxlength="20"><br/>
+		<button [disabled]="login === '' || senha === ''" (click)="entrar()">CONFIRMAR</button>
+	</div>
+	<div *ngIf="auth.loggedIn()">
+		<h2>Gerenciar Perfil</h2>
+		<h2>{{ login | uppercase }}</h2>
+		<button (click)="mudarSenha()">Mudar minha senha</button>
+	</div>
 </div>

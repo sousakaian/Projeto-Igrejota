@@ -10,6 +10,8 @@ import { MessageService } from '../message.service';
 })
 export class TopbarComponent implements OnInit {
   mostrarMenu: Boolean = false
+  static returnLink: string[] = []
+  static lastUrl: string = ""
 
   constructor(
   	private router: Router,
@@ -23,12 +25,24 @@ export class TopbarComponent implements OnInit {
   	
   }
 
+  goBack() {
+    if (this.validReturn()) {
+      let link = TopbarComponent.returnLink.splice(TopbarComponent.returnLink.length-1,1)[0]
+      this.router.navigate([link]);
+      TopbarComponent.lastUrl = ""
+    }
+  }
+
+  validReturn(): boolean {
+    return TopbarComponent.returnLink.length > 0
+  }
+
   toggleMenu(): void {
     this.mostrarMenu = !this.mostrarMenu
   }
 
   goToGerenciarPerfil(): void {
-    this.messageService.clear();
+    this.router.navigate(['/login']);
   }
 
   goToGerenciarApp(): void {

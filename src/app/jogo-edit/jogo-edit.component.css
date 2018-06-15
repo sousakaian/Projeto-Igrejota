@@ -215,3 +215,7 @@ button.delete:hover, button.save:hover {
     border-radius: 0vw 0vw 0vw 4vw;
     z-index: 500 !important;
 }
+
+a {
+    text-decoration: none;
+}

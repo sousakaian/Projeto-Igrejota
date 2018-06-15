@@ -1,3 +1,9 @@
+h2 {
+  font-family: BalooRegular;
+  color: #294D60;
+  font-size: 4vw;
+}
+
 .highlight {
     margin-top: 5vw;
     height: 55vw;
@@ -7,16 +13,16 @@
 
 .highlight img {
 	max-width: 90.56vw;
-	max-height: 53.2vw;
+	max-height: 55.2vw;
 }
 
 .highlight h3 {
     position: relative;
     width: auto;
-    bottom: -36vw;
+    bottom: 16vw;
     height: 12.5vw;
     line-height: 12.5vw;
-    background-color: ##00000077;
+    background-color: #00000077;
     color: #f0f0f1;
     font-size: 3vw;
     padding-left: 2vw;

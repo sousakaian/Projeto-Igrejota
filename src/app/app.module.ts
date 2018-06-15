@@ -7,6 +7,7 @@ import { CalendarModule } from 'angular-calendar';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppComponent } from './app.component';
 import { NoticiasComponent } from './noticias/noticias.component';
@@ -73,7 +74,8 @@ import { environment } from '../environments/environment';
     CalendarModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase, 'igrejotaapp'),
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireAuthModule
   ],
   providers: [
     AuthService,

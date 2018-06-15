@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriaService } from '../categoria.service';
+import { MessageService } from '../message.service';
 import { Categoria } from '../categoria';
 
 @Component({
@@ -12,9 +13,12 @@ export class CategoriaEditComponent implements OnInit {
   @Input() categorias: Categoria[];
   enviado: Boolean;
   loaded: boolean = false;
+  categoriaToBeRemoved: Categoria;
+  sentRequest: boolean = false;
 
   constructor(
   	private categoriaService: CategoriaService,
+    private messageService: MessageService,
 	  private router: Router
 	) {
 
@@ -62,11 +66,27 @@ export class CategoriaEditComponent implements OnInit {
   }
 
   onDelete(categoria: Categoria): void {
-  	this.categoriaService.remove(categoria.id);
-    this.getCategorias();
+    if (this.sentRequest) {
+      return
+    }
+    this.categoriaToBeRemoved = categoria;
+    this.messageService.displayAlert("Você têm certeza que deseja deletar essa categoria?", CategoriaEditComponent.confirmDelete, CategoriaEditComponent.alertCancel, this);
+  }
+
+  static confirmDelete(sender: CategoriaEditComponent) {
+    sender.categoriaService.remove(sender.categoriaToBeRemoved.id);
+    sender.getCategorias();
+    sender.sentRequest = true;
+  }
+
+  static alertCancel() {
+
   }
 
   addCategoria(): void {
+    if (this.sentRequest) {
+      return
+    }
   	this.categoriaService.generateEmptyCategoria()
   		.subscribe(categoria => this.categorias.push(categoria));
   }

@@ -84,13 +84,19 @@ export class JogoService {
 	  return nJogadores >= jogo.minJogadores && nJogadores <= jogo.maxJogadores;
   }
 
-  removeCategoriaFromAll(categoria: Categoria) {
-    for (let jogo of JOGOS) {
-      if (jogo.categorias.includes(categoria)) {
+  removeCategoriaFromAll(categoria: Categoria): Observable<Boolean> {
+    for (let index in JOGOS) {
+      let jogo = JOGOS[index];
+      if (!jogo.categorias) {
+        jogo.categorias = [];
+      }
+      if (jogo.categorias.includes(categoria) === true) {
         let indexCategoria = jogo.categorias.indexOf(categoria);
         jogo.categorias.splice(indexCategoria,1);
+        this.edit(jogo)
       }
     }
+    return of(true)
   }
 
   getJogos(): Observable<Jogo[]> {

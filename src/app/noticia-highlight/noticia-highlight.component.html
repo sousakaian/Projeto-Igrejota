@@ -1,6 +1,6 @@
 <div class="highlight" *ngIf="noticiaDestacada">
 	<a (click)="onSelect(noticiaDestacada)" routerLink="{{ '/noticia/'+noticiaDestacada.id }}">
-		<img class="center" src="{{ noticiaDestacada.imagemDestaque !== '' ? noticiaDestacada.imagemDestaque : '../assets/default-image.png' }}" alt=""><br>
+		<img class="center" src="{{ noticiaDestacada.imagemDestaque ? noticiaDestacada.imagemDestaque : '../assets/default-image.png' }}" alt=""><br>
 		<h3 class="no-wrap">{{noticiaDestacada.titulo | uppercase}}</h3>
 		<a class="edit-item" *ngIf="auth.loggedIn()" routerLink="{{'/noticia/edit/'+noticiaDestacada.id}}" (click)="messageService.clear()"><img src="../assets/edititem.png" alt=""></a>
 	</a>

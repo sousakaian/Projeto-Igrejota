@@ -16,6 +16,12 @@
   src: url("../../fonts/LateefRegOT.ttf");
 }
 
+h2 {
+  font-family: BalooRegular;
+  color: #294D60;
+  font-size: 4vw;
+}
+
 .icon-news {
 
 }
