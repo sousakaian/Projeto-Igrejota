@@ -43,15 +43,17 @@ export class TopbarComponent implements OnInit {
 
   goToGerenciarPerfil(): void {
     this.router.navigate(['/login']);
+    this.toggleMenu()
   }
 
   goToGerenciarApp(): void {
     this.router.navigate(['/categorias/edit']);
+    this.toggleMenu()
   }
 
   sair(): void {
   	this.auth.logout();
-    this.mostrarMenu = false
+    this.toggleMenu();
   	this.router.navigate(['/inicio']);
     this.messageService.clear();
   }

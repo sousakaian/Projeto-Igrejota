@@ -10,9 +10,14 @@
 }
 .tab-menu-mobile ul {
   margin-top: 0;
+  margin-left: -5.5vw;
   display: block;
   list-style-type: none;
   justify-content: center;
+}
+
+.tab-menu-mobile li {
+  border: 8px solid #294D60;
 }
 
 .tab-menu-mobile header {
@@ -33,7 +38,6 @@
 
 .menu-item-mobile {
   width: 90.7vw;
-  margin-left: -5.5vw;
   text-align: left;
   background-color: #00A6C4;
   color: #FFEADD;
@@ -42,6 +46,15 @@
   padding-bottom: 10px;
   margin-top: 0px;
   margin-bottom: 0px;
+  font-size: 3.5vw;
+  font-family: BalooRegular;
+}
+
+h3.menu-item-mobile {
+  padding-left: 2vw;
+  margin: -1px;
+  width: 95.7vw;
+  background-color: #294D60;
 }
 
 .login-button {

@@ -7,7 +7,7 @@
 	<div class="dropdown-menu" *ngIf="mostrarMenu">
 		<ul *ngIf="auth.loggedIn()">
 			<li>
-				<h3 class="menu-item-mobile">{{ auth.getLoggedUser() | uppercase }}</h3>
+				<h3 class="menu-item-mobile">{{" "+auth.getLoggedUser() | uppercase }}</h3>
 			</li>
 			<li>
 				<button class="menu-item-mobile" (click)="goToGerenciarPerfil()">Gerenciar Perfil</button>

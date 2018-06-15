@@ -57,16 +57,20 @@ input [type=text]{
     padding-right:2vw;
     padding-left:2vw;	
     transition: color 0.2s, background-color 0.2s;
-	margin-bottom:4vw;
+	  margin-bottom:4vw;
 }
+
 .login button:hover{
     color:#D06636;
     background-color:#EFE0D0;
 }
 
+.login h1 {
+  font-size: 8vw;
+}
+
 .login h1, h2 {
 	font-family: PridiBold;
-	font-size: 8vw;
   margin: 0;
   padding-top: 2vw;
   padding-bottom: 2vw;

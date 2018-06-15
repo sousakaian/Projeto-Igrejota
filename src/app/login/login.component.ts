@@ -43,18 +43,18 @@ export class LoginComponent implements OnInit {
 
   entrar() {
   	this.enviado = true;
+    this.messageService.add("Entrando...");
   	this.auth.login(this.login,this.senha)
-      .subscribe(login => login ? this.enter() : this.clear());
+      .subscribe(login => {
+        if (login) {
+          this.enter()
+        }
+      });
   }
 
   enter() {
-    this.router.navigate([this.router.url]);
     this.messageService.clear();
-  }
-
-  clear() {
-    this.login = "";
-    this.senha = "";
+    this.router.navigate([this.router.url]);
   }
 
   mudarSenha() {
