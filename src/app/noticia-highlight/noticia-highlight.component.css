@@ -17,9 +17,9 @@ h2 {
 }
 
 .highlight h3 {
-    position: relative;
-    width: auto;
-    bottom: 16vw;
+    position: absolute;
+    width: 88.56vw;
+    top: 44.5vw;
     height: 12.5vw;
     line-height: 12.5vw;
     background-color: #00000077;
@@ -53,6 +53,7 @@ a {
 	width: 25.3vw;
 	height: 13.2vw;
 	background-color: #605A5777;
+	text-align: center;
 }
 
 .news-image {
@@ -73,6 +74,9 @@ a {
 
 a a img {
     width: 8vw;
+    position: absolute;
+    top: 50vw;
+    right: 6vw;
 }
 .noticia-info h3 {
   font-family: Pridi;

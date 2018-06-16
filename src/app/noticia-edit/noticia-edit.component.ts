@@ -98,11 +98,11 @@ export class NoticiaEditComponent implements OnInit {
       } else {
         var newnoticia = this.noticia.id === -1
         if (this.noticia.id !== -1) {
-          this.storage.ref("capa/"+this.noticia.id).delete()
+          this.storage.ref("noticia/"+this.noticia.id).delete()
         } else {
           this.noticia.id = Math.floor(Date.now() + Math.random()*100)
         }
-        var filePath = "capa/"+this.noticia.id;
+        var filePath = "noticia/"+this.noticia.id;
         this.noticia.imagemDestaque = filePath
 
         if (file) {

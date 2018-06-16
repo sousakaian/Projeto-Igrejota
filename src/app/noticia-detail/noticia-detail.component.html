@@ -4,7 +4,7 @@
 	<h4 *ngIf="noticia.dataEdicao && noticia.dataEdicao !== noticia.dataCriacao">
 		Ultima edição {{ noticia.dataEdicao.fromNow() }}
 	</h4>
-	<img class="center" src="{{ noticia.imagemDestaque ? noticia.imagemDestaque : '../assets/default-image.png' }}" alt="{{noticia.titulo}}"><br>
+	<img class="center" src="{{ noticia.imagemDestaque ? noticia.imagemDestaque : 'capa/default.png' }}" alt="{{noticia.titulo}}"><br>
 	<h5>Criado em {{ noticia.dataCriacao.format('LLL') }}</h5>
 	<p>{{ noticia.conteudo }}</p>
 </div>

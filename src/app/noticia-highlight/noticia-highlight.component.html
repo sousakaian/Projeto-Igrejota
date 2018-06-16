@@ -1,16 +1,16 @@
-<div class="highlight" *ngIf="noticiaDestacada">
-	<a (click)="onSelect(noticiaDestacada)" routerLink="{{ '/noticia/'+noticiaDestacada.id }}">
-		<img class="center" src="{{ noticiaDestacada.imagemDestaque ? noticiaDestacada.imagemDestaque : '../assets/default-image.png' }}" alt=""><br>
+<a (click)="onSelect(noticiaDestacada)" routerLink="{{ '/noticia/'+noticiaDestacada.id }}" *ngIf="noticiaDestacada">
+	<div class="highlight">
+		<img class="center" src="{{ noticiaDestacada.imagemDestaque ? noticiaDestacada.imagemDestaque : 'capa/default.png' }}" alt=""><br>
 		<h3 class="no-wrap">{{noticiaDestacada.titulo | uppercase}}</h3>
 		<a class="edit-item" *ngIf="auth.loggedIn()" routerLink="{{'/noticia/edit/'+noticiaDestacada.id}}" (click)="messageService.clear()"><img src="../assets/edititem.png" alt=""></a>
-	</a>
-</div>
+	</div>
+</a>
 <h2 *ngIf="!noticiaDestacada">{{ loaded ? "Não existem notícias!" : "Carregando notícias..." }}</h2>
 <ul class="noticias">
 	<li *ngFor="let noticia of noticias" [class.selected]="noticia === noticiaSelecionada" (click)="onSelect(noticia)">
 		<a routerLink="{{ '/noticia/'+noticia.id }}" (click)="messageService.clear()">
 			<div class="news-container">
-				<img class="section-icon news-image center" src="../assets/default-image.png" alt="">
+				<img class="center section-icon news-image" src="{{ noticia.imagemDestaque ? noticia.imagemDestaque : 'capa/default.png' }}" alt="">
 			</div>
 			<div class="noticia-info" [class.redux]="auth.loggedIn()">
 				<h3 class="no-wrap">{{ noticia.titulo }}</h3>
