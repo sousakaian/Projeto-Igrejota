@@ -10,7 +10,7 @@
 	padding-left: 10vw;
 }
 
-.noticia h1 {
+h1 {
     margin: 0vw;
     font-size: 5vw;
     font-weight: 700;
@@ -19,7 +19,7 @@
 }
 
 .noticia img {
-	max-height: 47.2vw;
+	max-height: 55vw;
 }
 
 .noticia h4 {
@@ -41,11 +41,26 @@
 
 .noticia p {
 	color: #000;
-	font-size: 3vw;
+	font-size: 6vw;
 	font-weight: normal;
     font-family: Lateef;
+    margin: 0;
 }
 
 a {
 	text-decoration: none;
+}
+
+.edit-item img {
+    width: 10vw;
+    height: 10vw;
+    padding-right: 2vw;
+    padding-top: 1vw;
+}
+
+.container-image {
+    margin-top: 5vw;
+    height: 55vw;
+    background-color: #f0f0f1;
+    text-align: center;
 }

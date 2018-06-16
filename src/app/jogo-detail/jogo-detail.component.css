@@ -47,7 +47,7 @@ h1{
 	color: black;
 }
 .jogo h3{
-	font-size: 6.5	vw;
+	font-size: 6.5vw;
 	font-family: Pridi;
 	color: #BF6646;
 	margin: 0px;
@@ -56,10 +56,10 @@ h1{
 .jogo p{
 	font-family: Lateef;
 	color: black;
-	font-size: 4.5vw;
+	font-size: 5.5vw;
 	margin: 0px;
 }
-.jogo a{
+.jogo-link{
 	font-family: Lateef;
 	border-left: solid 3px #BF6646;	
 	font-size: 4.5vw;
@@ -83,6 +83,14 @@ h1{
 .highlight {
 	width: 9vw;
     height: 6vw;
+}
+
+.edit-item img {
+	float: left;
+	width: 10vw;
+	height: 10vw;
+	padding-right: 2vw;
+    padding-top: 3vw;
 }
 
 /*@media screen and (min-width: 550px){
