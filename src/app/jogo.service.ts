@@ -51,17 +51,20 @@ export class JogoService {
     } else {
     this.jogos.valueChanges()
       .subscribe(j => {
-        for (let jogo of j) {
-          if (jogo.imagemJogo != "") {
+        for (let i in j) {
+          if (j[i].imagemJogo != "") {
             try {
-              let fileRef = this.storage.ref(jogo.imagemJogo)
+              let fileRef = this.storage.ref(j[i].imagemJogo)
               if (!fileRef) {
-                 jogo.imagemJogo = "capa/default.png"
+                 j[i].imagemJogo = "capa/default.png"
               }
-              this.storage.ref(jogo.imagemJogo).getDownloadURL()
-                  .subscribe(imagem => jogo.imagemJogo = imagem);
+              this.storage.ref(j[i].imagemJogo).getDownloadURL()
+                  .subscribe(imagem => {
+                    let index = i
+                    j[index].imagemJogo = imagem
+                  });
             } catch {
-              jogo.imagemJogo = "../assets/default-image.png"
+              j[i].imagemJogo = "capa/default.png"
             }
           }
         }

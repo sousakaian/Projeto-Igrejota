@@ -50,7 +50,7 @@ export class NoticiaService {
                       n[index].imagemDestaque = imagem
                     });
               } catch {
-                n[i].imagemDestaque = "../assets/default-image.png"
+                n[i].imagemDestaque = "capa/default.png"
               }
             }
           }
