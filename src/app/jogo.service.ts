@@ -51,17 +51,20 @@ export class JogoService {
     } else {
     this.jogos.valueChanges()
       .subscribe(j => {
-        for (let jogo of j) {
-          if (jogo.imagemJogo != "") {
+        for (let i in j) {
+          if (j[i].imagemJogo != "") {
             try {
-              let fileRef = this.storage.ref(jogo.imagemJogo)
+              let fileRef = this.storage.ref(j[i].imagemJogo)
               if (!fileRef) {
-                 jogo.imagemJogo = "capa/default.png"
+                 j[i].imagemJogo = "capa/default.png"
               }
-              this.storage.ref(jogo.imagemJogo).getDownloadURL()
-                  .subscribe(imagem => jogo.imagemJogo = imagem);
+              this.storage.ref(j[i].imagemJogo).getDownloadURL()
+                  .subscribe(imagem => {
+                    let index = i
+                    j[index].imagemJogo = imagem
+                  });
             } catch {
-              jogo.imagemJogo = "../assets/default-image.png"
+              j[i].imagemJogo = "capa/default.png"
             }
           }
         }
@@ -84,13 +87,19 @@ export class JogoService {
 	  return nJogadores >= jogo.minJogadores && nJogadores <= jogo.maxJogadores;
   }
 
-  removeCategoriaFromAll(categoria: Categoria) {
-    for (let jogo of JOGOS) {
-      if (jogo.categorias.includes(categoria)) {
+  removeCategoriaFromAll(categoria: Categoria): Observable<Boolean> {
+    for (let index in JOGOS) {
+      let jogo = JOGOS[index];
+      if (!jogo.categorias) {
+        jogo.categorias = [];
+      }
+      if (jogo.categorias.includes(categoria) === true) {
         let indexCategoria = jogo.categorias.indexOf(categoria);
         jogo.categorias.splice(indexCategoria,1);
+        this.edit(jogo)
       }
     }
+    return of(true)
   }
 
   getJogos(): Observable<Jogo[]> {
@@ -153,7 +162,6 @@ export class JogoService {
 
   add(jogo: Jogo): void {
     this.jogos.set(String(jogo.id),jogo).then(_ => {
-      JOGOS.push(jogo);
       this.router.navigate(['/jogo/'+jogo.id])
       this.messageService.add("Jogo adicionado!");
     })

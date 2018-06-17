@@ -1,3 +1,9 @@
+h2 {
+  font-family: BalooRegular;
+  color: #294D60;
+  font-size: 4vw;
+}
+
 .highlight {
     margin-top: 5vw;
     height: 55vw;
@@ -7,16 +13,16 @@
 
 .highlight img {
 	max-width: 90.56vw;
-	max-height: 53.2vw;
+	max-height: 55.2vw;
 }
 
 .highlight h3 {
-    position: relative;
-    width: auto;
-    bottom: -36vw;
+    position: absolute;
+    width: 88.56vw;
+    top: 44.5vw;
     height: 12.5vw;
     line-height: 12.5vw;
-    background-color: ##00000077;
+    background-color: #00000077;
     color: #f0f0f1;
     font-size: 3vw;
     padding-left: 2vw;
@@ -47,6 +53,7 @@ a {
 	width: 25.3vw;
 	height: 13.2vw;
 	background-color: #605A5777;
+	text-align: center;
 }
 
 .news-image {
@@ -65,8 +72,11 @@ a {
 	max-width: 63vw;
 }
 
-a a img {
+.highlight-edit {
     width: 8vw;
+    position: absolute;
+    top: 50vw;
+    right: 6vw;
 }
 .noticia-info h3 {
   font-family: Pridi;
@@ -97,7 +107,7 @@ a a img {
 a.edit-item img{
 	width: 9vw;
     position: absolute;
-    right: 0.5vw;
+    right: 5.5vw;
 }
 a.add-item img {
 	width: 20vw;

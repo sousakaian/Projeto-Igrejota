@@ -1,5 +1,5 @@
-<h1>Calendário</h1>
-<div class="calendário">
+<h1>{{ loaded ? "Calendário" : "Carregando..." }}</h1>
+<div class="calendário" *ngIf="loaded">
 <div class="row text-center">
   <div class="col-md-4">
     <div class="btn-group">
@@ -34,8 +34,8 @@
 </div>
 <br>
 <div class="alert alert-info">
-  <strong *ngIf="clickedDate | async">Dia selecionado: {{ displayDate(clickedDate) }}</strong>
-  <button *ngIf="isIgrejotaDay | async" (click)="onDaySelect(clickedDate)">Ver Presenças</button>
+  <strong *ngIf="clickedDate">Dia selecionado: {{ displayDate(clickedDate) }}</strong>
+  <button *ngIf="isIgrejotaDay" (click)="onDaySelect(clickedDate)">Ver Presenças</button>
 </div>
 <div [ngSwitch]="view">
   <mwl-calendar-month-view
@@ -58,7 +58,7 @@
 </div>
 </div>
 <div class="eventos" *ngIf="clickedDate">
-  <div *ngIf="eventosDiaIgrejota.length <= 0">
+  <div *ngIf="loaded && eventosDiaIgrejota.length <= 0">
     <h2>Sem eventos</h2>
     <div *ngIf="auth.loggedIn()">
       <h3>Deseja adicionar um novo?</h3>
@@ -67,16 +67,16 @@
   <div *ngIf="!auth.loggedIn() || !openEditMode">
     <h2 *ngIf="eventosDiaIgrejota.length > 0">Lista de Eventos</h2>
     <ul>
-      <li *ngFor="let evento of eventosDiaIgrejota | async">
+      <li *ngFor="let evento of eventosDiaIgrejota">
         <h3>{{ evento.descricao }}</h3>
         <h4>{{ evento.tipo === tiposDia.Normal ? "Encontro" : "Evento" }}</h4>
       </li>
     </ul>
   </div>
-  <button *ngIf="auth.loggedIn()" (click)="openEditMode = !openEditMode">{{ openEditMode ? "Salvar" : "Editar"}}</button>
+  <button *ngIf="auth.loggedIn() && loaded" (click)="openEditMode = !openEditMode">{{ openEditMode ? "Sair da Edição" : "Editar"}}</button>
   <div class="editor" *ngIf="auth.loggedIn() && openEditMode">
     <h2>Lista de Eventos</h2>
-    <div class="form-adicionar-dia" *ngFor="let evento of eventosDiaIgrejota | async">
+    <div class="form-adicionar-dia" *ngFor="let evento of eventosDiaIgrejota">
       <h4>Descrição do Evento:<input type="text" [(ngModel)]="evento.descricao"></h4>
       <h4>Tipo de Evento: 
         <select [(ngModel)]="evento.tipo">
@@ -84,6 +84,7 @@
           <option [ngValue]="tiposDia.Evento" [selected]="evento.tipo === tiposDia.Evento">Evento</option>
         </select>
       </h4>
+      <button (click)="editar(evento)">Salvar</button>
       <button (click)="deletar(evento)">Deletar</button>
     </div>
     <button (click)="adicionarEvento()">Adicionar Evento</button>

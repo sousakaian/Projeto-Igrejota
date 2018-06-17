@@ -31,27 +31,34 @@ export class NoticiaService {
     private router: Router
     ) {
     this.noticias = db.list<Noticia>("/noticias")
-    this.noticias.valueChanges()
-      .subscribe(n => {
-        for (let i in n) {
-          n[i] = NoticiaEncapsulator.decapsule(n[i])
-          if (n[i].imagemDestaque != "") {
-            try {
-              let fileRef = this.storage.ref(n[i].imagemDestaque)
-              if (!fileRef) {
-                 n[i].imagemDestaque = "capa/default.png"
+    if (NoticiaService.loaded) {
+      return
+    } else {
+      this.noticias.valueChanges()
+        .subscribe(n => {
+          for (let i in n) {
+            n[i] = NoticiaEncapsulator.decapsule(n[i])
+            if (n[i].imagemDestaque != "") {
+              try {
+                let fileRef = this.storage.ref(n[i].imagemDestaque)
+                if (!fileRef) {
+                   n[i].imagemDestaque = "capa/default.png"
+                }
+                this.storage.ref(n[i].imagemDestaque).getDownloadURL()
+                    .subscribe(imagem => {
+                      let index = i
+                      n[index].imagemDestaque = imagem
+                    });
+              } catch {
+                n[i].imagemDestaque = "capa/default.png"
               }
-              this.storage.ref(n[i].imagemDestaque).getDownloadURL()
-                  .subscribe(imagem => n[i].imagemDestaque = imagem);
-            } catch {
-              n[i].imagemDestaque = "../assets/default-image.png"
             }
           }
-        }
-        NOTICIAS.length = 0
-        NOTICIAS.push(...n)
-        NoticiaService.loaded = true
-      })
+          NOTICIAS.length = 0
+          NOTICIAS.push(...n)
+          NoticiaService.loaded = true
+        })
+    }
   }
 
   isReady(): boolean {
@@ -73,7 +80,7 @@ export class NoticiaService {
   remove(id: number): void {
     let index = NOTICIAS.indexOf(NOTICIAS.find(noticia => noticia.id === id));
     this.noticias.remove(String(NOTICIAS[index].id)).then(_ => {
-      NOTICIAS.splice(index,1);
+      //NOTICIAS.splice(index,1);
       this.router.navigate(["/noticias"]);
       this.messageService.add("Notícia removida!");
     })
@@ -93,7 +100,6 @@ export class NoticiaService {
 
   add(noticia: Noticia): void {
     this.noticias.set(String(noticia.id),NoticiaEncapsulator.encapsule(noticia)).then(_ => {
-      NOTICIAS.push(noticia);
       this.router.navigate(['/noticia/'+noticia.id])
       this.messageService.add("Notícia adicionada!");
     })

@@ -4,68 +4,49 @@ import { of } from 'rxjs/observable/of';
 import { MessageService } from './message.service';
 import { Bolsista } from './bolsista';
 import { BolsistaService } from './bolsista.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { FirebaseAuth } from 'angularfire2';
 import * as moment from 'moment';
 
 @Injectable()
 export class AuthService {
-  public token: string;
+  firebaseAuth: FirebaseAuth
 
   constructor(
-  	private bolsistaService: BolsistaService,
-  	private messageService: MessageService
+  	private messageService: MessageService,
+  	private af: AngularFireAuth
   	) {
-
+  	this.firebaseAuth = af.auth
   }
 
 	login(user:string, password:string): Observable<Boolean> {
-	    var autenticado;
-	    this.bolsistaService.validateLogin(user, password)
-	    	.subscribe(aut => autenticado = aut);
-	    if (!autenticado) {
-	    	this.messageService.add("Login e/ou senha inválidos");
-	    	return of(false);
-	    }
-    	this.setSession({user: user, expiraEm: 180});
-    	return of(true);
-	    
-	}
-	      
-	private setSession(authResult) {
-	    const expiresAt = moment().add(authResult.expiraEm,'second');
+		var result: Boolean
+		this.firebaseAuth.signInWithEmailAndPassword(user,password)
+			.then(r => result = r)
+			.catch(e => this.messageService.add("Login e/ou senha inválidos!"))
+		return of(result)
+	}  
 
-	    localStorage.setItem('user', JSON.stringify(authResult.user));
-	    localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
-	}          
+	isReady(): boolean {
+		return this.firebaseAuth !== undefined
+	}     
 
 	logout() {
-	    localStorage.removeItem("user");
-	    localStorage.removeItem("expires_at");
+	    this.firebaseAuth.signOut()
 	}
 
-	public loggedIn() {
-		if (moment().isBefore(this.getExpiration())) {
-			this.resetExpiration();
-			return true;
-		}
-		this.logout();
-	    return false;
+	public loggedIn(): Boolean {
+	    return this.firebaseAuth.currentUser !== null
+	}
+
+	changePassword(user: string) {
+		var auth = this.firebaseAuth
+	    return auth.sendPasswordResetEmail(user)
+	      .then(() => this.messageService.add("Enviamos um email para mudar a senha!"))
 	}
 
 	getLoggedUser(): string {
-		let userData = localStorage.getItem("user");
-		let user = JSON.parse(userData);
-		return user;
-	}
-
-	getExpiration() {
-	    const expiration = localStorage.getItem("expires_at");
-	    const expiresAt = JSON.parse(expiration);
-	    return moment(expiresAt);
-	}
-
-	private resetExpiration() {
-		const expiresAt = moment().add(180,'second');
-		localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+		return this.firebaseAuth.currentUser.email
 	}
 
 }

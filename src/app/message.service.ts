@@ -6,6 +6,7 @@ export class MessageService {
   alert: Alert;
 
   add(message: string) {
+    this.messages.length = 0
     this.messages.push(message);
   }
 
@@ -34,6 +35,11 @@ export class MessageService {
 
   hasAlert() {
   	return this.alert !== undefined;
+  }
+
+  saveMessage() {
+    this.clear()
+    this.add("Salvando...")
   }
 }
 

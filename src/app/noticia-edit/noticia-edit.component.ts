@@ -20,6 +20,7 @@ export class NoticiaEditComponent implements OnInit {
   task: AngularFireUploadTask;
   loaded: boolean = false;
   swapImage: boolean = false;
+  sentRequest: boolean = false;
 
   constructor(
 	  private noticiaService: NoticiaService,
@@ -67,6 +68,9 @@ export class NoticiaEditComponent implements OnInit {
 
   static confirmDelete(sender: NoticiaEditComponent) {
     let filePath = "noticia/"+sender.noticia.id;
+    sender.sentRequest = true;
+    sender.messageService.clear()
+    sender.messageService.add("Deletando...")
     sender.noticiaService.remove(sender.noticia.id);
     sender.storage.ref(filePath).delete()
       .subscribe(_ => sender.router.navigate(['/noticias']));
@@ -77,10 +81,14 @@ export class NoticiaEditComponent implements OnInit {
   }
 
   onSave() {
+    if (this.sentRequest) {
+      return
+    }
     this.enviado = true;
     if (this.noticiaValida()) {
       let file = this.noticia.imagemDestaque
       if (!this.swapImage || !file) {
+        this.sentRequest = true
         if (this.noticia.id === -1) {
           this.noticia.id = Math.floor(Date.now() + Math.random()*100)
           this.noticiaService.add(this.noticia);
@@ -90,14 +98,15 @@ export class NoticiaEditComponent implements OnInit {
       } else {
         var newnoticia = this.noticia.id === -1
         if (this.noticia.id !== -1) {
-          this.storage.ref("capa/"+this.noticia.id).delete()
+          this.storage.ref("noticia/"+this.noticia.id).delete()
         } else {
           this.noticia.id = Math.floor(Date.now() + Math.random()*100)
         }
-        var filePath = "capa/"+this.noticia.id;
+        var filePath = "noticia/"+this.noticia.id;
         this.noticia.imagemDestaque = filePath
 
         if (file) {
+          this.sentRequest = true
           this.task = this.storage.upload(filePath, file)
           this.task.snapshotChanges().pipe(finalize(() => {
               if (newnoticia) {

@@ -14,6 +14,7 @@ import 'rxjs/add/operator/pairwise';
 
 export class LoginComponent implements OnInit {
   enviado: boolean = false;
+  loaded: boolean = false;
   login: string;
   loginValido: boolean;
   senha: string;
@@ -28,22 +29,36 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.watch(this)
+  }
+
+  watch(self: LoginComponent) {
+    if (self.auth.loggedIn()) {
+      self.login = self.auth.getLoggedUser()
+      self.loaded = true
+    } else {
+      let timer = setTimeout(self.watch, 1000, self);
+    }
   }
 
   entrar() {
   	this.enviado = true;
+    this.messageService.add("Entrando...");
   	this.auth.login(this.login,this.senha)
-      .subscribe(login => login ? this.enter() : this.clear());
+      .subscribe(login => {
+        if (login) {
+          this.enter()
+        }
+      });
   }
 
   enter() {
-    this.router.navigate([this.router.url]);
     this.messageService.clear();
+    this.router.navigate([this.router.url]);
   }
 
-  clear() {
-    this.login = "";
-    this.senha = "";
+  mudarSenha() {
+    this.auth.changePassword(this.login)
   }
 
 }

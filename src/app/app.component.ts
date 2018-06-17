@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BottomComponent } from './bottom/bottom.component';
+import { TopbarComponent } from './topbar/topbar.component';
 
 @Component({
   selector: 'app-root',
@@ -20,9 +21,20 @@ export class AppComponent implements OnInit {
         if (!(evt instanceof NavigationEnd)) {
             return;
         }
+        if (this.router.url === "/inicio") {
+          TopbarComponent.returnLink.length = 0
+        } else if (TopbarComponent.lastUrl && !TopbarComponent.lastUrl.includes("edit") && !this.isNumber(TopbarComponent.lastUrl)) {
+          TopbarComponent.returnLink.push(TopbarComponent.lastUrl)
+        }
+        TopbarComponent.lastUrl = this.router.url
         this.setBottomMenu();
         window.scrollTo(0, 0);
     });
+  }
+
+  isNumber(text: string): boolean {
+    var regexp = new RegExp('^[1-9]\d{0,2}$')
+    return regexp.test(TopbarComponent.lastUrl)
   }
 
   setBottomMenu() {
@@ -33,8 +45,6 @@ export class AppComponent implements OnInit {
       BottomComponent.component.selected = "jogos";
     } else if (this.router.url.includes("noticia")) {
       BottomComponent.component.selected = "noticias";
-    } else if (this.router.url.includes("calendario")) {
-      BottomComponent.component.selected = "calendario";
     } else {
       BottomComponent.component.selected = ""
     }

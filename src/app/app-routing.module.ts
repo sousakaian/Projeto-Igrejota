@@ -23,13 +23,14 @@ const routes: Routes = [
   { path: 'noticia/:id', component: NoticiaDetailComponent },
   { path: 'noticia/edit/:id', component: NoticiaEditComponent, canActivate: [AuthGuard] },
   { path: 'categorias/edit', component: CategoriaEditComponent, canActivate: [AuthGuard] },
-  { path: 'calendario', component: CalendarioComponent},
-  { path: 'calendario/:data', component: DiaPresencaComponent},
-  { path: 'calendario/add/:data', component: ListaAlunosComponent, canActivate: [AuthGuard]},
+  //{ path: 'calendario', component: CalendarioComponent},
+  //{ path: 'calendario/:data', component: DiaPresencaComponent},
+  //{ path: 'calendario/add/:data', component: ListaAlunosComponent, canActivate: [AuthGuard]},
   { path: 'jogos', component: JogoComponent },
   { path: 'jogos/termoBusca/:termo', component: JogoComponent },
   { path: 'jogo/:id', component: JogoDetailComponent },
   { path: 'jogo/edit/:id', component: JogoEditComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

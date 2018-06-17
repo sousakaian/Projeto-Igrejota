@@ -14,4 +14,4 @@
 	</li>
 </ul>
 <h2 *ngIf="!loaded || noticias.length <= 0">{{ loaded ? "Não existem notícias!" : "Carregando notícias..." }}</h2>
-<a *ngIf="auth.loggedIn()" routerLink="/noticia/edit/-1" (click)="messageService.clear()" class="add-item><img src="../assets/addnoti.png" alt=""></a>
+<a *ngIf="auth.loggedIn()" routerLink="/noticia/edit/-1" (click)="messageService.clear()" class="add-item"><img src="../assets/addnoti.png" alt=""></a>

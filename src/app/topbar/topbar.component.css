@@ -10,9 +10,14 @@
 }
 .tab-menu-mobile ul {
   margin-top: 0;
+  margin-left: -5.5vw;
   display: block;
   list-style-type: none;
   justify-content: center;
+}
+
+.tab-menu-mobile li {
+  border: 8px solid #294D60;
 }
 
 .tab-menu-mobile header {
@@ -22,8 +27,8 @@
 
 .tab-menu-mobile h1 {
 	float: left;
-	width: 80vw;
-	margin-left: 3vw;
+	width: 66vw;
+  margin-left: 17vw;
 	text-align: center;
 	color: #FFEADD;
 	font-family: RoundRegular;
@@ -33,7 +38,6 @@
 
 .menu-item-mobile {
   width: 90.7vw;
-  margin-left: -5.5vw;
   text-align: left;
   background-color: #00A6C4;
   color: #FFEADD;
@@ -42,11 +46,20 @@
   padding-bottom: 10px;
   margin-top: 0px;
   margin-bottom: 0px;
+  font-size: 3.5vw;
+  font-family: BalooRegular;
+}
+
+h3.menu-item-mobile {
+  padding-left: 2vw;
+  margin: -1px;
+  width: 95.7vw;
+  background-color: #294D60;
 }
 
 .login-button {
     width: 17vw;
-    height: 14.72vw;
+    height: 14.6vw;
     background-color: #00a6c4;
     font-size: 4.5vw;
     border: none;
@@ -57,6 +70,22 @@
     position: fixed;
     top: 0vw;
 }
+
+.back-button {
+    float: left;
+    width: 17vw;
+    height: 14.6vw;
+    background-color: #00a6c4;
+    font-size: 4.5vw;
+    border: none;
+    font-family: BalooRegular;
+    padding: 1vw 6vw;
+    color: #ffeadd;
+    line-height: 1em;
+    position: fixed;
+    top: 0vw;
+}
+
 .login-button:hover {
   background-color: #294D60;
 }

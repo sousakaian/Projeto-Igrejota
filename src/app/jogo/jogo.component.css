@@ -262,9 +262,11 @@ a {
 	text-decoration: none;
 }
 
-a img {
-    width: 25vw;
-    float: right;
+.edit-pencil {
+	float: right;
+	width: 8vw;
+	padding-top: 3vw;
+	padding-bottom: 3vw;
 }
 
 .jogoinfo {
@@ -283,12 +285,6 @@ a img {
 	color: #294D60;
   	font-weight: normal;
   	display: inline-flex;
-}
-
-li a img {
-    width: 6vw;
-    margin: 0vw;
-    float: right;
 }
 
 .jogos .jogoinfo h3{
@@ -323,10 +319,31 @@ a.edit-item img{
     position: absolute;
     right: 0.5vw;
 }
+
+a.add-item {
+	float: right;
+}
+
 a.add-item img {
 	width: 20vw;
 	position: fixed;
 	border-radius: 20vw;
 	bottom: 18vw;
 	right: 6vw;
+}
+
+.order {
+	padding-left: 1vw;
+	padding-right: 1vw;
+}
+
+.section-header {
+	height:6vw;
+}
+.section-header h1{
+	margin: 0px;
+	margin-top: 1vw;
+	height: 6vw;
+	width: 65vw;
+	font-family: BalooRegular;
 }
