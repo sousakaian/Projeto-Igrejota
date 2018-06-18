@@ -2,9 +2,12 @@
 	padding-top: 7.5vw;
 }
 
-
 .noticia .edit-item img {
-    width: 6vw;
+    width: 10vw;
+    height: 10vw;
+    padding-right: 2vw;
+    padding-top: 1vw;
+    float: left;
 }
 
 .noticia h1 {
