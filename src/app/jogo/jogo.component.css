@@ -154,8 +154,9 @@ input[type=text]{
 
 .jogos h3{
 	text-align: left;
-  	font-family: PridiBold;
+  font-family: PridiBold;
 	color: #294D60;
+  width: 50vw;
 	font-size: 4vw;
 }
 
@@ -257,7 +258,6 @@ a img {
 	padding-top: 0px;
 	margin: 0px;
 	margin-left: 3vw;
-	height: 5vw;
 	float:left;
 	color: #294D60;
   	font-weight: normal;
