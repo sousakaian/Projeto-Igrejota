@@ -46,10 +46,11 @@
 }
 
 .noticia p {
-	color: #000;
-	font-size: 5vw;
-	font-weight: normal;
-    font-family: Lateef;
+    font-family: Pridi;
+    color: #000;
+    font-size: 3.5vw;
+    line-height: 5vw;
+    margin: 0;
 }
 
 a {
