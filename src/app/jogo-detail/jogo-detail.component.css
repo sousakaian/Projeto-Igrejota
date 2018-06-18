@@ -53,10 +53,11 @@ h1{
 	margin-top: 2vw;
 }
 .jogo p{
-	font-family: Lateef;
-	color: black;
-	font-size: 4.5vw;
-	margin: 0px;
+    font-family: Pridi;
+    color: #000;
+    font-size: 3.5vw;
+    line-height: 5vw;
+    margin: 0;
 }
 .jogo a{
 	font-family: Lateef;
@@ -103,51 +104,3 @@ h1{
 	width: 9vw;
     height: 6vw;
 }
-
-/*@media screen and (min-width: 550px){
-	h1{ 
-		font-size: 50px;
-		margin: 0px;
-		margin-top: 10px;
-	}
-	.jogoimg{
-		padding: 0px;
-		margin: 0px;
-		margin-left:50.44px;
-		width:400px;
-		height:250px;
-	}
-	.jogodet {
-		margin-left:50.44px;	
-	}
-
-	.jogodet h4{
-		padding-right: 10.18px;
-		padding-left: 5px;
-		font-size: 15px;	
-	}
-	.jogo h3{
-		font-size: 30px;
-		margin-top: 10px;
-	}
-	.jogo p{
-		font-size: 22.5px;
-	}
-	.jogo a{
-		font-size: 22.5px;
-		margin: 0px;
-	}
-	.icon{
-	    background-size: 30px 30px;
-	    width:30px;
-	    height:30px;
-	    margin-top: 5px;
-	    margin-right: 5px;
-	}
-	.jogicone{
-		background-image: url("../../assets/players.png");
-	}
-	.timicone{
-		background-image: url("../../assets/time.png");
-	}
-}*/
