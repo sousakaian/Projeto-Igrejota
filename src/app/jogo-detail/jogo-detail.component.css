@@ -54,10 +54,12 @@ h1{
 	margin-top: 2vw;
 }
 .jogo p{
-	font-family: Lateef;
+	font-family: Pridi;
 	color: black;
-	font-size: 4.5vw;
+	font-size: 3vw;
 	margin: 0px;
+  line-height: 5vw;
+  text-align: justify;
 }
 .jogo a{
 	font-family: Lateef;
