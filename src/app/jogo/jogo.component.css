@@ -78,10 +78,10 @@ input[type=text]{
 }
 
 .Settings{
-	display: block;
+	display: inline-flex;
 	height: 10vw;
     margin-bottom: 2vw;
-	width: 90vw;
+    width: 88.56vw;
 }
 .Settings img{
 	height: 10vw;
